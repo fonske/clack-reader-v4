@@ -12,7 +12,7 @@ main: Tof2 sensor (VL53L1X) code for the Clack DV valve (ECOSOFT LESS-10 / 15 / 
 ws1: Tof2 sensor (VL53L1X) code for the Clack WS1  (software not yet ready)
 
 ## Contact
-Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with wemos s3 mini
+Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
 
 Help: Please open a issue on this git project.
 
