@@ -22,11 +22,11 @@ packages:
     ref: main
     refresh: 0s
     files: [ 
-      esphome/.clack-base.yaml, 
-      esphome/.clack-optional.yaml,
+      esphome/clack_dv_tof2/.clack-base.yaml, 
+      esphome/clack_dv_tof2/.clack-optional.yaml,
 #      esphome/.clack-labels-nl.yaml,
-      esphome/.clack-labels-en.yaml,
-      esphome/board-esp32-atom-s3.yaml,
+      esphome/clack_dv_tof2/.clack-labels-en.yaml,
+      esphome/clack_dv_tof2/board-esp32-atom-s3.yaml,
     ]
 
 ## for developing/testing, uncomment local includes and comment out above remote_package packages part.
