@@ -1,0 +1,220 @@
+### ESP32 S3 used is a M5stack Atom S3 lite
+
+esp32:
+  board: esp32-s3-devkitc-1
+## Atom S3 lite  
+  framework:
+    #type: esp-idf 
+    type: arduino
+    version: latest
+
+# the m5stack TOF sensor vl53l1x is I2C
+i2c:
+  - id: bus_a
+    sda: GPIO6  
+    scl: GPIO5  
+    scan: true
+
+# Enable/Disable logging
+logger:
+  logs:
+    modbus_controller.sensor: DEBUG
+    modbus_controller.output: DEBUG
+    modbus.number: DEBUG
+    esp32.preferences: DEBUG
+    sensor: DEBUG
+    text_sensor: DEBUG
+    button: DEBUG
+    number: DEBUG
+    component: ERROR
+
+wifi:
+  ap:
+    ssid: "${name}"
+    password: "configesp"
+  
+captive_portal:
+
+# Enable Web server.
+web_server:
+  port: 80
+
+binary_sensor:
+## flowmeter pulse
+  - platform: gpio
+    pin:
+      number: GPIO7 
+      inverted: false
+      mode:
+        input: true
+        pullup: true
+    id: clack_watermeter_pulse
+    name: ${clack_watermeter_pulse}
+    icon: mdi:pulse
+    internal: true
+    filters:
+      - delayed_on_off: 50ms
+    on_press:
+      then:
+        - if:
+            condition:
+              lambda: 'return id(wait_on_delay) == false;'
+            then:
+              - sensor.template.publish:
+                  id: clack_watermeter
+                  state: !lambda |-
+                    return id(totalWaterUsage) += 1/float(${pulse_per_liters});
+              - sensor.template.publish:
+                  id: clack_m3_left
+                  state: !lambda |-
+                    return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+              - sensor.template.publish:
+                  id: clack_l_left
+                  state: !lambda |-
+                    return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+
+## temporary test button for testing water meter pulse
+  - id: clack_use_test_button
+#    name: Test button use pulse
+    platform: template
+    internal: true
+    filters:
+      - delayed_on_off: 50ms
+    on_press:
+      then:
+        - sensor.template.publish:
+            id: clack_watermeter
+            state: !lambda |-
+              return id(totalWaterUsage) += 0.1;
+        - sensor.template.publish:
+            id: clack_m3_left
+            state: !lambda |-
+              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+        - sensor.template.publish:
+            id: clack_l_left
+            state: !lambda |-
+              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+        - lambda: |-
+            ESP_LOGI("UseTest", "Use button pressed");
+
+  - platform: template
+    name: Block regen
+    id: init_state
+    internal: false
+    lambda: |-
+      if (id(wait_on_delay)) {
+        return true;
+      } else {
+        return false;
+      }
+
+
+# ## temporary test button for testing regeneration pulse
+switch:
+  # Chlorinator Relay
+  - platform: gpio
+    pin:
+      number: GPIO8
+      inverted: false
+    name: ${clack_chlorinator}
+    id: chlorinator_relay
+    icon: mdi:bacteria
+    entity_category: config
+
+  - id: clack_reg_test_button
+ #   name: Test switch regen pulse
+    platform: template
+    internal: true
+    optimistic: true
+    on_turn_on:
+        - globals.set:
+            id: totalWaterUsage
+            value: '00'        
+        - globals.set:
+            id: regen_last
+            value: !lambda |-
+              return id(sntp_time).now().timestamp;
+        - text_sensor.template.publish:
+            id: clack_regeneration_last
+            state: !lambda |-
+              char str[32];
+              time_t currTime = id(sntp_time).now().timestamp;
+              strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
+              id(regen_date_last) = str;
+              return  { str };
+        - sensor.template.publish:
+            id: clack_watermeter
+            state: !lambda |-
+              return id(totalWaterUsage);
+        - sensor.template.publish:
+            id: clack_m3_left
+            state: !lambda |-
+              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+        - sensor.template.publish:
+            id: clack_l_left
+            state: !lambda |-
+              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+    on_turn_off:
+      - logger.log: "clack_reg_test_button is OFF" 
+
+button:
+  - platform: template
+    name: Test button use pulse
+    id: clack_use_tst_but
+    on_press:
+      then:
+        - lambda: |-
+            id(clack_use_test_button).publish_state(true);
+        - delay: 100ms
+        - lambda: |-
+            id(clack_use_test_button).publish_state(false);
+
+  - platform: template
+    name: Test button regen pulse
+    id: clack_reg_tst_but
+    internal: true
+    on_press:
+      then:
+        - switch.turn_on: clack_reg_test_button
+        - delay: 100ms
+        - switch.turn_off: clack_reg_test_button
+
+  - platform: template
+    name: "Resinclean Reset"
+    id: clack_resinclean_reset_button
+    on_press:
+      - globals.set:
+          id: resinclean_last
+          value: !lambda |-
+            return id(sntp_time).now().timestamp;
+      - text_sensor.template.publish:
+          id: clack_resinclean_last
+          state: !lambda |-
+            char str[32];
+            time_t currTime = id(sntp_time).now().timestamp;
+            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
+            id(resinclean_date_last) = str;
+            return  { str };
+      - component.update: time_to_resinclean #set down counter
+
+  - platform: template
+    name: ${clack_reset_but_last_dist}
+    id: clack_reset_but_last_dist
+    on_press:
+      then:
+        - globals.set:
+            id: last_distance
+            value: !lambda |-
+              return id(distance_cm).state;
+        - sensor.template.publish:
+            id: clack_distance
+            state: !lambda |-
+              return id(last_distance_cm).state;
+        - text_sensor.template.publish:
+            id: clack_saltfill_last
+            state: !lambda |-
+              char str[32];
+              time_t currTime = id(sntp_time).now().timestamp;
+              strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
+              id(fill_last) = str;
+              return  { str };

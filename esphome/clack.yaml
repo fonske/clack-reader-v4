@@ -1,0 +1,59 @@
+substitutions:
+  # General substitutions:
+  name: clack
+  friendly_name: Clack
+  device_description: "Esphome component for Clack DV (WSPI) softener with TOF sensor saltlevel detection"
+  timezone: "Europe/Amsterdam"
+  # Interval substitutions:
+  salt_level_update_interval: 30s
+  watermeter_update_interval: 600s # 10 minutes
+  tank_percentage_update_interval: 600s
+  clack_height_update_interval: 600s
+
+  pulse_per_liters: "27.60"  #Clack DV flowmeter 27.60  / Clack WS1: 17.00
+
+## In order to use other language fix clack-label filename below:
+## Currently supported languages are en (english), nl (dutch).
+## ESP32-Atom-s3 is a M5STACK Atom s3 lite
+
+packages:
+  remote_package:
+    url: https://github.com/fonske/clack-reader-v4
+    ref: main
+    refresh: 0s
+    files: [ 
+      esphome/.clack-base.yaml, 
+      esphome/.clack-optional.yaml,
+#      esphome/.clack-labels-nl.yaml,
+      esphome/.clack-labels-en.yaml,
+      esphome/board-esp32-atom-s3.yaml,
+    ]
+
+## for developing/testing, uncomment local includes and comment out above remote_package packages part.
+#packages:
+#  substitutions: !include clack_dv_tof2/.clack-labels-en.yaml
+##  substitutions: !include clack_dv_tof2/.clack-labels-nl.yaml
+#  device_base1:  !include clack_dv_tof2/board-esp32-atom-s3.yaml
+#  device_base2:  !include clack_dv_tof2/.clack-base.yaml
+
+time:
+  - platform: sntp
+    id: sntp_time
+    timezone: ${timezone}
+    # Enable this with your own NTP server if your device is on a no internet IOT lan. 
+    #servers: 192.168.X.X
+#    servers:
+#     - 0.pool.ntp.org
+#     - 1.pool.ntp.org
+#     - 2.pool.ntp.org   
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: true
+#  power_save_mode: none
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${name}"
+    password: "configesp"
+    ap_timeout: 15s
