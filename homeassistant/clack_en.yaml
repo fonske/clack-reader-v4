@@ -1,0 +1,54 @@
+#-----------
+#UTILITY METER
+#-----------
+utility_meter:
+  clack_waterusage_this_quarter:  
+    source: sensor.clack_water_meter
+    cycle: quarter-hourly
+  clack_waterusage_this_hour:
+    source: sensor.clack_water_meter
+    cycle: hourly
+  clack_waterusage_today:
+    source: sensor.clack_water_meter
+    cycle: daily 
+  clack_waterusage_this_month:
+    source: sensor.clack_water_meter
+    cycle: monthly
+  clack_waterusage_this_year:
+    source: sensor.clack_water_meter
+    cycle: yearly 
+
+#-----------
+#AUTOMATIONS
+#-----------
+automation:
+  #------------------------------------------------------------------
+  # Extra option: Salt level alarm
+  # Fill in your own mobile_app_iphone_van_xxx in. (as an example)            
+  #------------------------------------------------------------------
+  - id: salt_level_alarm_notify
+    alias: Salt level alarm notify
+    description: ''
+    trigger:
+    - platform: state
+      entity_id: sensor.clack_fill_salt
+      to: "yes"
+    condition:
+    - condition: time
+      after: 07:30:00
+      before: '22:00:00'
+    action:
+    - service: notify.mobile_app_iphone_van_a_c_a  #change to your own!
+      data:
+        title: Be aware!
+        message: Salt level watersoftener is low! Fill salt today!
+        data:
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1
+    - delay:
+        minutes: 30
+    initial_state: 'true'
+    mode: single
