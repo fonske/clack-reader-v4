@@ -1,0 +1,235 @@
+  - title: Clack LESS
+    path: clack-less
+    cards:
+      - type: vertical-stack
+        cards:
+          - cards:
+              - type: entities
+                entities:
+                  - entity: sensor.clack_water_meter
+                    type: custom:multiple-entity-row
+                    icon: mdi:cup-water
+                    name: Water softener
+                    secondary_info:
+                      entity: sensor.clack_cycle_step
+                      name: 'cycle: '
+                    state_header: used
+                    entities:
+                      - entity: sensor.clack_time_to_regen
+                        name: time left
+                      - entity: sensor.clack_water_softener_m3_left
+                        name: m3 left
+                style: |
+                  ha-card {
+                    border-radius: 20px
+                  }
+                  .card-header {
+                    font-size: 18px;
+                    padding: 5px 25px;
+                    font-weight: bold;
+                  }          
+                title: Water softener
+              - entities:
+                  - entity: sensor.clack_water_softener_ltr_left
+                    max: 3700
+                    min: 0
+                    name: L used
+                height: 8px
+                decimal: false
+                positions:
+                  icon: 'off'
+                  indicator: 'off'
+                  tap_action: info
+                  name: 'off'
+                  value: 'off'
+                style: |
+                  ha-card {
+                    border-radius: 20px
+                  }
+                  .card-content {
+                   padding: 0px 10px 10px 10px;
+                   }      
+                type: custom:bar-card
+            mode: vertical
+            type: custom:stack-in-card
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.clack_cycle_step
+                state_not: Idle
+            card:
+              type: entities
+              style: |
+
+                .card-content {
+                  padding: 8px;
+                }
+                .card-content > div {
+                  margin: 0 !important;
+                }  
+                .card-header {
+                  font-size: 18px;
+                  padding: 5px 25px;
+                  font-weight: bold;
+                }  
+                    .card-header {
+                      font-size: 18px;
+                      padding: 5px 25px;
+                      font-weight: bold;
+                    }     
+              title: Regen. started
+              entities:
+                - conditions:
+                    - entity: sensor.clack_cycle_step
+                      state: Fill
+                  row:
+                    entity: sensor.clack_cycle_runtime
+                    icon: mdi:numeric-1-circle
+                    name: 'Cycle: Fill'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cycle_step
+                      state: Service
+                  row:
+                    entity: sensor.clack_cycle_runtime
+                    icon: mdi:numeric-2-circle
+                    name: 'Cycle: Service'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cycle_step
+                      state: Brine
+                  row:
+                    entity: sensor.clack_cycle_runtime
+                    icon: mdi:numeric-3-circle
+                    name: 'Cycle: Brine'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cycle_step
+                      state: Backwash
+                  row:
+                    entity: sensor.clack_cycle_runtime
+                    icon: mdi:numeric-4-circle
+                    name: 'Cycle: Backwash'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cycle_step
+                      state: Rinse
+                  row:
+                    entity: sensor.clack_cycle_runtime
+                    icon: mdi:numeric-5-circle
+                    name: 'Cycle: Rinse'
+                  type: conditional
+                - type: section
+                - entity: sensor.clack_cycle_total_runtime
+                  icon: mdi:timer-sand
+                  name: Total time past
+      - type: entities
+        entities:
+          - entity: sensor.clack_water_meter
+            name: Water meter
+          - entity: sensor.clack_water_softener_ltr_left
+            name: Water softener liters left
+          - entity: sensor.clack_water_softener_m3_left
+            name: Water softener m3 left
+          - entity: sensor.clack_salt_level_distance
+            name: Distance
+          - entity: sensor.clack_salt_level_distance_tof
+            name: Distance TOF
+          - entity: sensor.clack_salt_level_height
+            name: Height
+          - entity: sensor.clack_salt_level_percent
+            name: Procent
+          - entity: sensor.clack_fill_salt
+            name: Fill salt
+          - entity: sensor.clack_regenerated_on
+            name: Regenerated on
+          - entity: sensor.clack_resinclean_on
+            name: Resin clean on
+          - entity: sensor.clack_salt_fill_on
+            name: Salt fill on
+          - entity: sensor.clack_voltage
+            name: Voltage
+          - entity: sensor.clack_power_clack
+            name: Power Clack
+          - entity: sensor.clack_power_esp
+            name: Power ESP
+          - entity: sensor.clack_power_chlorinator
+            name: Power Chlorinator
+          - entity: binary_sensor.clack_block_regen
+            name: Block regen
+          - entity: binary_sensor.clack_motor_run
+            name: Motor run
+          - entity: switch.clack_chlorinator
+            name: Chlorinator
+      - type: vertical-stack
+        cards:
+          - elements:
+              - entity: sensor.clack_salt_level_for_dashboard
+                image: local/softener/softener.png
+                state_image:
+                  '0': local/softener/softener0.png
+                  '10': local/softener/softener10.png
+                  '20': local/softener/softener20.png
+                  '40': local/softener/softener40.png
+                  '60': local/softener/softener60.png
+                  '80': local/softener/softener80.png
+                  '100': local/softener/softener100.png
+                style:
+                  left: 0%
+                  top: 0%
+                  transform: scale(1,1)
+                tap_action:
+                  action: none
+                type: image
+            image: local/softener/softener0.png
+            panel: true
+            type: picture-elements
+          - type: history-graph
+            entities:
+              - entity: sensor.clack_salt_level_distance_tof
+                name: Salt level TOF
+              - entity: sensor.clack_salt_level_distance
+                name: Salt level last Distance
+            hours_to_show: 1.5
+          - type: history-graph
+            entities:
+              - entity: sensor.clack_water_meter
+                name: Water meter
+            hours_to_show: 1.5
+      - type: entities
+        entities:
+          - entity: select.clack_function_mode
+            name: Function mode
+          - entity: select.clack_regeneration_mode
+            name: Regeneration mode
+          - entity: number.clack_chlorinator_active_time
+            name: Chlorinator active time
+          - entity: number.clack_min_salt_distance
+            name: Min. salt distance
+          - entity: number.clack_max_salt_distance
+            name: Max. salt distance
+          - entity: number.clack_fill_salt_distance
+            name: Fill salt distance
+          - entity: number.clack_capacity_in_days
+            name: Capacity in days
+          - entity: number.clack_capacity_in_liters
+            name: Capacity in liters
+          - entity: number.clack_resinclean_days
+            name: Resinclean days
+          - entity: button.clack_reset_fill_salt
+            name: Reset fill salt
+          - entity: button.clack_resinclean_reset
+            name: Resinclean reset
+          - entity: button.clack_test_button_use_pulse
+            name: Test button use pulse
+          - entity: sensor.clack_time_to_resinclean
+            name: Time to resinclean
+          - entity: sensor.clack_water_softener_ip
+            name: Water softener IP
+          - entity: sensor.clack_version
+            name: Version
+          - entity: sensor.clack_internal_temperature
+            name: Internal temperature
+          - entity: button.clack_esp_restart
+            name: ESP Restart
+        title: Settings
