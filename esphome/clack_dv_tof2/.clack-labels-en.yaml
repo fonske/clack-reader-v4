@@ -48,6 +48,9 @@ substitutions:
   clack_resinclean_last: Resinclean on
   clack_saltfill_last: Salt fill on
   clack_cycle_step: Cycle step
+  clack_use_tst_but: Test button use pulse
+  clack_resinclean_reset_button: Resinclean Reset
+  clack_regen_stop_script: Test button Regen stop
   
 
 text_sensor:

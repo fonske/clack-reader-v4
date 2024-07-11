@@ -48,6 +48,9 @@ substitutions:
   clack_resinclean_last: Harscleaner op
   clack_saltfill_last: Zout bijgevuld op
   clack_cycle_step: Cyclus stap
+  clack_use_tst_but: Testknop verbruik pulse
+  clack_resinclean_reset_button: Harsclean reset
+  clack_regen_stop_script: Testknop Regen stop
 
 text_sensor:
   # Expose last regeneration information as sensor

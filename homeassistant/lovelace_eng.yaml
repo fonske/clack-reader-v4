@@ -222,6 +222,8 @@
             name: Resinclean reset
           - entity: button.clack_test_button_use_pulse
             name: Test button use pulse
+          - entity: button.clack_test_button_regen_stop
+            name: Test button Regen stop
           - entity: sensor.clack_time_to_resinclean
             name: Time to resinclean
           - entity: sensor.clack_water_softener_ip
