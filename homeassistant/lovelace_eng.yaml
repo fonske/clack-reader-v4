@@ -219,7 +219,7 @@
           - entity: button.clack_reset_fill_salt
             name: Reset fill salt
           - entity: button.clack_resinclean_reset
-            name: Resinclean reset
+            name: Reset Resinclean
           - entity: button.clack_test_button_use_pulse
             name: Test button use pulse
           - entity: button.clack_test_button_regen_stop
