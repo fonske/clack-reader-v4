@@ -112,13 +112,13 @@ globals:
     type: bool
     restore_value: yes
 
-# Define a global variable that shows motor run
-  - id: motor_run
+# Define a global variable that blocks a new reg cycle
+  - id: water_meter_freeze
     type: bool
     restore_value: yes
 
-# Define a global variable that blocks a new reg cycle
-  - id: timer_on_delay
+# Define a global variable that shows motor run
+  - id: motor_run
     type: bool
     restore_value: yes
 
@@ -194,14 +194,6 @@ script:
             } else {
               return {"${clack_no}"};
              }
-
-###  Define a script that blocks a new regeneration, after starting one
-  - id: on_delay
-    then:
-      - lambda: 'id(wait_on_delay) = true;'
-      - delay: 7200s # 120 minutes max regeneration time?
-      - lambda: 'id(wait_on_delay) = false;'
-
 ###  Define a script that sets a motor run to simulate steps.
   - id: clack_motor_run
     then:
@@ -218,112 +210,65 @@ script:
       - delay: !lambda "return id(duration) * 60 * 1000;"
       - switch.turn_off: chlorinator_relay
 
-###  Define a script that visualize the cycle steps in regeneration cycle "post"
-  - id: cycle_steps_post
-    mode: single
+  - id: chlorinator_stop
+    mode: restart
     then:
-      # Step 1: Brine
-      - lambda: 'id(timer_on_delay) = true;'
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Brine";
-      - lambda: |-
-          id(start_time) = id(sntp_time).now().timestamp;
-      - lambda: |-
-          id(start_time_total) = id(sntp_time).now().timestamp;
-      - if:
-          condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
-          then:
-            - script.execute: chlorinator_start
-      - delay: 10s
-      # Step 2: Backwash
-      - wait_until:
-          condition:
-            binary_sensor.is_on: bin_sens_motor_run
-          timeout: 3660s
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Backwash";
-      - lambda: |-
-          id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 6s
-      # Step 3: Rinse
-      - wait_until:
-          condition:
-            binary_sensor.is_on: bin_sens_motor_run
-          timeout: 1000s
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Rinse";
-      - lambda: |-
-          id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 8s
-      # Step 4: Fill
-      - wait_until:
-          condition:
-            binary_sensor.is_on: bin_sens_motor_run
-          timeout: 1000s
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Fill";
-      - lambda: |-
-          id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 6s
-      # Idle
-      - wait_until:
-          condition:
-            binary_sensor.is_on: bin_sens_motor_run
-          timeout: 120s
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Idle";
-      - lambda: |-
-          id(start_time) = 0;
-      - lambda: |-
-          id(start_time_total) = 0;
-      - component.update: timer1
-      - component.update: timer2
-      - delay: 10s
-      - lambda: 'id(timer_on_delay) = false;'
-      - lambda: 'id(wait_on_delay) = false;'
+      - switch.turn_off: chlorinator_relay
 
-###  Define a script that visualize the cycle steps in regeneration cycle "pre"
-  - id: cycle_steps_pre
+###  Define a script that resets the watermeter during regeneration
+  - id: reset_water_meter
+    mode: restart
+    then:
+      - globals.set:
+          id: totalWaterUsage
+          value: '00'        
+      - sensor.template.publish:
+          id: clack_watermeter
+          state: !lambda |-
+            return id(totalWaterUsage);
+      - sensor.template.publish:
+          id: clack_m3_left
+          state: !lambda |-
+            return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+      - sensor.template.publish:
+          id: clack_l_left
+          state: !lambda |-
+            return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+
+###  Define a script that visualize the cycle steps in regeneration cycle 4 steps
+  - id: cycle_steps_4cycle
     mode: single
     then:
-      # Step 1: Fill
-      - lambda: 'id(timer_on_delay) = true;'
+      - lambda: 'id(wait_on_delay) = true;'
+      - lambda: 'id(water_meter_freeze) = true;'
+      - script.execute: reset_water_meter #Set watermeter to 0 ltr
+      - globals.set:
+          id: regen_last
+          value: !lambda |-
+            return id(sntp_time).now().timestamp;   
+      - text_sensor.template.publish:
+          id: clack_regeneration_last
+          state: !lambda |-
+            char str[32];
+            time_t currTime = id(sntp_time).now().timestamp;
+            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
+            id(regen_date_last) = str;
+            return  { str };
+      # Step 1: Backwash
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
-              return id(cycle_step) = "Fill";
+              return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
+      - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
       - delay: 10s
-      # Step 2: Service
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 400s
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Service";
-      - lambda: |-
-          id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 10s
-      # Step 3: Brine
-      - wait_until:
-          condition:
-            binary_sensor.is_on: bin_sens_motor_run
-          timeout: 14500s
+          timeout: 1000s
+      # Step 2: Brine
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
@@ -336,35 +281,40 @@ script:
           then:
             - script.execute: chlorinator_start
       - delay: 10s
-      # Step 4: Backwash
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 3660s
-      - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Backwash";
-      - lambda: |-
-          id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 10s
-      # Step 5: Rinse
-      - wait_until:
-          condition:
-            binary_sensor.is_on: bin_sens_motor_run
-          timeout: 1000s
+          timeout: 3600s
+      # Step 3: Rinse
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
               return id(cycle_step) = "Rinse";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
+      - if:
+          condition:
+            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+          then:
+            - script.execute: chlorinator_stop
       - delay: 10s
-      # Idle
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
           timeout: 1000s
+      # Step 4: Fill
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Fill";
+      - lambda: |-
+          id(start_time) = id(sntp_time).now().timestamp;
+      - delay: 25s
+      - wait_until:
+          condition:
+            binary_sensor.is_on: bin_sens_motor_run
+          timeout: 600s
+      # Idle
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
@@ -375,9 +325,115 @@ script:
           id(start_time_total) = 0;
       - component.update: timer1
       - component.update: timer2
-      - delay: 10s
-      - lambda: 'id(timer_on_delay) = false;'
+      - delay: 20s
       - lambda: 'id(wait_on_delay) = false;'
+      - lambda: 'id(water_meter_freeze) = false;'
+
+###  Define a script that visualize the cycle steps in regeneration cycle 5 steps
+  - id: cycle_steps_5cycle
+    mode: single
+    then:
+      - lambda: 'id(wait_on_delay) = true;'
+      - lambda: 'id(water_meter_freeze) = true;'
+      - script.execute: reset_water_meter #Set watermeter to 0 ltr
+      - globals.set:
+          id: regen_last
+          value: !lambda |-
+            return id(sntp_time).now().timestamp;   
+      - text_sensor.template.publish:
+          id: clack_regeneration_last
+          state: !lambda |-
+            char str[32];
+            time_t currTime = id(sntp_time).now().timestamp;
+            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
+            id(regen_date_last) = str;
+            return  { str };
+      # Step 1: Backwash
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Backwash";
+      - lambda: |-
+          id(start_time) = id(sntp_time).now().timestamp;
+      - lambda: |-
+          id(start_time_total) = id(sntp_time).now().timestamp;
+      - delay: 10s
+      - wait_until:
+          condition:
+            binary_sensor.is_on: bin_sens_motor_run
+          timeout: 1000s
+      # Step 2: Brine
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Brine";
+      - lambda: |-
+          id(start_time) = id(sntp_time).now().timestamp;
+      - if:
+          condition:
+            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+          then:
+            - script.execute: chlorinator_start
+      - delay: 10s
+      - wait_until:
+          condition:
+            binary_sensor.is_on: bin_sens_motor_run
+          timeout: 3600s
+      # Step 3: Backwash2
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Backwash2";
+      - lambda: |-
+          id(start_time) = id(sntp_time).now().timestamp;
+      - if:
+          condition:
+            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+          then:
+            - script.execute: chlorinator_stop
+      - delay: 10s
+      - wait_until:
+          condition:
+            binary_sensor.is_on: bin_sens_motor_run
+          timeout: 1000s
+      # Step 4: Rinse
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Rinse";
+      - lambda: |-
+          id(start_time) = id(sntp_time).now().timestamp;
+      - delay: 10s
+      - wait_until:
+          condition:
+            binary_sensor.is_on: bin_sens_motor_run
+          timeout: 1000s
+      # Step 5: Fill
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Fill";
+      - lambda: |-
+          id(start_time) = id(sntp_time).now().timestamp;
+      - delay: 25s
+      - wait_until:
+          condition:
+            binary_sensor.is_on: bin_sens_motor_run
+          timeout: 600s
+      # Idle
+      - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Idle";
+      - lambda: |-
+          id(start_time) = 0;
+      - lambda: |-
+          id(start_time_total) = 0;
+      - component.update: timer1
+      - component.update: timer2
+      - delay: 20s
+      - lambda: 'id(wait_on_delay) = false;'
+      - lambda: 'id(water_meter_freeze) = false;'
 
 interval:
   - interval: 1s
@@ -460,17 +516,13 @@ sensor:
                   condition:
                     lambda: 'return id(wait_on_delay) == false;'
                   then:
-                    - script.execute: on_delay
-                    - switch.turn_on: clack_reg_test_button
-                    - delay: 100ms
-                    - switch.turn_off: clack_reg_test_button
                     - if:
                         condition:
-                          lambda: 'return id(clack_select_cycle).state == "Pre";'
+                          lambda: 'return id(clack_select_cycle).state == "4 step cycle";'
                         then:
-                          - script.execute: cycle_steps_pre  # FILL before regeneration - dry brine tank
+                          - script.execute: cycle_steps_4cycle  # backwash/brine/rinse/fill
                         else:
-                          - script.execute: cycle_steps_post # FILL after regeration - wet brine tank
+                          - script.execute: cycle_steps_5cycle # backwash/brine/backwas2/rinse/fill
       bus_voltage:
         id: ch1_voltage #Voltage ch1 - 2 - 3 are the same
         internal: true
@@ -762,9 +814,9 @@ select:
     optimistic: true
     restore_value: true
     options:
-      - "Post"
-      - "Pre"
-    initial_option: Post
+      - "4 step cycle"
+      - "5 step cycle"
+    initial_option: 4 step cycle
     entity_category: config
     update_interval: never
 ##

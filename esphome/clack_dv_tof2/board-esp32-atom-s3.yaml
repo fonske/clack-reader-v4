@@ -58,7 +58,7 @@ binary_sensor:
       then:
         - if:
             condition:
-              lambda: 'return id(wait_on_delay) == false;'
+              lambda: 'return id(water_meter_freeze) == false;'
             then:
               - sensor.template.publish:
                   id: clack_watermeter
@@ -82,20 +82,24 @@ binary_sensor:
       - delayed_on_off: 50ms
     on_press:
       then:
-        - sensor.template.publish:
-            id: clack_watermeter
-            state: !lambda |-
-              return id(totalWaterUsage) += 0.1;
-        - sensor.template.publish:
-            id: clack_m3_left
-            state: !lambda |-
-              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-        - sensor.template.publish:
-            id: clack_l_left
-            state: !lambda |-
-              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
-        - lambda: |-
-            ESP_LOGI("UseTest", "Use button pressed");
+        - if:
+            condition:
+              lambda: 'return id(water_meter_freeze) == false;'
+            then:
+              - sensor.template.publish:
+                  id: clack_watermeter
+                  state: !lambda |-
+                    return id(totalWaterUsage) += 0.1;
+              - sensor.template.publish:
+                  id: clack_m3_left
+                  state: !lambda |-
+                    return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+              - sensor.template.publish:
+                  id: clack_l_left
+                  state: !lambda |-
+                    return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+              - lambda: |-
+                  ESP_LOGI("UseTest", "Use button pressed");
 
   - platform: template
     name: Block regen
@@ -121,45 +125,9 @@ switch:
     icon: mdi:bacteria
     entity_category: config
 
-  - id: clack_reg_test_button
- #   name: Test switch regen pulse
-    platform: template
-    internal: true
-    optimistic: true
-    on_turn_on:
-        - globals.set:
-            id: totalWaterUsage
-            value: '00'        
-        - globals.set:
-            id: regen_last
-            value: !lambda |-
-              return id(sntp_time).now().timestamp;
-        - text_sensor.template.publish:
-            id: clack_regeneration_last
-            state: !lambda |-
-              char str[32];
-              time_t currTime = id(sntp_time).now().timestamp;
-              strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
-              id(regen_date_last) = str;
-              return  { str };
-        - sensor.template.publish:
-            id: clack_watermeter
-            state: !lambda |-
-              return id(totalWaterUsage);
-        - sensor.template.publish:
-            id: clack_m3_left
-            state: !lambda |-
-              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-        - sensor.template.publish:
-            id: clack_l_left
-            state: !lambda |-
-              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
-    on_turn_off:
-      - logger.log: "clack_reg_test_button is OFF" 
-
 button:
   - platform: template
-    name: Test button use pulse
+    name: ${clack_use_tst_but}
     id: clack_use_tst_but
     on_press:
       then:
@@ -170,17 +138,7 @@ button:
             id(clack_use_test_button).publish_state(false);
 
   - platform: template
-    name: Test button regen pulse
-    id: clack_reg_tst_but
-    internal: true
-    on_press:
-      then:
-        - switch.turn_on: clack_reg_test_button
-        - delay: 100ms
-        - switch.turn_off: clack_reg_test_button
-
-  - platform: template
-    name: "Resinclean Reset"
+    name: ${clack_resinclean_reset_button}
     id: clack_resinclean_reset_button
     on_press:
       - globals.set:
@@ -218,3 +176,23 @@ button:
               strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
               id(fill_last) = str;
               return  { str };
+
+  - platform: template
+    name: ${clack_regen_stop_script}
+    id: clack_regen_stop_script
+    on_press:
+      then:
+        - script.stop: cycle_steps_4cycle
+        - script.stop: cycle_steps_5cycle
+        - text_sensor.template.publish:
+            id: clack_cycle_step
+            state: !lambda |-
+              return id(cycle_step) = "Idle";
+        - lambda: |-
+            id(start_time) = 0;
+        - lambda: |-
+            id(start_time_total) = 0;
+        - component.update: timer1
+        - component.update: timer2
+        - lambda: 'id(wait_on_delay) = false;'
+        - lambda: 'id(water_meter_freeze) = false;'
