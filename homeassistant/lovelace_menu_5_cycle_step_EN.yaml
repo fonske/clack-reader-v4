@@ -1,5 +1,5 @@
-  - title: Clack LESS
-    path: clack-less
+  - title: Clack
+    path: clack
     cards:
       - type: vertical-stack
         cards:
@@ -81,43 +81,43 @@
               entities:
                 - conditions:
                     - entity: sensor.clack_cycle_step
-                      state: Fill
+                      state: Backwash
                   row:
                     entity: sensor.clack_cycle_runtime
                     icon: mdi:numeric-1-circle
-                    name: 'Cycle: Fill'
-                  type: conditional
-                - conditions:
-                    - entity: sensor.clack_cycle_step
-                      state: Service
-                  row:
-                    entity: sensor.clack_cycle_runtime
-                    icon: mdi:numeric-2-circle
-                    name: 'Cycle: Service'
+                    name: 'Cycle: Backwash'
                   type: conditional
                 - conditions:
                     - entity: sensor.clack_cycle_step
                       state: Brine
                   row:
                     entity: sensor.clack_cycle_runtime
-                    icon: mdi:numeric-3-circle
+                    icon: mdi:numeric-2-circle
                     name: 'Cycle: Brine'
                   type: conditional
                 - conditions:
                     - entity: sensor.clack_cycle_step
-                      state: Backwash
+                      state: Backwash2
                   row:
                     entity: sensor.clack_cycle_runtime
-                    icon: mdi:numeric-4-circle
-                    name: 'Cycle: Backwash'
+                    icon: mdi:numeric-3-circle
+                    name: 'Cycle: Backwash2'
                   type: conditional
                 - conditions:
                     - entity: sensor.clack_cycle_step
                       state: Rinse
                   row:
                     entity: sensor.clack_cycle_runtime
-                    icon: mdi:numeric-5-circle
+                    icon: mdi:numeric-4-circle
                     name: 'Cycle: Rinse'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cycle_step
+                      state: Fill
+                  row:
+                    entity: sensor.clack_cycle_runtime
+                    icon: mdi:numeric-5-circle
+                    name: 'Cycle: Fill'
                   type: conditional
                 - type: section
                 - entity: sensor.clack_cycle_total_runtime
@@ -219,7 +219,9 @@
           - entity: button.clack_reset_fill_salt
             name: Reset fill salt
           - entity: button.clack_resinclean_reset
-            name: Resinclean reset
+            name: Reset resinclean
+          - entity: button.clack_test_button_regen_stop
+            name: Test button Regen stop
           - entity: button.clack_test_button_use_pulse
             name: Test button use pulse
           - entity: sensor.clack_time_to_resinclean
