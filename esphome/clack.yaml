@@ -2,7 +2,7 @@ substitutions:
   # General substitutions:
   name: clack
   friendly_name: Clack
-  device_description: "Esphome component for Clack DV (WSPI) softener with TOF sensor saltlevel detection"
+  device_description: "Esphome component for Clack WS1 softener with TOF sensor saltlevel detection"
   timezone: "Europe/Amsterdam"
   # Interval substitutions:
   salt_level_update_interval: 30s
@@ -10,7 +10,7 @@ substitutions:
   tank_percentage_update_interval: 600s
   clack_height_update_interval: 600s
 
-  pulse_per_liters: "27.60"  #Clack DV flowmeter 27.60  / Clack WS1: 17.00
+  pulse_per_liters: "17.00"  #Clack DV flowmeter 27.60  / Clack WS1: 17.00
 
 ## In order to use other language fix clack-label filename below:
 ## Currently supported languages are en (english), nl (dutch).
@@ -19,7 +19,7 @@ substitutions:
 packages:
   remote_package:
     url: https://github.com/fonske/clack-reader-v4
-    ref: main
+    ref: ws1
     refresh: 0s
     files: [ 
       esphome/clack_dv_tof2/.clack-base.yaml, 
