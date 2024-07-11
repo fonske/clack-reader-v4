@@ -209,7 +209,12 @@ script:
       # Use a lambda expression to return the delay in milliseconds
       - delay: !lambda "return id(duration) * 60 * 1000;"
       - switch.turn_off: chlorinator_relay
-
+      
+  - id: chlorinator_stop
+    mode: restart
+    then:
+      - switch.turn_off: chlorinator_relay
+      
 ###  Define a script that resets the watermeter during regeneration
   - id: reset_water_meter
     mode: restart
@@ -275,6 +280,11 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
+      - if:
+          condition:
+            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+          then:
+            - script.execute: chlorinator_stop
       - delay: 6s
       # Step 3: Rinse
       - wait_until:
@@ -315,6 +325,7 @@ script:
           id(start_time_total) = 0;
       - component.update: timer1
       - component.update: timer2
+      - delay: 10s
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
@@ -386,6 +397,11 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
+        - if:
+          condition:
+            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+          then:
+            - script.execute: chlorinator_stop
       - delay: 10s
       # Step 5: Rinse
       - wait_until:
@@ -414,6 +430,7 @@ script:
           id(start_time_total) = 0;
       - component.update: timer1
       - component.update: timer2
+      - delay: 10s
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
