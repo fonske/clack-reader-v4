@@ -397,11 +397,11 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-        - if:
-          condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
-          then:
-            - script.execute: chlorinator_stop
+      - if:
+         condition:
+           - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+         then:
+           - script.execute: chlorinator_stop
       - delay: 10s
       # Step 5: Rinse
       - wait_until:
