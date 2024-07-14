@@ -22,19 +22,19 @@ packages:
     ref: ws1
     refresh: 0s
     files: [ 
-      esphome/clack_dv_tof2/.clack-base.yaml, 
-      esphome/clack_dv_tof2/.clack-optional.yaml,
-#      esphome/clack_dv_tof2/.clack-labels-nl.yaml,
-      esphome/clack_dv_tof2/.clack-labels-en.yaml,
-      esphome/clack_dv_tof2/board-esp32-atom-s3.yaml,
+      esphome/clack_ws1_tof2/.clack-base.yaml, 
+      esphome/clack_ws1_tof2/.clack-optional.yaml,
+#      esphome/clack_ws1_tof2/.clack-labels-nl.yaml,
+      esphome/clack_ws1_tof2/.clack-labels-en.yaml,
+      esphome/clack_ws1_tof2/board-esp32-atom-s3.yaml,
     ]
 
 ## for developing/testing, uncomment local includes and comment out above remote_package packages part.
 #packages:
-#  substitutions: !include clack_dv_tof2/.clack-labels-en.yaml
-##  substitutions: !include clack_dv_tof2/.clack-labels-nl.yaml
-#  device_base1:  !include clack_dv_tof2/board-esp32-atom-s3.yaml
-#  device_base2:  !include clack_dv_tof2/.clack-base.yaml
+#  substitutions: !include clack_ws1_tof2/.clack-labels-en.yaml
+##  substitutions: !include clack_ws1_tof2/.clack-labels-nl.yaml
+#  device_base1:  !include clack_ws1_tof2/board-esp32-atom-s3.yaml
+#  device_base2:  !include clack_ws1_tof2/.clack-base.yaml
 
 time:
   - platform: sntp
