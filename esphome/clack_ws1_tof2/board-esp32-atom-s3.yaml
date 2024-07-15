@@ -15,30 +15,6 @@ i2c:
     scl: GPIO5  
     scan: true
 
-# Enable/Disable logging
-logger:
-  logs:
-    modbus_controller.sensor: DEBUG
-    modbus_controller.output: DEBUG
-    modbus.number: DEBUG
-    esp32.preferences: DEBUG
-    sensor: DEBUG
-    text_sensor: DEBUG
-    button: DEBUG
-    number: DEBUG
-    component: ERROR
-
-wifi:
-  ap:
-    ssid: "${name}"
-    password: "configesp"
-  
-captive_portal:
-
-# Enable Web server.
-web_server:
-  port: 80
-
 binary_sensor:
 ## flowmeter pulse
   - platform: gpio
@@ -63,7 +39,7 @@ binary_sensor:
               - sensor.template.publish:
                   id: clack_watermeter
                   state: !lambda |-
-                    return id(totalWaterUsage) += 1/float(${pulse_per_liters});
+                    return id(totalWaterUsage) += 1/id(pulse_per_liters);
               - sensor.template.publish:
                   id: clack_m3_left
                   state: !lambda |-
