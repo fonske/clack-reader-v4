@@ -13,12 +13,12 @@
                     secondary_info:
                       entity: sensor.clack_cyclus_stap
                       name: 'cyclus: '
-                    state_header: used
+                    state_header: verbr.
                     entities:
                       - entity: sensor.clack_tijd_tot_regen
-                        name: time left
+                        name: tijd over
                       - entity: sensor.clack_waterontharder_m3_over
-                        name: m3 left
+                        name: m3 over
                 style: |
                   ha-card {
                     border-radius: 20px
@@ -28,7 +28,7 @@
                     padding: 5px 25px;
                     font-weight: bold;
                   }          
-                title: Water softener
+                title: Water ontharder
               - entities:
                   - entity: sensor.clack_waterontharder_ltr_over
                     max: 3200
@@ -77,7 +77,7 @@
                       padding: 5px 25px;
                       font-weight: bold;
                     }     
-              title: Regen. started
+              title: Regen. gestart
               entities:
                 - conditions:
                     - entity: sensor.clack_cyclus_stap
