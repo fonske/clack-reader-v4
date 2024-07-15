@@ -10,8 +10,6 @@ substitutions:
   tank_percentage_update_interval: 600s
   clack_height_update_interval: 600s
 
-  pulse_per_liters: "17.00"  #Clack DV flowmeter 27.60  / Clack WS1: 17.00
-
 ## In order to use other language fix clack-label filename below:
 ## Currently supported languages are en (english), nl (dutch).
 ## ESP32-Atom-s3 is a M5STACK Atom s3 lite
@@ -24,7 +22,7 @@ packages:
     files: [ 
       esphome/clack_ws1_tof2/.clack-base.yaml, 
       esphome/clack_ws1_tof2/.clack-optional.yaml,
-#      esphome/clack_ws1_tof2/.clack-labels-nl.yaml,
+##      esphome/clack_ws1_tof2/.clack-labels-nl.yaml,
       esphome/clack_ws1_tof2/.clack-labels-en.yaml,
       esphome/clack_ws1_tof2/board-esp32-atom-s3.yaml,
     ]
@@ -51,9 +49,36 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   fast_connect: true
-#  power_save_mode: none
+  power_save_mode: light
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${name}"
     password: "configesp"
     ap_timeout: 15s
+
+# Enable Over The Air Updates
+ota:
+  platform: esphome
+#  password: !secret clack_ota_password
+
+# Enable captive portal
+captive_portal:
+  
+# Enable logger
+logger:
+  baud_rate: 0
+  logs:
+    esp32.preferences: DEBUG
+    sensor: DEBUG
+    text_sensor: DEBUG
+    binary_sensor: DEBUG
+    switch: DEBUG
+    button: DEBUG
+    number: DEBUG
+    climate: DEBUG
+    component: ERROR
+    ecodan.component: ERROR
+
+# Enable Web server.
+web_server:
+  port: 80
