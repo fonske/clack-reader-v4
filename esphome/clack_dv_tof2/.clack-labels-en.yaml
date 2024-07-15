@@ -11,6 +11,7 @@ substitutions:
   clack_version: Version
   clack_regeneration_last: Regenerated on
   clack_fill_salt: Fill salt
+  clack_set_pulse_per_liters: Set pulse per ltr
   clack_saltlevel_height_min: Min salt distance
   clack_saltlevel_height_max: Max salt distance
   clack_saltlevel_height_fill: Fill salt distance
@@ -36,6 +37,7 @@ substitutions:
   clack_power_esp: Power ESP
   clack_power_chlorinator: Power Chlorinator
   clack_restart: ESP Restart
+  clack_safe_mode: ESP Restart (Safe Mode)
   clack_regen: clack regen
   clack_brine: During brine
   clack_regeneration_mode: Regeneration mode

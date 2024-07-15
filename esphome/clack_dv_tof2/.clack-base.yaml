@@ -59,6 +59,12 @@ globals:
     restore_value: yes
 #    initial_value: '00'
 
+# Clack DV flowmeter 27.60  / Clack WS1: 17.00
+  - id: pulse_per_liters
+    type: float
+    restore_value: yes
+    initial_value: '27.60'
+
 # Define a global variable for the chlorinator delay duration in minutes
   - id: duration
     type: int
@@ -478,6 +484,11 @@ button:
     id: restart_button
     name: ${clack_restart}
 
+###  ESP restart (safe mode) button
+  - platform: safe_mode
+    id: safe_mode_button
+    name: ${clack_safe_mode}
+
 #-----------
 #SENSORS
 #-----------
@@ -843,6 +854,7 @@ text_sensor:
     icon: mdi:basket-fill
     update_interval: never
 
+
   # Textsensor "cycle_step"
   - platform: template
     name: ${clack_cycle_step}
@@ -943,6 +955,27 @@ text_sensor:
 ##
 # imput numbers as sliders for setting the dimensions of the tank and level alarm.
 number:
+  ##
+  # Set pulse per liters flowmeter
+  - platform: template
+    id: clack_set_pulse_per_liters
+    name: ${clack_set_pulse_per_liters}
+    icon: mdi:pulse
+    optimistic: true
+    mode: box
+    step: 0.1
+    entity_category: config
+    min_value: 0
+    max_value: 50
+    initial_value: 27.6
+    restore_value: yes
+    unit_of_measurement: " "
+    on_value: 
+      - globals.set:
+          id: pulse_per_liters
+          value: !lambda |-
+            return id(clack_set_pulse_per_liters).state;
+
   ##
   # Set minimum distance (from bottom sensor / above plastic cap)
   - platform: template
