@@ -141,14 +141,14 @@
             name: Procent
           - entity: sensor.clack_zout_bijvullen
             name: Zout bijvullen
-          - entity: sensor.clack_regenerated_on
-            name: Regenerated on
+          - entity: sensor.clack_geregenereerd_op
+            name: Geregenereerd op
           - entity: sensor.clack_harscleaner_op
             name: Harsreiniger op
           - entity: sensor.clack_zout_bijgevuld_op
             name: Zout bijgevuld op
-          - entity: sensor.clack_voltage
-            name: Voltage
+          - entity: sensor.clack_spanning
+            name: Spanning
           - entity: sensor.clack_vermogen_clack
             name: Power Clack
           - entity: sensor.clack_vermogen_esp
