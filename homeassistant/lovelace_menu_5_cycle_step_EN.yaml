@@ -202,6 +202,8 @@
             name: Function mode
           - entity: select.clack_regeneration_mode
             name: Regeneration mode
+          - entity: number.clack_set_pulse_per_ltr
+            name: Set pulse per ltr           
           - entity: number.clack_chlorinator_active_time
             name: Chlorinator active time
           - entity: number.clack_min_salt_distance
@@ -234,4 +236,6 @@
             name: Internal temperature
           - entity: button.clack_esp_restart
             name: ESP Restart
+          - entity: button.clack_esp_restart_safe_mode
+            name: ESP Restart (Safe mode)
         title: Settings
