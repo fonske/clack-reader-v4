@@ -1,0 +1,54 @@
+#-----------
+#UTILITY METER
+#-----------
+utility_meter:
+  clack_waterverbruik_dit_kwartier:  
+    source: sensor.clack_watermeter
+    cycle: quarter-hourly
+  clack_waterverbruik_dit_uur:
+    source: sensor.clack_watermeter
+    cycle: hourly
+  clack_waterverbruik_vandaag:
+    source: sensor.clack_watermeter
+    cycle: daily 
+  clack_waterverbruik_maand:
+    source: sensor.clack_watermeter
+    cycle: monthly
+  clack_waterverbruik_jaar:
+    source: sensor.clack_watermeter
+    cycle: yearly 
+
+#-----------
+#AUTOMATIONS
+#-----------
+automation:
+  #------------------------------------------------------------------
+  # Extra optie: Zout niveau alarm
+  # Vul je eigen mobile_app_iphone_van_xxx in. (als voorbeeld)            
+  #------------------------------------------------------------------
+  - id: salt_level_alarm_notify
+    alias: Ontharder - Zoutniveau alarm melding
+    description: ''
+    trigger:
+    - platform: state
+      entity_id: sensor.clack_zout_bijvullen
+      to: ja
+    condition:
+    - condition: time
+      after: 07:30:00
+      before: '22:00:00'
+    action:
+    - service: notify.mobile_app_iphone_van_a_c_a
+      data:
+        title: Let op!
+        message: Zout niveau van ontharder is laag! Vandaag gaan bijvullen!
+        data:
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1
+    - delay:
+        minutes: 30
+    initial_state: 'true'
+    mode: single
