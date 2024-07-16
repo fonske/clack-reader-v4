@@ -17,3 +17,5 @@ Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB wit
 Help: Please open a issue on this git project.
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ebbenberg)
+
+![Example](/readme/github_photo.png)
