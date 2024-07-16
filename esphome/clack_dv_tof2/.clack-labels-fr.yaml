@@ -1,0 +1,148 @@
+substitutions:
+  clack_select_chl_or_dpsw: Choix du mode
+  clack_distance: Distance Sel
+  clack_distance_tof: Distance Sel/Capteur TOF
+  clack_procent: Pourcentage de Sel
+  clack_animation: Hauteur Sel pour tableau de bord
+  clack_height: Hauteur Sel
+  clack_watermeter_total: Volume d'eau total
+  clack_m3_left: M3 d'eau adoucie restante
+  clack_l_left: Litres d'eau adoucie restante
+  clack_version: Version
+  clack_regeneration_last: Regéneré le
+  clack_fill_salt: Remplissage de Sel
+  clack_set_pulse_per_liters: Set pulse per ltr
+  clack_saltlevel_height_min: Hauteur Sel MIN
+  clack_saltlevel_height_max: Hauteur Sel MAX
+  clack_saltlevel_height_fill: Distance avant remplissage Sel
+  clack_capacity_liters: Capacité Restantate (LITRES)
+  clack_capacity_days: Capacité Restante (JOURS)
+  clack_chlorinator_delay: Temps d'activation du Chlorinateur
+  clack_watermeter_pulse: Impulsion du compteur d'eau
+  clack_regeneration_pulse: Impulsion regénération
+  clack_ip: Adresse IP adoucisseur
+  clack_wifi_signal_db: dB signal WiFi
+  clack_wifi_signal_db_percent: Signal WiFi
+  clack_uptime: Durée de fonctionnement
+  clack_chlorinator: Chlorinateur
+  clack_salt_level_measurement: Mesure du Sel
+  hours: heures
+  days: jours
+  clack_yes: "oui"
+  clack_no: "non"
+  clack_on: "Allumé"
+  clack_off: "Eteint"
+  clack_power: Puissance Clack
+  clack_voltage: Tension
+  clack_power_esp: Puissance ESP
+  clack_power_chlorinator: Puissance Chlorinator
+  clack_restart: Redémarrer ESP
+  clack_safe_mode: Redémarrer ESP (Mode de sécurité)
+  clack_regen: regénération clack
+  clack_brine: Pendant la saumure
+  clack_regeneration_mode: Mode de régénération
+  clack_time_to_regen: Temps de régénération
+  clack_time_to_resinclean: Time to resinclean
+  clack_cycle_runtime: Durée de cycle
+  clack_cycle_total_runtime: Durée totale de cycle
+  clack_resinclean_capacity_days: Resinclean days
+  clack_reset_but_last_dist: Reset fill salt
+  clack_resinclean_last: Resinclean on
+  clack_saltfill_last: Salt fill on
+  clack_cycle_step: Cycle step
+  clack_use_tst_but: Test button use pulse
+  clack_resinclean_reset_button: Resinclean Reset
+  clack_regen_stop_script: Test button Regen stop
+  
+
+text_sensor:
+  # Expose last regeneration information as sensor
+  - platform: template
+    name: ${clack_regeneration_last}
+    id: clack_regeneration_last
+    icon: mdi:clock-start
+    update_interval: never
+    lambda: |-
+      return id(regen_date_last);
+    filters:   
+      - substitute:
+        - "Jan -> Jan"
+        - "Feb -> Fév"
+        - "Mar -> Mar"
+        - "Apr -> Avr"
+        - "May -> Mai"
+        - "Jun -> Jui"
+        - "Jul -> Jui"
+        - "Aug -> Aoû"
+        - "Sep -> Sep"
+        - "Okt -> Okt"
+        - "Nov -> Nov"
+        - "Dec -> Déc"
+        - "Mon -> Lun"
+        - "Tue -> Mar"
+        - "Wed -> Mer"
+        - "Thu -> Jeu"
+        - "Fri -> Ven"
+        - "Sat -> Sam"
+        - "Sun -> Dim" 
+
+  # Expose last resinclean information as sensor
+  - platform: template
+    name: ${clack_resinclean_last}
+    id: clack_resinclean_last
+    icon: mdi:clock-start
+    update_interval: never
+    lambda: |-
+      return id(resinclean_date_last);
+    filters:   
+      - substitute:
+        - "Jan -> Jan"
+        - "Feb -> Fév"
+        - "Mar -> Mar"
+        - "Apr -> Avr"
+        - "May -> Mai"
+        - "Jun -> Jui"
+        - "Jul -> Jui"
+        - "Aug -> Aoû"
+        - "Sep -> Sep"
+        - "Okt -> Okt"
+        - "Nov -> Nov"
+        - "Dec -> Déc"
+        - "Mon -> Lun"
+        - "Tue -> Mar"
+        - "Wed -> Mer"
+        - "Thu -> Jeu"
+        - "Fri -> Ven"
+        - "Sat -> Sam"
+        - "Sun -> Dim" 
+
+  # Expose last salt fill information as sensor
+  - platform: template
+    name: ${clack_saltfill_last}
+    id: clack_saltfill_last
+    icon: mdi:clock-start
+    update_interval: never
+    lambda: |-
+      return id(fill_last);
+    filters:   
+      - substitute:
+        - "Jan -> Jan"
+        - "Feb -> Fév"
+        - "Mar -> Mar"
+        - "Apr -> Avr"
+        - "May -> Mai"
+        - "Jun -> Jui"
+        - "Jul -> Jui"
+        - "Aug -> Aoû"
+        - "Sep -> Sep"
+        - "Okt -> Okt"
+        - "Nov -> Nov"
+        - "Dec -> Déc"
+        - "Mon -> Lun"
+        - "Tue -> Mar"
+        - "Wed -> Mer"
+        - "Thu -> Jeu"
+        - "Fri -> Ven"
+        - "Sat -> Sam"
+        - "Sun -> Dim" 
+
