@@ -18,4 +18,4 @@ Help: Please open a issue on this git project.
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ebbenberg)
 
-![Example](/readme/github_photo.png)
+![Example](/readme/pcb_transp.png)
