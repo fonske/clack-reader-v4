@@ -789,7 +789,7 @@ sensor:
     name: ${clack_m3_left}
     unit_of_measurement: m³
     device_class: water
-    state_class: total_increasing
+    state_class: total
     accuracy_decimals: 2
     update_interval: ${watermeter_update_interval}
 
@@ -798,7 +798,7 @@ sensor:
     name: ${clack_l_left}
     unit_of_measurement: L
     device_class: water
-    state_class: total_increasing
+    state_class: total
     accuracy_decimals: 0
     update_interval: ${watermeter_update_interval}
 
