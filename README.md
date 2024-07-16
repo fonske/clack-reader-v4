@@ -7,9 +7,9 @@
  Automatic recognision of the softener steps
 
 ## Versions / Branches
-main: Clack WSPI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS) with tof sensor (VL53L1X) 
+main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS) with tof sensor (VL53L1X) 
 
-ws1: Clack WS1 valve with tof sensor (VL53L1X) (software not yet ready)
+ws1: Clack WS1 valve (CM(x) from AQMOS) with tof sensor (VL53L1X)
 
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
