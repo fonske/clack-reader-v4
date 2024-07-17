@@ -4,7 +4,7 @@
  Relay for control of the chlorinator module from AQMOS
  and Power measurement with ina3221
 
- Automatic recognision of the softener steps
+ Automatic recognision of the softener steps and measure the liters and m3 softened water by reading the clack flowmeter
 
 ## Versions / Branches
 main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS) with tof sensor (VL53L1X) 
