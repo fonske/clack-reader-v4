@@ -8,12 +8,12 @@ esp32:
     type: arduino
     version: latest
 
-# the m5stack TOF sensor vl53l1x is I2C
 i2c:
   - id: bus_a
     sda: GPIO6  
     scl: GPIO5  
     scan: true
+    timeout: 10ms
 
 binary_sensor:
 ## flowmeter pulse
@@ -158,8 +158,8 @@ button:
     id: clack_regen_stop_script
     on_press:
       then:
-        - script.stop: cycle_steps_post
-        - script.stop: cycle_steps_pre
+        - script.stop: cycle_steps_4cycle
+        - script.stop: cycle_steps_5cycle
         - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-

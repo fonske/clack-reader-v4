@@ -10,9 +10,11 @@ substitutions:
   tank_percentage_update_interval: 600s
   clack_height_update_interval: 600s
 
-## In order to use other language fix clack-label filename below:
-## Currently supported languages are en (english), nl (dutch).
-## ESP32-Atom-s3 is a M5STACK Atom s3 lite
+### In order to use other language fix clack-label filename below:
+### Currently supported languages are: en (English), nl (Dutch) and fr (French).
+### ESP32-Atom-s3 is a M5STACK Atom s3 lite
+### tof1 is a VL53L0X M5stack. Distance measure up to 2 mtr. I2C grove cable max 5 mtr length
+### tof2 is a VL53L1X M5stack (ToF4M). Distance measure up to 4 mtr. I2C grove cable max 2 mtr length
 
 packages:
   remote_package:
@@ -20,19 +22,26 @@ packages:
     ref: main
     refresh: 0s
     files: [ 
-      esphome/clack_dv_tof2/.clack-base.yaml, 
-      esphome/clack_dv_tof2/.clack-optional.yaml,
-#      esphome/clack_dv_tof2/.clack-labels-nl.yaml,
-      esphome/clack_dv_tof2/.clack-labels-en.yaml,
-      esphome/clack_dv_tof2/board-esp32-atom-s3.yaml,
+      esphome/clack_dv/.clack-base.yaml,
+#      esphome/clack_dv/.tof1.yaml,
+      esphome/clack_dv/.tof2.yaml,
+      esphome/clack_dv/.clack-optional.yaml,
+#      esphome/clack_dv/.clack-labels-nl.yaml,
+#      esphome/clack_dv/.clack-labels-fr.yaml,
+      esphome/clack_dv/.clack-labels-en.yaml,
+      esphome/clack_dv/board-esp32-atom-s3.yaml,
     ]
 
-## for developing/testing, uncomment local includes and comment out above remote_package packages part.
+### for developing/testing, uncomment local includes and comment out above remote_package packages part.
 #packages:
-#  substitutions: !include clack_dv_tof2/.clack-labels-en.yaml
-##  substitutions: !include clack_dv_tof2/.clack-labels-nl.yaml
-#  device_base1:  !include clack_dv_tof2/board-esp32-atom-s3.yaml
-#  device_base2:  !include clack_dv_tof2/.clack-base.yaml
+##  substitutions: !include clack_dv/.clack-labels-en.yaml
+#  substitutions: !include clack_dv/.clack-labels-nl.yaml
+##  substitutions: !include clack_dv/.clack-labels-fr.yaml
+#  device_base1:  !include clack_dv/board-esp32-atom-s3.yaml
+#  device_base2:  !include clack_dv/.clack-base.yaml
+#  device_base3: !include clack_dv/.tof1.yaml
+##  device_base3:  !include clack_dv/.tof2.yaml
+#  device_base4:  !include clack_dv/.clack-optional.yaml
 
 time:
   - platform: sntp
@@ -77,7 +86,6 @@ logger:
     number: DEBUG
     climate: DEBUG
     component: ERROR
-    ecodan.component: ERROR
 
 # Enable Web server.
 web_server:
