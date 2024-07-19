@@ -36,11 +36,11 @@ packages:
 #packages:
 ##  substitutions: !include clack_ws1/.clack-labels-en.yaml
 #  substitutions: !include clack_ws1/.clack-labels-nl.yaml
-##  substitutions: !include clack_ws1/.clack-labels-nl.yaml
+##  substitutions: !include clack_ws1/.clack-labels-fr.yaml
 #  device_base1:  !include clack_ws1/board-esp32-atom-s3.yaml
 #  device_base2:  !include clack_ws1/.clack-base.yaml
-#  device_base3: !include clack_ws1/.tof1.yaml
-##  device_base3:  !include clack_ws1/.tof2.yaml
+##  device_base3: !include clack_ws1/.tof1.yaml
+#  device_base3:  !include clack_ws1/.tof2.yaml
 #  device_base4:  !include clack_ws1/.clack-optional.yaml
 
 time:
