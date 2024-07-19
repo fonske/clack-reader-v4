@@ -8,12 +8,12 @@ esp32:
     type: arduino
     version: latest
 
-# the m5stack TOF sensor vl53l1x is I2C
 i2c:
   - id: bus_a
     sda: GPIO6  
     scl: GPIO5  
     scan: true
+    timeout: 10ms
 
 binary_sensor:
 ## flowmeter pulse

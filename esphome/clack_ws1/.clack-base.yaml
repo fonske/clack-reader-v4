@@ -6,11 +6,6 @@ esphome:
     priority: -100
     then:
       - script.execute: on_boot
-  includes:
-    - tof_vl53l1x.h  #ToF4M M5stack
-  libraries:
-    - "Wire"
-    - "pololu/VL53L1X"
 
 # Enable Home Assistant API
 api:
@@ -264,7 +259,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -281,7 +276,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -298,7 +293,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -358,7 +353,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -375,7 +370,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -392,7 +387,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -404,7 +399,7 @@ script:
               return id(cycle_step) = "Rinse";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 10s
+      - delay: 12s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -591,41 +586,6 @@ sensor:
         on_value:
           - component.update: clack_power_chlorinator  #template sensor          
     update_interval: 1s
-
-
-# VL53L1X TOF               
-  - platform: custom
-    lambda: |-
-      auto my_sensor = new MyCustomSensor();
-      App.register_component(my_sensor);
-      return {my_sensor};
-
-    sensors:
-      name: ${clack_distance_tof}
-      accuracy_decimals: 1
-      unit_of_measurement: "cm"
-      id: distance_cm
-      icon: mdi:ruler
-      internal: false
-      filters:
-        - lambda: |-
-            if (isnan(x)) {
-              return 0;
-            } else {
-              return x;
-            }
-        - lambda: return x/10;
-        - clamp:
-            min_value: 0.0
-            max_value: 400.0
-#        - median:
-        - delta: 0.2
-      on_value:
-        then:
-          - sensor.template.publish:
-              id: clack_distance
-              state: !lambda |-
-                return id(distance_cm).state;
 
   ##
   # ultrasonic distance sensor.
