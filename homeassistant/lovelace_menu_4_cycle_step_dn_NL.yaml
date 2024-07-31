@@ -31,7 +31,7 @@
                 title: Water ontharder
               - entities:
                   - entity: sensor.clack_waterontharder_ltr_over
-                    max: 3700
+                    max: 3200
                     min: 0
                     name: Liter over
                   - entity: sensor.clack_tijd_tot_regen_uren
