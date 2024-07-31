@@ -127,6 +127,10 @@
             name: Waterontharder ltr over
           - entity: sensor.clack_waterontharder_m3_over
             name: Waterontharder m3 over
+          - entity: sensor.clack_water_debiet
+            name: Water debiet
+          - entity: binary_sensor.clack_lekkage_gedetecteerd
+            name: Lekkage gedetecteerd
           - entity: sensor.clack_zoutniveau_afstand
             name: Afstand
           - entity: sensor.clack_zoutniveau_afstand_tof
@@ -151,12 +155,14 @@
             name: Power ESP
           - entity: sensor.clack_vermogen_chlorinator
             name: Power Chlorinator
-          - entity: binary_sensor.clack_block_regen
-            name: Block regen
-          - entity: binary_sensor.clack_motor_run
-            name: Motor run
           - entity: switch.clack_chlorinator
             name: Chlorinator
+          - entity: binary_sensor.clack_water_stroomt
+            name: Water stroomt
+          - entity: binary_sensor.clack_block_regen
+            name: Block regen
+          - entity: binary_sensor.clack_motor_in_werking
+            name: Motor run
       - type: vertical-stack
         cards:
           - elements:
@@ -199,7 +205,9 @@
           - entity: select.clack_regeneratie_mode
             name: Regeneratie mode
           - entity: number.clack_pulse_per_liter
-            name: Pulse per liter           
+            name: Pulse per liter
+          - entity: number.clack_vertraging_lekkage_alarm
+            name: Lekkage alarm vertraging
           - entity: number.clack_chlorinator_aktief_tijd
             name: Chlorinator aktief tijd
           - entity: number.clack_min_afstand_zout
@@ -234,4 +242,5 @@
             name: ESP Herstart
           - entity: button.clack_esp_herstart_safe_mode
             name: ESP Herstart (Veilige modus)
-        title: Settings
+        title: Instellingen
+        state_color: false
