@@ -9,6 +9,7 @@ esp32:
     version: latest
 
 i2c:
+## use I2C bus external, not on ESP GPIO1 and GPIO2
   - id: bus_a
     sda: GPIO6  
     scl: GPIO5  
@@ -16,39 +17,6 @@ i2c:
     timeout: 10ms
 
 binary_sensor:
-## flowmeter pulse
-  - platform: gpio
-    pin:
-      number: GPIO7 
-      inverted: false
-      mode:
-        input: true
-        pullup: true
-    id: clack_watermeter_pulse
-    name: ${clack_watermeter_pulse}
-    icon: mdi:pulse
-    internal: true
-    filters:
-      - delayed_on_off: 50ms
-    on_press:
-      then:
-        - if:
-            condition:
-              lambda: 'return id(water_meter_freeze) == false;'
-            then:
-              - sensor.template.publish:
-                  id: clack_watermeter
-                  state: !lambda |-
-                    return id(totalWaterUsage) += 1/id(pulse_per_liters);
-              - sensor.template.publish:
-                  id: clack_m3_left
-                  state: !lambda |-
-                    return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-              - sensor.template.publish:
-                  id: clack_l_left
-                  state: !lambda |-
-                    return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
-
 ## temporary test button for testing water meter pulse
   - id: clack_use_test_button
 #    name: Test button use pulse
@@ -66,14 +34,6 @@ binary_sensor:
                   id: clack_watermeter
                   state: !lambda |-
                     return id(totalWaterUsage) += 0.1;
-              - sensor.template.publish:
-                  id: clack_m3_left
-                  state: !lambda |-
-                    return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-              - sensor.template.publish:
-                  id: clack_l_left
-                  state: !lambda |-
-                    return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
               - lambda: |-
                   ESP_LOGI("UseTest", "Use button pressed");
 

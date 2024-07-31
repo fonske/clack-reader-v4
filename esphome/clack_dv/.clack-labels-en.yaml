@@ -5,6 +5,7 @@ substitutions:
   clack_procent: Salt level percent
   clack_animation: Salt level for dashboard
   clack_height: Salt level height
+  clack_flow_rate: Water flow rate
   clack_watermeter_total: Water meter
   clack_m3_left: Water softener m3 left
   clack_l_left: Water softener ltr left
@@ -18,6 +19,7 @@ substitutions:
   clack_capacity_liters: Capacity in liters
   clack_capacity_days: Capacity in days
   clack_chlorinator_delay: Chlorinator active time
+  clack_leakage_alarm_delay: Delay leakage alarm
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneration pulse
   clack_ip: Water softener IP
@@ -42,6 +44,7 @@ substitutions:
   clack_brine: During brine
   clack_regeneration_mode: Regeneration mode
   clack_time_to_regen: Time to regen
+  clack_time_to_regen_hours: Time to regen hours
   clack_time_to_resinclean: Time to resinclean
   clack_cycle_runtime: Cycle runtime
   clack_cycle_total_runtime: Cycle total runtime
@@ -53,8 +56,10 @@ substitutions:
   clack_use_tst_but: Test button use pulse
   clack_resinclean_reset_button: Resinclean Reset
   clack_regen_stop_script: Test button Regen stop
+  clack_motor_running: Motor running
+  clack_water_flowing: Water flowing
+  clack_water_leakage: Leakage detected
   
-
 text_sensor:
   # Expose last regeneration information as sensor
   - platform: template

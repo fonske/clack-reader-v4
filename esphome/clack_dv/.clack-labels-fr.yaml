@@ -6,6 +6,7 @@ substitutions:
   clack_procent: Pourcentage de Sel
   clack_animation: Hauteur Sel pour tableau de bord
   clack_height: Hauteur Sel
+  clack_flow_rate: Water flow rate
   clack_watermeter_total: Volume d'eau total
   clack_m3_left: M3 d'eau adoucie restante
   clack_l_left: Litres d'eau adoucie restante
@@ -19,6 +20,7 @@ substitutions:
   clack_capacity_liters: Capacité Restantate (LITRES)
   clack_capacity_days: Capacité Restante (JOURS)
   clack_chlorinator_delay: Temps d'activation du Chlorinateur
+  clack_leakage_alarm_delay: Leakage alarm delay
   clack_watermeter_pulse: Impulsion du compteur d'eau
   clack_regeneration_pulse: Impulsion regénération
   clack_ip: Adresse IP adoucisseur
@@ -43,6 +45,7 @@ substitutions:
   clack_brine: Pendant la saumure
   clack_regeneration_mode: Mode de régénération
   clack_time_to_regen: Temps de régénération
+  clack_time_to_regen_hours: Temps de régénération Hueres
   clack_time_to_resinclean: Time to resinclean
   clack_cycle_runtime: Durée de cycle
   clack_cycle_total_runtime: Durée totale de cycle
@@ -54,7 +57,9 @@ substitutions:
   clack_use_tst_but: Test button use pulse
   clack_resinclean_reset_button: Resinclean Reset
   clack_regen_stop_script: Test button Regen stop
-  
+  clack_motor_running: Motor running
+  clack_water_flowing: Water flowing  
+  clack_water_leakage: Leakage detected
 
 text_sensor:
   # Expose last regeneration information as sensor

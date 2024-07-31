@@ -6,7 +6,7 @@ sensor:
   # Diagnostics wifi and uptime
   - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
     id: clack_wifi_signal_db
-    name: WiFi Signal dB
+    name: ${clack_wifi_signal_db}
     update_interval: 60s
     device_class: signal_strength
     entity_category: diagnostic
@@ -14,7 +14,7 @@ sensor:
   - platform: copy # Reports the WiFi signal strength in %
     source_id: clack_wifi_signal_db
     id: clack_wifi_signal_db_percent
-    name: WiFi Signal
+    name: ${clack_wifi_signal_db_percent}
     filters:
       - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
     unit_of_measurement: "%"

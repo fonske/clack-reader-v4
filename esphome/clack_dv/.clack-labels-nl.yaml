@@ -5,6 +5,7 @@ substitutions:
   clack_procent: Zoutniveau procent
   clack_animation: Zoutniveau voor dashboard
   clack_height: Zoutniveau hoogte
+  clack_flow_rate: Water debiet
   clack_watermeter_total: Watermeter
   clack_m3_left: Waterontharder m3 over
   clack_l_left: Waterontharder ltr over
@@ -18,6 +19,7 @@ substitutions:
   clack_capacity_liters: Capaciteit in liters
   clack_capacity_days: Capaciteit in dagen
   clack_chlorinator_delay: Chlorinator aktief tijd
+  clack_leakage_alarm_delay: Vertraging lekkage alarm
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneratie pulse
   clack_ip: Waterontharder IP
@@ -42,6 +44,7 @@ substitutions:
   clack_brine: Tijdens bezouten
   clack_regeneration_mode: Regeneratie mode
   clack_time_to_regen: Tijd tot regen.
+  clack_time_to_regen_hours: Tijd tot regen uren
   clack_time_to_resinclean: Tijd tot harscleaner
   clack_cycle_runtime: Cyclus runtime
   clack_cycle_total_runtime: Cyclus totale runtime
@@ -53,6 +56,9 @@ substitutions:
   clack_use_tst_but: Testknop verbruik pulse
   clack_resinclean_reset_button: Harsclean reset
   clack_regen_stop_script: Testknop Regen stop
+  clack_motor_running: Motor in werking
+  clack_water_flowing: Water stroomt
+  clack_water_leakage: Lekkage gedetecteerd
 
 text_sensor:
   # Expose last regeneration information as sensor

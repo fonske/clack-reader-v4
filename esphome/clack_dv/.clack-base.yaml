@@ -2,15 +2,12 @@
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
+  includes:
+    - water_flow.h
   on_boot:
     priority: -100
     then:
       - script.execute: on_boot
-
-#update for esphome 2024.6.0
-# OTA:
-ota:
-  platform: esphome
 
 # Enable Home Assistant API
 api:
@@ -27,14 +24,6 @@ api:
             id: clack_watermeter
             state: !lambda |-
               return id(totalWaterUsage);
-        - sensor.template.publish:
-            id: clack_m3_left
-            state: !lambda |-
-              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-        - sensor.template.publish:
-            id: clack_l_left
-            state: !lambda |-
-              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
 
     - service: last_distance_value #set last measured salt distance to any value in cm.
       variables:
@@ -54,8 +43,8 @@ globals:
     restore_value: yes
 #    initial_value: '00'
 
-# Clack DV flowmeter 27.60  / Clack WS1: 17.00
-  - id: pulse_per_liters
+# Clack DV flowmeter 27.60  / Clack WS1: 16.80 / (to be checked)
+  - id: pulse_per_liter
     type: float
     restore_value: yes
     initial_value: '27.60'
@@ -65,6 +54,12 @@ globals:
     type: int
     restore_value: yes
     initial_value: '15'
+
+# Define a global variable for the chlorinator delay duration in minutes
+  - id: duration_leakage
+    type: int
+    restore_value: yes
+    initial_value: '30'
 
 # Define a global variable for last regeneration time
   - id: cycle_step
@@ -145,22 +140,20 @@ globals:
     restore_value: yes
     initial_value: '0'
 
+  - id: leakage_detected
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+
 script:
 ###  On reboot or powerloss of the esp, set the time left, last regeneration time, and capacity counters
   - id: on_boot
     then:
-      - sensor.template.publish:
-          id: clack_m3_left
-          state: !lambda |-
-            return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-      - sensor.template.publish:
-          id: clack_l_left
-          state: !lambda |-
-            return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
       - component.update: clack_saltfill_last  # add old date to dashboard when boot
       - component.update: clack_resinclean_last # add old date to dashboard when boot
       - component.update: clack_regeneration_last # add old date to dashboard when boot
       - component.update: time_to
+      - component.update: time_to_regen_hours
       - sensor.template.publish:
           id: clack_distance
           state: !lambda |-
@@ -194,7 +187,25 @@ script:
               return {"${clack_yes}"};
             } else {
               return {"${clack_no}"};
-             }
+            }
+
+### Define a script that waits for a specified amount of time and then sets the leakage alarm bool
+  - id: check_leakage
+    mode: restart
+    then:
+      - if:
+          condition:
+            binary_sensor.is_on: clack_water_flowing
+          then:
+            # Use a lambda expression to return the delay in milliseconds
+            - delay: !lambda "return id(duration_leakage) * 60 * 1000;"
+            - lambda: 'id(leakage_detected) = true;'
+            - wait_until:
+                condition:
+                  binary_sensor.is_off: clack_water_flowing
+                timeout: 20s
+            - lambda: 'id(leakage_detected) = false;'
+
 ###  Define a script that sets a motor run to simulate steps.
   - id: clack_motor_run
     then:
@@ -210,12 +221,12 @@ script:
       # Use a lambda expression to return the delay in milliseconds
       - delay: !lambda "return id(duration) * 60 * 1000;"
       - switch.turn_off: chlorinator_relay
-      
+
   - id: chlorinator_stop
     mode: restart
     then:
       - switch.turn_off: chlorinator_relay
-      
+
 ###  Define a script that resets the watermeter during regeneration
   - id: reset_water_meter
     mode: restart
@@ -227,14 +238,6 @@ script:
           id: clack_watermeter
           state: !lambda |-
             return id(totalWaterUsage);
-      - sensor.template.publish:
-          id: clack_m3_left
-          state: !lambda |-
-            return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-      - sensor.template.publish:
-          id: clack_l_left
-          state: !lambda |-
-            return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
 
 ###  Define a script that visualize the cycle steps in regeneration cycle "post"
   - id: cycle_steps_post
@@ -463,7 +466,7 @@ interval:
 
 binary_sensor:
   - platform: template
-    name: Motor run
+    name: ${clack_motor_running}
     id: bin_sens_motor_run
     internal: false
     lambda: |-
@@ -472,6 +475,25 @@ binary_sensor:
       } else {
         return false;
       }
+
+  - platform: template
+    name: ${clack_water_flowing}
+    id: clack_water_flowing
+    lambda: |-
+      return (id(clack_flow_rate).state > 0);
+    on_state:
+      - if:
+          condition:
+            binary_sensor.is_on: clack_water_flowing
+          then:
+            - script.execute: check_leakage
+
+  - platform: template
+    name: ${clack_water_leakage}
+    icon: mdi:home-flood
+    id: clack_water_leakage
+    lambda: |-
+      return id(leakage_detected);
 
 ###  ESP restart button
 button:
@@ -592,7 +614,7 @@ sensor:
     update_interval: 1s
 
   ##
-  # ultrasonic distance sensor.
+  # Time Of Flight distance sensor.
   - platform: template
     name: clack_distance #${clack_distance}
     id:  clack_distance
@@ -731,6 +753,23 @@ sensor:
 # CLACK
 #------
   ##
+  #  Flow Rate
+  - platform: custom
+    lambda: |-
+      auto wf = new WaterFlowSensor();
+      App.register_component(wf);
+      return {wf->clack_flow_rate};
+
+    sensors:
+    - name: ${clack_flow_rate}
+      icon: mdi:waves-arrow-right
+      unit_of_measurement: L/min # Gallons GPM or Liters per minute 
+      accuracy_decimals: 2
+      id: clack_flow_rate
+      device_class: water
+      state_class: measurement
+
+
   #  Watermeter
   - platform: template
     id: clack_watermeter
@@ -741,8 +780,15 @@ sensor:
     device_class: water
     state_class: total_increasing
     accuracy_decimals: 1
-    lambda: |-
-      return id(totalWaterUsage);
+    on_value:
+      - sensor.template.publish:
+          id: clack_m3_left
+          state: !lambda |-
+            return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+      - sensor.template.publish:
+          id: clack_l_left
+          state: !lambda |-
+            return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
 
   - platform: template
     id: clack_m3_left
@@ -844,6 +890,20 @@ text_sensor:
       return { str };
 
   - platform: template
+    name: ${clack_time_to_regen_hours}
+    id: time_to_regen_hours
+    icon: mdi:clock-outline
+    update_interval: 600s
+    lambda: |-
+      char str[32];
+      if(id(regen_last) == 0){
+        return {"Unknown"};
+      }
+      int hours = (id(regen_last) - id(sntp_time).now().timestamp) / 3600 + (id(clack_capacity_days).state * 24);
+      sprintf(str, "%i", hours);
+      return { str };
+
+  - platform: template
     name: ${clack_time_to_resinclean}
     id: time_to_resinclean
     icon: mdi:bacteria-outline
@@ -930,11 +990,12 @@ number:
     initial_value: 27.6
     restore_value: yes
     unit_of_measurement: " "
-    on_value: 
-      - globals.set:
-          id: pulse_per_liters
-          value: !lambda |-
-            return id(clack_set_pulse_per_liters).state;
+    on_value:
+      then:
+        - globals.set:
+            id: pulse_per_liter
+            value: !lambda |-
+              return id(clack_set_pulse_per_liters).state;
 
   ##
   # Set minimum distance (from bottom sensor / above plastic cap)
@@ -1020,14 +1081,6 @@ number:
             id: clack_watermeter
             state: !lambda |-
               return id(totalWaterUsage);
-        - sensor.template.publish:
-            id: clack_m3_left
-            state: !lambda |-
-              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-        - sensor.template.publish:
-            id: clack_l_left
-            state: !lambda |-
-              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
   ##
   # Set capacity days
   - platform: template
@@ -1040,12 +1093,13 @@ number:
     entity_category: config
     min_value: 0
     max_value: 21
-    initial_value: 14
+    initial_value: 10
     restore_value: yes
     unit_of_measurement: ${days}
     on_value: 
-      - component.update: time_to
-
+      then:
+        - component.update: time_to
+        - component.update: time_to_regen_hours
   ##
   # Set resinclean capacity days
   - platform: template
@@ -1061,8 +1115,9 @@ number:
     initial_value: 120
     restore_value: yes
     unit_of_measurement: ${days}
-    on_value: 
-      - component.update: time_to_resinclean
+    on_value:
+      then:
+        - component.update: time_to_resinclean
   ##
   # Set chlorinator relay off-delay
   - platform: template
@@ -1082,4 +1137,25 @@ number:
       then:
         - globals.set:
             id: duration
+            value: !lambda 'return int(x);'
+
+  ##
+  # Set minimum time delay for leakage alarm
+  - platform: template
+    id: clack_leakage_alarm_delay
+    name: ${clack_leakage_alarm_delay}
+    icon: mdi:home-flood
+    optimistic: true
+    mode: slider
+    step: 1
+    entity_category: config
+    min_value: 0
+    max_value: 60
+    initial_value: 30
+    restore_value: yes
+    unit_of_measurement: "min"
+    on_value:
+      then:
+        - globals.set:
+            id: duration_leakage
             value: !lambda 'return int(x);'
