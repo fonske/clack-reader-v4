@@ -31,16 +31,20 @@
                 title: Water softener
               - entities:
                   - entity: sensor.clack_water_softener_ltr_left
-                    max: 3700
+                    max: 3200
                     min: 0
-                    name: L used
-                height: 8px
+                    name: Liters left
+                  - entity: sensor.clack_time_to_regen_hours
+                    max: 240
+                    min: 0
+                    name: Time left
+                height: 20px
                 decimal: false
                 positions:
                   icon: 'off'
                   indicator: 'off'
                   tap_action: info
-                  name: 'off'
+                  name: inside
                   value: 'off'
                 style: |
                   ha-card {
@@ -131,6 +135,10 @@
             name: Water softener liters left
           - entity: sensor.clack_water_softener_m3_left
             name: Water softener m3 left
+          - entity: sensor.clack_water_flow_rate
+            name: Water flow rate
+          - entity: binary_sensor.clack_leakage_detected
+            name: Water leakage detected
           - entity: sensor.clack_salt_level_distance
             name: Distance
           - entity: sensor.clack_salt_level_distance_tof
@@ -155,10 +163,12 @@
             name: Power ESP
           - entity: sensor.clack_power_chlorinator
             name: Power Chlorinator
+          - entity: binary_sensor.clack_water_flowing
+            name: Water flowing
           - entity: binary_sensor.clack_block_regen
             name: Block regen
-          - entity: binary_sensor.clack_motor_run
-            name: Motor run
+          - entity: binary_sensor.clack_motor_running
+            name: Motor running
           - entity: switch.clack_chlorinator
             name: Chlorinator
       - type: vertical-stack
@@ -203,7 +213,9 @@
           - entity: select.clack_regeneration_mode
             name: Regeneration mode
           - entity: number.clack_set_pulse_per_ltr
-            name: Set pulse per ltr           
+            name: Set pulse per ltr
+          - entity: number.clack_delay_leakage_alarm
+            name: Delay water leakage alarm
           - entity: number.clack_chlorinator_active_time
             name: Chlorinator active time
           - entity: number.clack_min_salt_distance
