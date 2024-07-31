@@ -19,7 +19,7 @@ substitutions:
   clack_capacity_liters: Capacity in liters
   clack_capacity_days: Capacity in days
   clack_chlorinator_delay: Chlorinator active time
-  clack_leakage_alarm_delay: Leakage alarm delay
+  clack_leakage_alarm_delay: Delay leakage alarm
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneration pulse
   clack_ip: Water softener IP
