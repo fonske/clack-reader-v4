@@ -62,7 +62,7 @@ automation:
     description: ''
     trigger:
     - platform: state
-      entity_id: binary_sensor.clackws_lekkage_gedetecteerd
+      entity_id: binary_sensor.clack_lekkage_gedetecteerd
       to: "on"    
     action:
     - service: notify.mobile_app_iphone_van_a_c_a

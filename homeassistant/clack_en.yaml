@@ -27,7 +27,7 @@ automation:
   # Fill in your own mobile_app_iphone_van_xxx in. (as an example)            
   #------------------------------------------------------------------
   - id: salt_level_alarm_notify
-    alias: Salt level alarm notify
+    alias: Water softener - Salt level alarm notify
     description: ''
     trigger:
     - platform: state
@@ -52,3 +52,27 @@ automation:
         minutes: 30
     initial_state: 'true'
     mode: single
+  #------------------------------------------------------------------------------------
+  # Another option: Alarm water leakage - continious usage L/min after xx minutes
+  #  Fill in your own mobile_app_iphone_van_xxx in. (as an example)                 
+  #------------------------------------------------------------------------------------
+  - id: water_leakage_alarm_notify
+    alias: Water softener - Leakage of water alarm
+    description: ''
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.clack_leakage_detected
+      to: "on"    
+    action:
+    - service: notify.mobile_app_iphone_van_a_c_a
+      data:
+        title: Be aware!
+        message: Leakage of water detected!
+        data:
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1
+    initial_state: 'true'
+    mode: restart
