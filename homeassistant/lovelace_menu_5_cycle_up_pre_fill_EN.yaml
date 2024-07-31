@@ -33,14 +33,18 @@
                   - entity: sensor.clack_water_softener_ltr_left
                     max: 3700
                     min: 0
-                    name: L used
-                height: 8px
+                    name: Liters left
+                  - entity: sensor.clack_time_to_regen_hours
+                    max: 240
+                    min: 0
+                    name: Time left
+                height: 20px
                 decimal: false
                 positions:
                   icon: 'off'
                   indicator: 'off'
                   tap_action: info
-                  name: 'off'
+                  name: inside
                   value: 'off'
                 style: |
                   ha-card {
@@ -131,6 +135,10 @@
             name: Water softener liters left
           - entity: sensor.clack_water_softener_m3_left
             name: Water softener m3 left
+          - entity: sensor.clack_water_flow_rate
+            name: Water flow rate
+          - entity: binary_sensor.clack_leakage_detected
+            name: Water leakage detected
           - entity: sensor.clack_salt_level_distance
             name: Distance
           - entity: sensor.clack_salt_level_distance_tof
@@ -155,25 +163,27 @@
             name: Power ESP
           - entity: sensor.clack_power_chlorinator
             name: Power Chlorinator
+          - entity: binary_sensor.clack_water_flowing
+            name: Water flowing
           - entity: binary_sensor.clack_block_regen
             name: Block regen
-          - entity: binary_sensor.clack_motor_run
-            name: Motor run
+          - entity: binary_sensor.clack_motor_running
+            name: Motor running
           - entity: switch.clack_chlorinator
             name: Chlorinator
       - type: vertical-stack
         cards:
           - elements:
               - entity: sensor.clack_salt_level_for_dashboard
-                image: local/softener/softener.png
+                image: local/images/softener.png
                 state_image:
-                  '0': local/softener/softener0.png
-                  '10': local/softener/softener10.png
-                  '20': local/softener/softener20.png
-                  '40': local/softener/softener40.png
-                  '60': local/softener/softener60.png
-                  '80': local/softener/softener80.png
-                  '100': local/softener/softener100.png
+                  '0': local/images/softener0.png
+                  '10': local/images/softener10.png
+                  '20': local/images/softener20.png
+                  '40': local/images/softener40.png
+                  '60': local/images/softener60.png
+                  '80': local/images/softener80.png
+                  '100': local/images/softener100.png
                 style:
                   left: 0%
                   top: 0%
@@ -181,7 +191,7 @@
                 tap_action:
                   action: none
                 type: image
-            image: local/softener/softener0.png
+            image: local/images/softener0.png
             panel: true
             type: picture-elements
           - type: history-graph
@@ -203,7 +213,9 @@
           - entity: select.clack_regeneration_mode
             name: Regeneration mode
           - entity: number.clack_set_pulse_per_ltr
-            name: Set pulse per ltr           
+            name: Set pulse per ltr
+          - entity: number.clack_delay_leakage_alarm
+            name: Delay water leakage alarm
           - entity: number.clack_chlorinator_active_time
             name: Chlorinator active time
           - entity: number.clack_min_salt_distance

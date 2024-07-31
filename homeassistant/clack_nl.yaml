@@ -52,3 +52,28 @@ automation:
         minutes: 30
     initial_state: 'true'
     mode: single
+
+  #------------------------------------------------------------------------------------
+  # Nog een extra optie: Lekkage van water alarm - continu verbruik L/min na xx minuten
+  # Vul je eigen mobile_app_iphone_van_xxx in. (als voorbeeld)            
+  #------------------------------------------------------------------------------------
+  - id: water_leakage_alarm_notify
+    alias: Ontharder - Lekkage van water alarm melding
+    description: ''
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.clack_lekkage_gedetecteerd
+      to: "on"    
+    action:
+    - service: notify.mobile_app_iphone_van_a_c_a
+      data:
+        title: Let op!
+        message: Lekkage van water gedetecteerd!
+        data:
+          push:
+            sound:
+              name: default
+              critical: 1
+              volume: 1
+    initial_state: 'true'
+    mode: restart
