@@ -11,6 +11,9 @@ main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
 
 ws1: Clack WS1 valve (CM(x) from AQMOS)
 
+Remark: Make sure to copy water_flow.h and tof_vl53l1x.h to your esphome directory before compiling the clack.yaml
+There have been some bigger updates to the latest code: added L/min and alarm, also lovelace home assistant menu has been updated.
+
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
 
