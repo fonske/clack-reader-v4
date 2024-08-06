@@ -30,12 +30,12 @@
                   }          
                 title: Water softener
               - entities:
-                  - entity: sensor.clack_water_softener_ltr_left
-                    max: 3200
+                  - entity: sensor.clack_water_softener_percent_ltr_left
+                    max: 100
                     min: 0
                     name: Liters left
-                  - entity: sensor.clack_time_to_regen_hours
-                    max: 240
+                  - entity: sensor.clack_water_softener_percent_time_left
+                    max: 100
                     min: 0
                     name: Time left
                 height: 20px
@@ -119,6 +119,23 @@
                 - entity: sensor.clack_cycle_total_runtime
                   icon: mdi:timer-sand
                   name: Total time past
+          - type: entities
+            entities:
+              - entity: sensor.clack_operation_time
+                name: Operation time
+              - entity: sensor.clack_capacity_used
+                name: Capacity used
+              - entity: sensor.clack_backwash
+                name: Backwash
+              - entity: sensor.clack_brine
+                name: Brine
+              - entity: sensor.clack_rinse
+                name: Rinse
+              - entity: sensor.clack_fill
+                name: Fill
+              - entity: sensor.clack_run_time
+                name: Total run time
+            title: History
       - type: entities
         entities:
           - entity: sensor.clack_water_meter
@@ -230,6 +247,8 @@
             name: Test button Regen stop
           - entity: button.clack_test_button_use_pulse
             name: Test button use pulse
+          - entity: button.clack_test_clack_motor_run
+            name: Test button motor run pulse
           - entity: sensor.clack_time_to_resinclean
             name: Time to resinclean
           - entity: sensor.clack_water_softener_ip
