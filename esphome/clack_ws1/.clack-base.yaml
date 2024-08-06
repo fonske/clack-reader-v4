@@ -681,13 +681,10 @@ button:
 
 ####################################test
   - platform: template
-    name: test_clack_motor_run
-    id: test_clack_motor_run
+    name: ${clack_test_motor_run}
+    id: test_motor_run
     on_press:
       then:
-#        - lambda: 'id(motor_run) = true;'
-#        - delay: 100ms 
-#        - lambda: 'id(motor_run) = false;'
         - script.execute: clack_motor_run  #give pulse when motor runs to different step.
         - if:
             condition:
