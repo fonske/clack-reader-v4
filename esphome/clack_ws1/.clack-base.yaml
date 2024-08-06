@@ -519,7 +519,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
-      - delay: 12s
+      - delay: 15s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -542,7 +542,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
-      - delay: 15s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
