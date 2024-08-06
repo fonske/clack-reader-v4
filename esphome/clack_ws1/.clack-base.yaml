@@ -326,7 +326,6 @@ script:
             }
             return std::string(str);
       - component.update: clack_save_total_time_used
-      ###############################
       - script.execute: reset_water_meter #Set watermeter to 0 ltr
       - globals.set:
           id: regen_last
@@ -349,7 +348,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
-      - delay: 12s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -374,7 +373,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
-      - delay: 12s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -397,7 +396,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
-      - delay: 12s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -498,7 +497,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
-      - delay: 12s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -521,7 +520,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
-      - delay: 15s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -562,7 +561,7 @@ script:
               return id(cycle_step) = "Rinse";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 15s
+      - delay: 17s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
