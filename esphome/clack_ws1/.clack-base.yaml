@@ -222,8 +222,8 @@ script:
       - component.update: clack_fill_time
       - component.update: clack_service_time
       - component.update: clack_total_run_time
-      - lambda: 'id(wait_on_delay) = false;'
-      - lambda: 'id(water_meter_freeze) = false;'
+##      - lambda: 'id(wait_on_delay) = false;'
+##      - lambda: 'id(water_meter_freeze) = false;'
 
   - id: recalculate
     then:
