@@ -13,7 +13,8 @@ ws1: Clack WS1 valve (CM(x) from AQMOS)
 
 Remark: Make sure to copy water_flow.h and tof_vl53l1x.h to your esphome directory before compiling the clack.yaml
 There have been some bigger updates to the latest code: added L/min and alarm, also lovelace home assistant menu has been updated.
-Remerk2: 6 august 2024: Added history regeneration and test button motor pulse to step through regeneration (with time delays stil working between steps)
+
+Remark2: 6 august 2024: Added history regeneration and test button motor pulse to step through regeneration (with time delays stil working between steps)
 [example](/readme/last_changes_august_2024.jpg)
 
 ## Contact
