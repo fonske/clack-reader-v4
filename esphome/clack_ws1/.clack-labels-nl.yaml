@@ -61,6 +61,7 @@ substitutions:
   clack_motor_running: Motor in werking
   clack_water_flowing: Water stroomt
   clack_water_leakage: Lekkage gedetecteerd
+  clack_test_motor_run: Test button motor run
   clack_save_total_liters_used: Verbruikt
   clack_save_total_time_used: Werkings tijd
   clack_brine_time_txt: Brine
