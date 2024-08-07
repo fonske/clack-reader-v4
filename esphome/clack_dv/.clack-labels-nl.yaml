@@ -9,6 +9,7 @@ substitutions:
   clack_watermeter_total: Watermeter
   clack_m3_left: Waterontharder m3 over
   clack_l_left: Waterontharder ltr over
+  clack_percent_l_left: Waterontharder procent ltr over
   clack_version: Versie
   clack_regeneration_last: Geregenereerd op
   clack_fill_salt: Zout bijvullen
@@ -45,6 +46,7 @@ substitutions:
   clack_regeneration_mode: Regeneratie mode
   clack_time_to_regen: Tijd tot regen.
   clack_time_to_regen_hours: Tijd tot regen uren
+  clack_percent_time_left: Waterontharder procent tijd over
   clack_time_to_resinclean: Tijd tot harscleaner
   clack_cycle_runtime: Cyclus runtime
   clack_cycle_total_runtime: Cyclus totale runtime
@@ -59,6 +61,16 @@ substitutions:
   clack_motor_running: Motor in werking
   clack_water_flowing: Water stroomt
   clack_water_leakage: Lekkage gedetecteerd
+  clack_test_motor_run: Test button motor run
+  clack_save_total_liters_used: Verbruikt
+  clack_save_total_time_used: Werkings tijd
+  clack_brine_time_txt: Brine
+  clack_backwash_time_txt: Backwash
+  clack_backwash2_time_txt: Backwash2
+  clack_rinse_time_txt: Rinse
+  clack_fill_time_txt: Fill
+  clack_service_time_txt: Service
+  clack_total_run_time_txt: Run time
 
 text_sensor:
   # Expose last regeneration information as sensor

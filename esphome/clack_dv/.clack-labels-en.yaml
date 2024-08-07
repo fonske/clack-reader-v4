@@ -9,6 +9,7 @@ substitutions:
   clack_watermeter_total: Water meter
   clack_m3_left: Water softener m3 left
   clack_l_left: Water softener ltr left
+  clack_percent_l_left: Water softener percent ltr left
   clack_version: Version
   clack_regeneration_last: Regenerated on
   clack_fill_salt: Fill salt
@@ -45,6 +46,7 @@ substitutions:
   clack_regeneration_mode: Regeneration mode
   clack_time_to_regen: Time to regen
   clack_time_to_regen_hours: Time to regen hours
+  clack_percent_time_left: Water softener percent time left
   clack_time_to_resinclean: Time to resinclean
   clack_cycle_runtime: Cycle runtime
   clack_cycle_total_runtime: Cycle total runtime
@@ -59,6 +61,17 @@ substitutions:
   clack_motor_running: Motor running
   clack_water_flowing: Water flowing
   clack_water_leakage: Leakage detected
+  clack_test_motor_run: Test button motor run
+  clack_save_total_liters_used: Capacity used
+  clack_save_total_time_used: Operation time
+  clack_brine_time_txt: Brine
+  clack_backwash_time_txt: Backwash
+  clack_backwash2_time_txt: Backwash2
+  clack_rinse_time_txt: Rinse
+  clack_fill_time_txt: Fill
+  clack_service_time_txt: Service
+  clack_total_run_time_txt: Run time
+
   
 text_sensor:
   # Expose last regeneration information as sensor

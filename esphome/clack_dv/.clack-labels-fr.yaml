@@ -1,4 +1,4 @@
-#French Translation v0.2 (work 2 missing item)
+#French Translation v0.3 (work missing item)
 substitutions:
   clack_select_chl_or_dpsw: Choix du mode
   clack_distance: Distance Sel
@@ -10,6 +10,7 @@ substitutions:
   clack_watermeter_total: Volume d'eau total
   clack_m3_left: M3 d'eau adoucie restante
   clack_l_left: Litres d'eau adoucie restante
+  clack_percent_l_left: Water softener percent ltr left
   clack_version: Version
   clack_regeneration_last: Regéneré le
   clack_fill_salt: Remplissage de Sel
@@ -46,6 +47,7 @@ substitutions:
   clack_regeneration_mode: Mode de régénération
   clack_time_to_regen: Temps de régénération
   clack_time_to_regen_hours: Temps de régénération Hueres
+  clack_percent_time_left: Water softener percent time left
   clack_time_to_resinclean: Time to resinclean
   clack_cycle_runtime: Durée de cycle
   clack_cycle_total_runtime: Durée totale de cycle
@@ -60,6 +62,16 @@ substitutions:
   clack_motor_running: Motor running
   clack_water_flowing: Water flowing  
   clack_water_leakage: Leakage detected
+  clack_test_motor_run: Test button motor run
+  clack_save_total_liters_used: Capacity used
+  clack_save_total_time_used: Operation time
+  clack_brine_time_txt: Brine
+  clack_backwash_time_txt: Backwash
+  clack_backwash2_time_txt: Backwash2
+  clack_rinse_time_txt: Rinse
+  clack_fill_time_txt: Fill
+  clack_service_time_txt: Service
+  clack_total_run_time_txt: Run time
 
 text_sensor:
   # Expose last regeneration information as sensor
