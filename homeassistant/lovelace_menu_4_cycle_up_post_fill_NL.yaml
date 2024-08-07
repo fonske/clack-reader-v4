@@ -135,7 +135,7 @@
                 name: Fill
               - entity: sensor.clack_run_time
                 name: Totale tijd
-            title: History
+            title: Historie
       - type: entities
         entities:
           - entity: sensor.clack_watermeter
