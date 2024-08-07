@@ -449,18 +449,6 @@ script:
     mode: single
     then:
       - lambda: 'id(wait_on_delay) = true;'
-      - globals.set:
-          id: regen_last
-          value: !lambda |-
-            return id(sntp_time).now().timestamp;   
-      - text_sensor.template.publish:
-          id: clack_regeneration_last
-          state: !lambda |-
-            char str[32];
-            time_t currTime = id(sntp_time).now().timestamp;
-            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
-            id(regen_date_last) = str;
-            return  { str }; 
       # Step 1: Fill - keep running water meter
       - text_sensor.template.publish:
             id: clack_cycle_step
@@ -521,6 +509,18 @@ script:
             }
             return std::string(str);
       - component.update: clack_save_total_time_used
+      - globals.set:
+          id: regen_last
+          value: !lambda |-
+            return id(sntp_time).now().timestamp;   
+      - text_sensor.template.publish:
+          id: clack_regeneration_last
+          state: !lambda |-
+            char str[32];
+            time_t currTime = id(sntp_time).now().timestamp;
+            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
+            id(regen_date_last) = str;
+            return  { str }; 
       - script.execute: reset_water_meter  #Set watermeter to 0 ltr
       - lambda: 'id(water_meter_freeze) = true;'
       - text_sensor.template.publish:
