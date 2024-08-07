@@ -134,7 +134,7 @@
               - entity: sensor.clack_fill
                 name: Fill
               - entity: sensor.clack_run_time
-                name: Total run time
+                name: Totale tijd
             title: History
       - type: entities
         entities:
