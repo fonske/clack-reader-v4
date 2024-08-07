@@ -15,14 +15,16 @@ Remark: Make sure to copy water_flow.h and tof_vl53l1x.h to your esphome directo
 There have been some bigger updates to the latest code: added L/min and alarm, also lovelace home assistant menu has been updated.
 
 Remark2: 6 august 2024: Added history regeneration and test button motor pulse to step through regeneration (with time delays stil working between steps)
-[example](/readme/last_changes_august_2024.jpg)
+[example EN](/readme/last_changes_august_2024.jpg)
+[example NL](/readme/laaste_wijzigingen_august_2024.jpg)
 
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
 
 Help: Please open a issue on this git project.
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ebbenberg)
-
-
 ![Example](/readme/pcb_transp.png)
+
+
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ebbenberg)
