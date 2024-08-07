@@ -669,16 +669,18 @@ button:
   - platform: restart
     id: restart_button
     name: ${clack_restart}
+    icon: mdi:button-pointer
 
 ###  ESP restart (safe mode) button
   - platform: safe_mode
     id: safe_mode_button
     name: ${clack_safe_mode}
+    icon: mdi:button-pointer
 
-####################################test
   - platform: template
-    name: ${clack_test_motor_run}
     id: test_motor_run
+    name: ${clack_test_motor_run}
+    icon: mdi:button-pointer
     on_press:
       then:
         - script.execute: clack_motor_run  #give pulse when motor runs to different step.
