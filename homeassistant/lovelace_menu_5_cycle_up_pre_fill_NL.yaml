@@ -9,7 +9,7 @@
                   - entity: sensor.clack_watermeter
                     type: custom:multiple-entity-row
                     icon: mdi:cup-water
-                    name: Water ontharder
+                    name: Waterontharder
                     secondary_info:
                       entity: sensor.clack_cyclus_stap
                       name: 'cyclus: '
