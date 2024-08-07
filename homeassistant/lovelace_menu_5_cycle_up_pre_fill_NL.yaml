@@ -144,7 +144,7 @@
               - entity: sensor.clack_rinse
                 name: Rinse
               - entity: sensor.clack_run_time
-                name: Total run time
+                name: Totale tijd
             title: History
       - type: entities
         entities:
