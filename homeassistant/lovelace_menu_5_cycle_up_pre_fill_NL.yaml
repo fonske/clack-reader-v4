@@ -28,7 +28,7 @@
                     padding: 5px 25px;
                     font-weight: bold;
                   }          
-                title: Water ontharder
+                title: Waterontharder
               - entities:
                   - entity: sensor.clack_waterontharder_procent_ltr_over
                     max: 100
@@ -130,7 +130,7 @@
           - type: entities
             entities:
               - entity: sensor.clack_werkings_tijd
-                name: Werkings tijd
+                name: Werkingstijd
               - entity: sensor.clack_verbruikt
                 name: Verbruikt
               - entity: sensor.clack_fill
@@ -149,7 +149,7 @@
       - type: entities
         entities:
           - entity: sensor.clack_watermeter
-            name: Water meter
+            name: Watermeter
           - entity: sensor.clack_waterontharder_ltr_over
             name: Waterontharder ltr over
           - entity: sensor.clack_waterontharder_m3_over
