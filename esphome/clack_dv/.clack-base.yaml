@@ -956,7 +956,7 @@ sensor:
       unit_of_measurement: L/min # Gallons GPM or Liters per minute 
       accuracy_decimals: 2
       id: clack_flow_rate
-      device_class: water
+      device_class: volume_flow_rate
       state_class: measurement
 
   #  Watermeter
@@ -1017,7 +1017,6 @@ sensor:
     name: ${clack_percent_l_left}
     icon: mdi:water-percent
     unit_of_measurement: "%"
-    device_class: water
     state_class: measurement
     accuracy_decimals: 1
     update_interval: ${watermeter_update_interval}
@@ -1156,6 +1155,8 @@ sensor:
 
   - platform: internal_temperature
     name: "Internal Temperature"
+    device_class: temperature
+    state_class: measurement
 
 select:
   - id: clack_select_chl_or_dpsw
