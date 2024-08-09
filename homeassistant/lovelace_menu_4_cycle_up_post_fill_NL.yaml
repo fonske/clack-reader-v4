@@ -213,7 +213,7 @@
           - type: history-graph
             entities:
               - entity: sensor.clack_watermeter
-                name: Water meter
+                name: Watermeter
             hours_to_show: 1.5
       - type: entities
         entities:
