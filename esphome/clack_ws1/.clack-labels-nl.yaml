@@ -21,6 +21,7 @@ substitutions:
   clack_capacity_days: Capaciteit in dagen
   clack_chlorinator_delay: Chlorinator aktief tijd
   clack_leakage_alarm_delay: Vertraging lekkage alarm
+  clack_test_motor_run: Test button motor run
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneratie pulse
   clack_ip: Waterontharder IP
@@ -44,6 +45,10 @@ substitutions:
   clack_regen: clack regen
   clack_brine: Tijdens bezouten
   clack_regeneration_mode: Regeneratie mode
+  clack_pre_fill_no_2nd_backwash: Droge zoutbak geen 2e Backwash
+  clack_pre_fill_2nd_backwash: Droge zoutbak 2e Backwash
+  clack_post_fill_no_2nd_backwash: Natte zoutbak geen 2e Backwash
+  clack_post_fill_2nd_backwash: Natte zoutbak 2e Backwash
   clack_time_to_regen: Tijd tot regen.
   clack_time_to_regen_hours: Tijd tot regen uren
   clack_percent_time_left: Waterontharder procent tijd over
@@ -61,7 +66,6 @@ substitutions:
   clack_motor_running: Motor in werking
   clack_water_flowing: Water stroomt
   clack_water_leakage: Lekkage gedetecteerd
-  clack_test_motor_run: Test button motor run
   clack_save_total_liters_used: Verbruikt
   clack_save_total_time_used: Werkings tijd
   clack_brine_time_txt: Brine

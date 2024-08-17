@@ -45,6 +45,10 @@ substitutions:
   clack_regen: regénération clack
   clack_brine: Pendant la saumure
   clack_regeneration_mode: Mode de régénération
+  clack_pre_fill_no_2nd_backwash: Pre fill no 2nd Backwash
+  clack_pre_fill_2nd_backwash: Pre fill 2nd Backwash
+  clack_post_fill_no_2nd_backwash: Post fill no 2nd Backwash
+  clack_post_fill_2nd_backwash: Post fill 2nd Backwash
   clack_time_to_regen: Temps de régénération
   clack_time_to_regen_hours: Temps de régénération Hueres
   clack_percent_time_left: Water softener percent time left

@@ -1,0 +1,275 @@
+  - title: Clack
+    path: clack
+    cards:
+      - type: vertical-stack
+        cards:
+          - cards:
+              - type: entities
+                entities:
+                  - entity: sensor.clack_watermeter
+                    type: custom:multiple-entity-row
+                    icon: mdi:cup-water
+                    name: Waterontharder
+                    secondary_info:
+                      entity: sensor.clack_cyclus_stap
+                      name: 'cyclus: '
+                    state_header: verbr.
+                    entities:
+                      - entity: sensor.clack_tijd_tot_regen
+                        name: tijd over
+                      - entity: sensor.clack_waterontharder_m3_over
+                        name: m3 over
+                style: |
+                  ha-card {
+                    border-radius: 20px
+                  }
+                  .card-header {
+                    font-size: 18px;
+                    padding: 5px 25px;
+                    font-weight: bold;
+                  }          
+                title: Waterontharder
+              - entities:
+                  - entity: sensor.clack_waterontharder_procent_ltr_over
+                    max: 100
+                    min: 0
+                    name: Liter over
+                  - entity: sensor.clack_waterontharder_procent_tijd_over
+                    max: 100
+                    min: 0
+                    name: Tijd over
+                height: 20px
+                decimal: false
+                positions:
+                  icon: 'off'
+                  indicator: 'off'
+                  tap_action: info
+                  name: inside
+                  value: 'off'
+                style: |
+                  ha-card {
+                    border-radius: 20px
+                  }
+                  .card-content {
+                   padding: 0px 10px 10px 10px;
+                   }      
+                type: custom:bar-card
+            mode: vertical
+            type: custom:stack-in-card
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.clack_cyclus_stap
+                state_not: Idle
+            card:
+              type: entities
+              style: |
+
+                .card-content {
+                  padding: 8px;
+                }
+                .card-content > div {
+                  margin: 0 !important;
+                }  
+                .card-header {
+                  font-size: 18px;
+                  padding: 5px 25px;
+                  font-weight: bold;
+                }  
+                    .card-header {
+                      font-size: 18px;
+                      padding: 5px 25px;
+                      font-weight: bold;
+                    }     
+              title: Regen. gestart
+              entities:
+                - conditions:
+                    - entity: sensor.clack_cyclus_stap
+                      state: Fill
+                  row:
+                    entity: sensor.clack_cyclus_runtime
+                    icon: mdi:numeric-1-circle
+                    name: 'Cyclus: Fill'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cyclus_stap
+                      state: Service
+                  row:
+                    entity: sensor.clack_cyclus_runtime
+                    icon: mdi:numeric-2-circle
+                    name: 'Cyclus: Service'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cyclus_stap
+                      state: Backwash
+                  row:
+                    entity: sensor.clack_cyclus_runtime
+                    icon: mdi:numeric-3-circle
+                    name: 'Cyclus: Backwash'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cyclus_stap
+                      state: Brine
+                  row:
+                    entity: sensor.clack_cyclus_runtime
+                    icon: mdi:numeric-4-circle
+                    name: 'Cyclus: Brine'
+                  type: conditional
+                - conditions:
+                    - entity: sensor.clack_cyclus_stap
+                      state: Rinse
+                  row:
+                    entity: sensor.clack_cyclus_runtime
+                    icon: mdi:numeric-5-circle
+                    name: 'Cyclus: Rinse'
+                  type: conditional
+                - type: section
+                - entity: sensor.clack_cyclus_totale_runtime
+                  icon: mdi:timer-sand
+                  name: Totale tijd voorbij
+          - type: entities
+            entities:
+              - entity: sensor.clack_werkings_tijd
+                name: Werkingstijd
+              - entity: sensor.clack_verbruikt
+                name: Verbruikt
+              - entity: sensor.clack_fill
+                name: Fill
+              - entity: sensor.clack_service
+                name: Service
+              - entity: sensor.clack_backwash
+                name: Backwash
+              - entity: sensor.clack_brine
+                name: Brine
+              - entity: sensor.clack_rinse
+                name: Rinse
+              - entity: sensor.clack_run_time
+                name: Totale tijd
+            title: Historie
+      - type: entities
+        entities:
+          - entity: sensor.clack_watermeter
+            name: Watermeter
+          - entity: sensor.clack_waterontharder_ltr_over
+            name: Waterontharder ltr over
+          - entity: sensor.clack_waterontharder_m3_over
+            name: Waterontharder m3 over
+          - entity: sensor.clack_water_debiet
+            name: Water debiet
+          - entity: binary_sensor.clack_lekkage_gedetecteerd
+            name: Lekkage gedetecteerd
+          - entity: sensor.clack_zoutniveau_afstand
+            name: Afstand
+          - entity: sensor.clack_zoutniveau_afstand_tof
+            name: Afstand TOF
+          - entity: sensor.clack_zoutniveau_hoogte
+            name: Hoogte
+          - entity: sensor.clack_zoutniveau_procent
+            name: Procent
+          - entity: sensor.clack_zout_bijvullen
+            name: Zout bijvullen
+          - entity: sensor.clack_geregenereerd_op
+            name: Geregenereerd op
+          - entity: sensor.clack_harscleaner_op
+            name: Harsreiniger op
+          - entity: sensor.clack_zout_bijgevuld_op
+            name: Zout bijgevuld op
+          - entity: sensor.clack_spanning
+            name: Spanning
+          - entity: sensor.clack_vermogen_clack
+            name: Power Clack
+          - entity: sensor.clack_vermogen_esp
+            name: Power ESP
+          - entity: sensor.clack_vermogen_chlorinator
+            name: Power Chlorinator
+          - entity: switch.clack_chlorinator
+            name: Chlorinator
+          - entity: binary_sensor.clack_water_stroomt
+            name: Water stroomt
+          - entity: binary_sensor.clack_block_regen
+            name: Block regen
+          - entity: binary_sensor.clack_motor_in_werking
+            name: Motor run
+      - type: vertical-stack
+        cards:
+          - elements:
+              - entity: sensor.clack_zoutniveau_voor_dashboard
+                image: local/images/softener.png
+                state_image:
+                  '0': local/images/softener0.png
+                  '10': local/images/softener10.png
+                  '20': local/images/softener20.png
+                  '40': local/images/softener40.png
+                  '60': local/images/softener60.png
+                  '80': local/images/softener80.png
+                  '100': local/images/softener100.png
+                style:
+                  left: 0%
+                  top: 0%
+                  transform: scale(1,1)
+                tap_action:
+                  action: none
+                type: image
+            image: local/images/softener0.png
+            panel: true
+            type: picture-elements
+          - type: history-graph
+            entities:
+              - entity: sensor.clack_zoutniveau_afstand_tof
+                name: Zout niveau afstand TOF
+              - entity: sensor.clack_zoutniveau_afstand
+                name: Zout niveau afstand
+            hours_to_show: 1.5
+          - type: history-graph
+            entities:
+              - entity: sensor.clack_watermeter
+                name: Water meter
+            hours_to_show: 1.5
+      - type: entities
+        entities:
+          - entity: select.clack_functie_mode
+            name: Functie mode
+          - entity: select.clack_regeneratie_mode
+            name: Regeneratie mode
+          - entity: number.clack_pulse_per_liter
+            name: Pulse per liter
+          - entity: number.clack_vertraging_lekkage_alarm
+            name: Lekkage alarm vertraging
+          - entity: number.clack_chlorinator_aktief_tijd
+            name: Chlorinator aktief tijd
+          - entity: number.clack_min_afstand_zout
+            name: Min. afstand zout
+          - entity: number.clack_max_afstand_zout
+            name: Max. afstand zout
+          - entity: number.clack_zout_bijvullen_afstand
+            name: Zout bijvullen afstand
+          - entity: number.clack_capaciteit_in_dagen
+            name: Capaciteit in dagen
+          - entity: number.clack_capaciteit_in_liters
+            name: Capaciteit in liters
+          - entity: number.clack_harsclean_dagen
+            name: Harsclean dagen
+          - entity: button.clack_reset_zout_bijgevuld
+            name: Reset zout bijgevuld
+          - entity: button.clack_harsclean_reset
+            name: Reset harscleaner
+          - entity: button.clack_testknop_regen_stop
+            name: Test knop Regen stop
+          - entity: button.clack_testknop_verbruik_pulse
+            name: Test knop verbruik pulse
+          - entity: button.clack_test_button_motor_run
+            name: Test button motor run pulse
+          - entity: sensor.clack_tijd_tot_harscleaner
+            name: Tijd tot harscleaner
+          - entity: sensor.clack_waterontharder_ip
+            name: Waterontharder IP
+          - entity: sensor.clack_versie
+            name: Versie
+          - entity: sensor.clack_internal_temperature
+            name: Interne temperatuur
+          - entity: button.clack_esp_herstart
+            name: ESP Herstart
+          - entity: button.clack_esp_herstart_safe_mode
+            name: ESP Herstart (Veilige modus)
+        title: Instellingen
+        state_color: false

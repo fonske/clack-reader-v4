@@ -14,7 +14,7 @@ i2c:
     sda: GPIO6  
     scl: GPIO5  
     scan: true
-    timeout: 10ms
+    timeout: 50ms
 
 binary_sensor:
 ## temporary test button for testing water meter pulse
@@ -118,8 +118,10 @@ button:
     id: clack_regen_stop_script
     on_press:
       then:
-        - script.stop: cycle_steps_4cycle
-        - script.stop: cycle_steps_5cycle
+        - script.stop: cycle_steps_4cycle_pre
+        - script.stop: cycle_steps_5cycle_pre
+        - script.stop: cycle_steps_4cycle_post
+        - script.stop: cycle_steps_5cycle_post
         - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
