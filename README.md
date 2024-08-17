@@ -18,7 +18,7 @@ Remark2: 6 august 2024: Added history regeneration and test button motor pulse t
 [example EN](/readme/last_changes_august_2024.jpg)
 [example NL](/readme/laaste_wijzigingen_august_2024.jpg)
 
-Remark3 17 august 2024: Added more options to show the regeneration cycle. Pre fill (dry salt tank) and Post fill (wet salt tank)
+Remark3: 17 august 2024: Added more options to show the regeneration cycle. Pre fill (dry salt tank) and Post fill (wet salt tank)
 Both with or without the 2nd backwash programmed  (between brine and rinse)
 
 ## Contact
