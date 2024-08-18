@@ -1,0 +1,13 @@
+Zie post:
+https://gathering.tweakers.net/forum/list_message/79868338#79868338
+
+Het behoeft wel enige uitleg.
+
+Als je print in ABS (of vergelijkbaar), dan kun je de airgap + deksel gewoon vanuit de STL inlaten en gaan met die banaan. De moer moet nog +2.2% krijgen zodat hij soepel draait. Kan in de slicer gewoon gescaled worden naar 102.2%.
+
+Als je in een ander materiaal print, dan zul je de buitendiameter van het buisgedeelte van de airgap moeten aanpassen voor een goede passing. Ik heb hem een diameter van 34.3mm gegeven in Fusion (+1.x %).
+
+Voor de rest, alles is aanpasbaar in fusion, daarom de F3D files erbij :)
+
+Thomox
+https://tweakers.net/gallery/1107053/
