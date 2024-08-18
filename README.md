@@ -20,6 +20,10 @@ Remark2: 6 august 2024: Added history regeneration and test button motor pulse t
 
 Remark3: 17 august 2024: Added more options to show the regeneration cycle. Pre fill (dry salt tank) and Post fill (wet salt tank)
 Both with or without the 2nd backwash programmed  (between brine and rinse)
+      # Pre fill no 2nd Backwash  : FILL/SERVICE/BACKWASH/BRINE/RINSE
+      # Pre fill 2nd Backwash     : FILL/SERVICE/BACKWASH/BRINE/BACKWASH2/RINSE
+      # Post fill no 2nd Backwash : BACKWASH/BRINE/RINSE/FILL
+      # sPost fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
 
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
