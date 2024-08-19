@@ -376,7 +376,7 @@ script:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
-      - delay: 6s
+      - delay: 10s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -394,7 +394,7 @@ script:
               return id(cycle_step) = "Rinse";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 8s
+      - delay: 10s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
@@ -412,11 +412,11 @@ script:
               return id(cycle_step) = "Fill";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - delay: 6s
+      - delay: 10s
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 120s
+          timeout: 200s
       ## store Fill time         
       - globals.set:
           id: save_fill_time
@@ -440,7 +440,7 @@ script:
           id(start_time_total) = 0;
       - component.update: timer1
       - component.update: timer2
-      - delay: 30s
+      - delay: 35s
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
@@ -603,7 +603,7 @@ script:
           id(start_time_total) = 0;
       - component.update: timer1
       - component.update: timer2
-      - delay: 30s
+      - delay: 35s
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
