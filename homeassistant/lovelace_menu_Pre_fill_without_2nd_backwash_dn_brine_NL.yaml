@@ -257,8 +257,8 @@
             name: Test knop Regen stop
           - entity: button.clack_testknop_verbruik_pulse
             name: Test knop verbruik pulse
-          - entity: button.clack_test_button_motor_run
-            name: Test button motor run pulse
+          - entity: button.clack_testknop_motor_run
+            name: Test knop motor run pulse
           - entity: sensor.clack_tijd_tot_harscleaner
             name: Tijd tot harscleaner
           - entity: sensor.clack_waterontharder_ip
