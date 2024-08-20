@@ -21,7 +21,7 @@ substitutions:
   clack_capacity_days: Capaciteit in dagen
   clack_chlorinator_delay: Chlorinator aktief tijd
   clack_leakage_alarm_delay: Vertraging lekkage alarm
-  clack_test_motor_run: Test button motor run
+  clack_test_motor_run: Testknop motor run
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneratie pulse
   clack_ip: Waterontharder IP
