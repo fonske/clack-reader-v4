@@ -1325,7 +1325,7 @@ sensor:
       unit_of_measurement: L/min # Gallons GPM or Liters per minute 
       accuracy_decimals: 2
       id: clack_flow_rate
-      device_class: water
+#      device_class: water
       state_class: measurement
 
 
