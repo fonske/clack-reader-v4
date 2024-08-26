@@ -72,7 +72,9 @@ switch:
           condition:
             lambda: 'return id(clack_select_chl_or_dpsw).state == "DP-SW Start regen";'
           then:
-            - script.execute: dp_sw_start_regen
+            - switch.turn_on: chlorinator_relay
+            - delay: 65s
+            - switch.turn_off: chlorinator_relay
             - switch.turn_off: dp_sw_start_hold
           else:
             - if:
