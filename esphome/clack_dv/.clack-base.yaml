@@ -357,7 +357,7 @@ script:
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 3660s
+          timeout: 4800s
       ## store Brine time         
       - globals.set:
           id: save_brine_time
@@ -538,7 +538,7 @@ script:
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 3660s
+          timeout: 4800s
       ## store Brine time         
       - globals.set:
           id: save_brine_time
