@@ -68,7 +68,18 @@ switch:
     entity_category: config
     optimistic: true
     turn_on_action:
-      - switch.turn_on: chlorinator_relay
+      - if:
+          condition:
+            lambda: 'return id(clack_select_chl_or_dpsw).state == "DP-SW Start regen";'
+          then:
+            - script.execute: dp_sw_start_regen
+            - switch.turn_off: dp_sw_start_hold
+          else:
+            - if:
+                condition:
+                  lambda: 'return id(clack_select_chl_or_dpsw).state == "DP-SW Hold regen";'
+                then:
+                  - switch.turn_on: chlorinator_relay
     turn_off_action:
       - switch.turn_off: chlorinator_relay
 
