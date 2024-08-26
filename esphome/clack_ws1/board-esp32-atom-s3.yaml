@@ -49,7 +49,6 @@ binary_sensor:
       }
 
 
-# ## temporary test button for testing regeneration pulse
 switch:
   # Chlorinator Relay
   - platform: gpio
@@ -60,6 +59,18 @@ switch:
     id: chlorinator_relay
     icon: mdi:bacteria
     entity_category: config
+
+  # DP-SW Start / Hold regen
+  - platform: template
+    name: DP-SW Start_hold}
+    id: chlorinator_relay
+    icon: mdi:timelapse
+    entity_category: config
+    optimistic: true
+    turn_on_action:
+      - switch.turn_on: chlorinator_relay
+    turn_off_action:
+      - switch.turn_off: chlorinator_relay
 
 button:
   - platform: template
