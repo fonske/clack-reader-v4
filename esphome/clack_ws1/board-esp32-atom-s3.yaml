@@ -62,8 +62,8 @@ switch:
 
   # DP-SW Start / Hold regen
   - platform: template
-    name: DP-SW Start_hold}
-    id: chlorinator_relay
+    name: DP-SW Start_hold
+    id: dp_sw_start_hold
     icon: mdi:timelapse
     entity_category: config
     optimistic: true
