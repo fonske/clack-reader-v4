@@ -55,7 +55,7 @@ switch:
     pin:
       number: GPIO8
       inverted: false
-    name: ${clack_chlorinator}
+    name: ${clack_chlorinator_sw}
     id: chlorinator_relay
     icon: mdi:bacteria
     entity_category: config

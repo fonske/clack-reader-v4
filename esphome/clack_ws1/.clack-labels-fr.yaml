@@ -29,7 +29,8 @@ substitutions:
   clack_wifi_signal_db: dB signal WiFi
   clack_wifi_signal_db_percent: Signal WiFi
   clack_uptime: Durée de fonctionnement
-  clack_chlorinator: Chlorinateur / DP-SW
+  clack_chlorinator: Chlorinator
+  clack_chlorinator_sw: Chlorinator / DP-SW
   clack_dp_sw_init_regen: DP-SW Initialise regen
   clack_dp_sw_hold_regen: DP-SW Hold regen
   clack_dp_sw_init_hold: DP-SW Activate
