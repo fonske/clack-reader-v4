@@ -188,8 +188,8 @@
             name: Block regen
           - entity: binary_sensor.clack_motor_running
             name: Motor running
-          - entity: switch.clack_chlorinator
-            name: Chlorinator
+          - entity: switch.clackws_chlorinator_dp_sw
+            name: Chlorinator / DP-SW
       - type: vertical-stack
         cards:
           - elements:
@@ -249,6 +249,8 @@
             name: Capacity in liters
           - entity: number.clack_resinclean_days
             name: Resinclean days
+          - entity: switch.clackws_dp_sw_activate
+            name: DP-SW Activate
           - entity: button.clack_reset_fill_salt
             name: Reset fill salt
           - entity: button.clack_resinclean_reset
