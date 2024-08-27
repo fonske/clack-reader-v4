@@ -284,15 +284,6 @@ script:
     then:
       - switch.turn_off: chlorinator_relay
 
-###  Define a script that turns on the chlorinator relay, waits for the duration, and turns it off
-  - id: dp_sw_start_regen
-    mode: restart
-    then:
-      - switch.turn_on: chlorinator_relay
-      # Use a lambda expression to return the delay in milliseconds
-      - delay: 65s
-      - switch.turn_off: chlorinator_relay
-
 ###  Define a script that resets the watermeter during regeneration
   - id: reset_water_meter
     mode: restart
