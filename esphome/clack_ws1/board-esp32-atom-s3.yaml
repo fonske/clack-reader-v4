@@ -60,26 +60,26 @@ switch:
     icon: mdi:bacteria
     entity_category: config
 
-  # DP-SW Start / Hold regen
+  # DP-SW Init / Hold regen through Chlorinator Relay
   - platform: template
-    name: DP-SW Start_hold
-    id: dp_sw_start_hold
+    name: ${clack_dp_sw_init_hold}
+    id: dp_sw_init_hold
     icon: mdi:timelapse
     entity_category: config
     optimistic: true
     turn_on_action:
       - if:
           condition:
-            lambda: 'return id(clack_select_chl_or_dpsw).state == "DP-SW Start regen";'
+            lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_init_regen}";'
           then:
             - switch.turn_on: chlorinator_relay
             - delay: 65s
             - switch.turn_off: chlorinator_relay
-            - switch.turn_off: dp_sw_start_hold
+            - switch.turn_off: dp_sw_init_hold
           else:
             - if:
                 condition:
-                  lambda: 'return id(clack_select_chl_or_dpsw).state == "DP-SW Hold regen";'
+                  lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_hold_regen}";'
                 then:
                   - switch.turn_on: chlorinator_relay
     turn_off_action:

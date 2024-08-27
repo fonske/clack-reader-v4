@@ -30,8 +30,9 @@ substitutions:
   clack_wifi_signal_db_percent: Signal WiFi
   clack_uptime: Durée de fonctionnement
   clack_chlorinator: Chlorinateur
-  clack_dp_sw_start_regen: DP-SW Start regen
+  clack_dp_sw_init_regen: DP-SW Initialise regen
   clack_dp_sw_hold_regen: DP-SW Hold regen
+  clack_dp_sw_init_hold: DP-SW Activate
   clack_salt_level_measurement: Mesure du Sel
   hours: heures
   days: jours

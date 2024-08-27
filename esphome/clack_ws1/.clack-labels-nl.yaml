@@ -29,8 +29,9 @@ substitutions:
   clack_wifi_signal_db_percent: WiFi Signaal
   clack_uptime: Uptime
   clack_chlorinator: Chlorinator
-  clack_dp_sw_start_regen: DP-SW Start regen
+  clack_dp_sw_init_regen: DP-SW Initialiseer regen
   clack_dp_sw_hold_regen: DP-SW Blokkeer regen
+  clack_dp_sw_init_regen: DP-SW Actief
   clack_salt_level_measurement: Zoutniveau meting
   hours: uur
   days: dagen

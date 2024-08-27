@@ -1534,7 +1534,7 @@ select:
     options:
       - ${clack_off}
       - ${clack_chlorinator}
-      - ${clack_dp_sw_start_regen}
+      - ${clack_dp_sw_init_regen}
       - ${clack_dp_sw_hold_regen}
     initial_option: ${clack_off}
     optimistic: true
