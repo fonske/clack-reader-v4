@@ -182,7 +182,7 @@
             name: Power ESP
           - entity: sensor.clack_vermogen_chlorinator
             name: Power Chlorinator
-          - entity: switch.clackws_chlorinator_dp_sw
+          - entity: switch.clack_chlorinator_dp_sw
             name: Chlorinator / DP-SW
           - entity: binary_sensor.clack_water_stroomt
             name: Water stroomt
@@ -249,7 +249,7 @@
             name: Capaciteit in liters
           - entity: number.clack_harsclean_dagen
             name: Harsclean dagen
-          - entity: switch.clackws_dp_sw_actief
+          - entity: switch.clack_dp_sw_actief
             name: DP-SW Actief
           - entity: button.clack_reset_zout_bijgevuld
             name: Reset zout bijgevuld
