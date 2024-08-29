@@ -79,6 +79,7 @@ substitutions:
   clack_fill_time_txt: Fill
   clack_service_time_txt: Service
   clack_total_run_time_txt: Run time
+  clack_block_regen: Block regen
 
   
 text_sensor:
