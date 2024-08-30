@@ -118,8 +118,10 @@ button:
     id: clack_regen_stop_script
     on_press:
       then:
-        - script.stop: cycle_steps_pre
-        - script.stop: cycle_steps_post
+        - script.stop: cycle_steps_post_upflow
+        - script.stop: cycle_steps_pre_upflow
+        - script.stop: cycle_steps_post_downflow
+        - script.stop: cycle_steps_pre_downflow
         - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-

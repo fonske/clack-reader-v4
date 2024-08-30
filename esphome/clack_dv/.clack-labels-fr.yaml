@@ -45,6 +45,10 @@ substitutions:
   clack_regen: regénération clack
   clack_brine: Pendant la saumure
   clack_regeneration_mode: Mode de régénération
+  clack_upflow_post_fill: Upflow - Post fill
+  clack_upflow_pre_fill: Upflow - Pre fill
+  clack_downflow_post_fill: Downflow - Post fill
+  clack_downflow_pre_fill: Downflow - Pre fill
   clack_time_to_regen: Temps de régénération
   clack_time_to_regen_hours: Temps de régénération Hueres
   clack_percent_time_left: Water softener percent time left

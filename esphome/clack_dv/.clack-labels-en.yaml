@@ -44,6 +44,10 @@ substitutions:
   clack_regen: clack regen
   clack_brine: During brine
   clack_regeneration_mode: Regeneration mode
+  clack_upflow_post_fill: Upflow - Post fill
+  clack_upflow_pre_fill: Upflow - Pre fill
+  clack_downflow_post_fill: Downflow - Post fill
+  clack_downflow_pre_fill: Downflow - Pre fill
   clack_time_to_regen: Time to regen
   clack_time_to_regen_hours: Time to regen hours
   clack_percent_time_left: Water softener percent time left
