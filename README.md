@@ -18,6 +18,10 @@ Remark2: 6 august 2024: Added history regeneration and test button motor pulse t
 [example EN](/readme/last_changes_august_2024.jpg)
 [example NL](/readme/laaste_wijzigingen_august_2024.jpg)
 
+Remark3: 30 august 2024: Added regeneration mode steps, for upflow and downflow brining with Pre and Post fill
+Copy correct lovelace menu yaml for the correct regen mode choosen in the dropdown menu.
+When changing the softener from upflow to downflow in the softeners menu, a different injector needs to be placed and switch over with the position of the blind plug. See manual of the WS PI valve.
+
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
 
