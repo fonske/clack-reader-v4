@@ -695,6 +695,8 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
+      - lambda: |-
+          id(start_time_total) = id(sntp_time).now().timestamp;
       - delay: 10s
       - wait_until:
           condition:
@@ -712,8 +714,6 @@ script:
               return id(cycle_step) = "Brine";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - lambda: |-
-          id(start_time_total) = id(sntp_time).now().timestamp;
       - if:
           condition:
             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
