@@ -1,0 +1,57 @@
+one_wire:
+  - platform: gpio
+    pin: GPIO2
+
+sensor:
+ # Temperature In °C
+  - platform: dallas_temp
+    address: 0xcc0b228090731328
+    name: "TDS temp"
+    id: probe01
+    accuracy_decimals: 1
+    unit_of_measurement: "°C"
+    filters:
+      - offset: 0.1
+
+# Temperature Compensated Voltage
+  - platform: adc
+    pin: GPIO01
+    name: "TDS raw Volt"
+    id: tds_raw_v
+    attenuation: auto
+    update_interval: 5s
+    unit_of_measurement: "V"
+    icon: "mdi:water-percent"
+    internal: true
+
+# Temperature Compensated Voltage  
+  - platform: template
+    name: "TDS raw TCV "
+    id: tds_tcv
+    unit_of_measurement: 'V'
+    accuracy_decimals: 3
+    lambda: return ((id(tds_raw_v).state) / (1 + (0.02 * ((id(probe01).state) - 25.0))));
+    update_interval: 5s
+    internal: true
+  
+# Temperature Compensated TDS
+  - platform: template
+    name: "TDS ppm"
+    id: tds
+    icon: "hass:water-opacity"
+    unit_of_measurement: 'PPM'
+    accuracy_decimals: 0    
+    update_interval: 5s
+    lambda: return (133.42*(id(tds_tcv).state)*(id(tds_tcv).state)*(id(tds_tcv).state) - 255.86*(id(tds_tcv).state)*(id(tds_tcv).state) + 857.39*(id(tds_tcv).state))*0.5;
+    filters:
+      - calibrate_linear:
+        # Map 0.0 (from sensor) to 0.0 (true value)
+        - 0 -> 0
+        - 268 -> 215
+        - 834 -> 980
+      - or:
+        - delta: 50
+        - median:
+            window_size: 11
+            send_every: 7
+            send_first_at: 3
