@@ -18,7 +18,7 @@ sensor:
     pin: GPIO01
     name: "TDS raw Volt"
     id: tds_raw_v
-    attenuation: 0db
+    attenuation: auto
     update_interval: 5s
     unit_of_measurement: "V"
     icon: "mdi:water-percent"
