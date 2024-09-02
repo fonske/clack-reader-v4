@@ -1,5 +1,5 @@
 # clack-reader-v4
- Esphome component for Clack WS PI (disc valve) Ecosoft LESS and WS1 softener with M5stack TOF sensor saltlevel detection
+ Esphome component for Clack WS PI (disc valve) Ecosoft LESS and Clack WS1 softener with M5stack TOF sensor saltlevel detection
  
  Relay for control of the chlorinator module from AQMOS
  and Power measurement with ina3221
