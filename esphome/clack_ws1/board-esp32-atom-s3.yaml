@@ -73,7 +73,7 @@ switch:
             lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_init_regen}";'
           then:
             - switch.turn_on: chlorinator_relay
-            - delay: 65s
+            - delay: 125s
             - switch.turn_off: chlorinator_relay
             - switch.turn_off: dp_sw_init_hold
           else:
