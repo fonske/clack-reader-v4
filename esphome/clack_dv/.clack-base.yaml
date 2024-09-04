@@ -454,7 +454,7 @@ script:
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 200s
+          timeout: 300s
       ## store Fill time         
       - globals.set:
           id: save_fill_time
@@ -782,7 +782,7 @@ script:
       - wait_until:
           condition:
             binary_sensor.is_on: bin_sens_motor_run
-          timeout: 200s
+          timeout: 300s
       ## store Fill time         
       - globals.set:
           id: save_fill_time
