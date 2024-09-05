@@ -7,7 +7,7 @@ Er wordt op de PCB onder andere gebruik gemaakt van
 - de [TOF1 sensor](https://www.tinytronics.nl/shop/nl/platformen-en-systemen/m5stack/unit/m5stack-tof-unit)  (vl53l0x) of [TOF2 sensor](https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x) (vl53l1x) van M5stack
 - TOF1 kan met een grove kabeltje van maximaal 5 mtr meten (2x 2mtr + 1x 1mtr met tussenblokjes)
   TOF2 kan met een grove kabeltje van maximaal 3 mtr meten (1x2 mtr + 1x 1mtr met tussenblokjes)
-- [3D printed](../README/Saltlevel_Atoms3_TOF.stl)  TOF sensor behuizing welke met twee rvs M4 boutjes en moertjes vast gezet kan worden op het deksel van het zout reservoir.
+- [3D printed](../readme/clack_tof-holder.stl)  TOF sensor behuizing welke met twee rvs M4 boutjes en moertjes vast gezet kan worden op het deksel van het zout reservoir.
 
 ## Software
 Alles is in ESPHOME geprogrammeerd.
