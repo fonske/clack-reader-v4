@@ -27,7 +27,7 @@ Both with or without the 2nd backwash programmed  (between brine and rinse)
       # sPost fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
 
  ## Dutch:
-[README](/readme/clack_uitleg_nl)
+[README](/readme/clack_uitleg_nl.md)
 
 ## English:
 [README](/README/R_EN.md)
