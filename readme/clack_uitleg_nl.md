@@ -9,6 +9,14 @@ Er wordt op de PCB onder andere gebruik gemaakt van
   TOF2 kan met een grove kabeltje van maximaal 3 mtr meten (1x2 mtr + 1x 1mtr met tussenblokjes)
 - [3D printed](../readme/clack_tof-holder.stl)  TOF sensor behuizing welke met twee rvs M4 boutjes en moertjes vast gezet kan worden op het deksel van het zout reservoir.
 
+Hier vind u de lokatie waar de clack reader het beste gemonteerd kan worden in de behuizing:
+[Foto1](../readme/montage1.jpg) [Foto2](../readme/montage2.jpg)
+En hier een [PDF](../readme/Clack_reader_v4_connections_on_clack_ws1.pdf) met een overzicht van de aansluitingen.
+
+De PCB heeft verder op de achterkant aansluiten om de clack flowmeter door te lussen met meegeleverd kabeltje
+En een aansluiting om de DP-SW aan te sluiten (2 polige molexstekker)
+De DP-SW kan dan gebruikt worden om de ontharder een uitgestelde of direkte regeneratie te geven of te voorkomen. Afhankelijk van wat u insteld in de ontharder besturing zelf (zie handleiding)
+
 ## Software
 Alles is in ESPHOME geprogrammeerd.
 Eigen wifi gegevens invullen via wifi hotspot met als wachtwoord: configesp
