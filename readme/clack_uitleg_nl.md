@@ -41,10 +41,10 @@ Het is mogelijk een notificatie te ontvangen op een telefoon waar home assistant
 Bijvoorbeeld bij waterlekkage of wanneer het zout op is.
 Verander dan nog wel de entiteit van uw eigen device in de code.
 
-[clack_nl.yaml](../home_assistant/clack_nl.yaml) samenvoegen met automations.yaml (let op inspringingen) of beter:
+[clack_nl.yaml](../homeassistant/clack_nl.yaml) samenvoegen met automations.yaml (let op inspringingen) of beter:
 
 ### Bestand op eigen lokatie:
-[clack_nl.yaml](../home_assistant/clack_nl.yaml) op een eigen lokatie zetten:
+[clack_nl.yaml](../homeassistant/clack_nl.yaml) op een eigen lokatie zetten:
 configuration.yaml aanpassen naar:
 
 ```yml
@@ -58,7 +58,7 @@ HA opnieuw starten
 ## Uitleg werking
 
 Met de schuifregelaars de juiste hoogtes instellen.
-Voorbeeld van de minimale en maximale hoogte vind u [hier.](../README/min_max_NL.jpg) 
+Voorbeeld van de minimale en maximale hoogte vind u [hier.](../readme/min_max_NL.jpg) 
 Zout bijvullen afstand is de afstand vanaf wanneer er een alarm (automation) zal verstuurd worden (waarde van Bijvullen wordt dan "ja")
 Dit is gemeten vanaf de onderkant van de tank, dus vanaf de maximale afstand naar boven toe.
 
