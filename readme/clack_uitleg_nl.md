@@ -18,7 +18,7 @@ Om het lovelace menu volledig te benutten met de zoutniveau simulatie zoals hier
 Kopieer daar alle simulatie plaatjes in van [/www/images](../www/images)
 
 Voorbeeld dashboard: 
-![Example](Printscreen_NL.jpg)
+![Example](../readme/home_assistant_menu_clack_ws_nl)
 
 Het dashboard zelf kan geplaatst worden via home assistant drie puntjes - dashboard bewerken - ruwe configuratie editor
 Tekst uit bijvoorbeeld [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL) daar aan toevoegen en opslaan.
@@ -49,7 +49,7 @@ HA opnieuw starten
 ## Uitleg werking
 
 Met de schuifregelaars de juiste hoogtes instellen.
-Voorbeeld van de minimale en maximale hoogte vind u [hier.](../README/min_max_NL.jpg) 
+Voorbeeld van de minimale en maximale hoogte vind u [hier.](../readme/min_max_NL.jpg) 
 Zout bijvullen afstand is de afstand vanaf wanneer er een alarm (automation) zal verstuurd worden (waarde van Bijvullen wordt dan "ja")
 Dit is gemeten vanaf de onderkant van de tank, dus vanaf de maximale afstand naar boven toe.
 
