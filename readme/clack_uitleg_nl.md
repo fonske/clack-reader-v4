@@ -33,7 +33,7 @@ Het dashboard zelf kan geplaatst worden via home assistant drie puntjes - dashbo
 Tekst uit bijvoorbeeld [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL) daar aan toevoegen en opslaan.
 U heeft nu een extra menu Clack in home assistant
 
-Ook om de status balk goed te zien kunt u via HACS een frontend toepassing installeren, zoals bar-card.
+Ook om de status balk goed te zien kunt u via HACS een frontend toepassing installeren, zoals bar-card en multiple-entity-row.
 
 
 ## Automations
