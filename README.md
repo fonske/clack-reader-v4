@@ -1,4 +1,4 @@
-# clack-reader-v4
+# Clack Reader v4
  Esphome component for Clack WS PI (disc valve) Ecosoft LESS and WS1 softener with M5stack TOF sensor saltlevel detection
  
  Relay for control of the chlorinator module from AQMOS
@@ -6,7 +6,7 @@
 
  Automatic recognision of the softener steps and measure the liters and m3 softened water by reading the clack flowmeter
 
-## Versions / Branches
+## 2 Versions / Branches
 main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
 
 ws1: Clack WS1 valve (CM(x) from AQMOS)
@@ -25,6 +25,12 @@ Both with or without the 2nd backwash programmed  (between brine and rinse)
       # Pre fill 2nd Backwash     : FILL/SERVICE/BACKWASH/BRINE/BACKWASH2/RINSE
       # Post fill no 2nd Backwash : BACKWASH/BRINE/RINSE/FILL
       # sPost fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
+
+ ## Dutch:
+[README](/readme/clack_uitleg_nl.md)
+
+## English:
+[README](/README/R_EN.md)
 
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
