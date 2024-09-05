@@ -18,7 +18,7 @@ Om het lovelace menu volledig te benutten met de zoutniveau simulatie zoals hier
 Kopieer daar alle simulatie plaatjes in van [/www/images](../www/images)
 
 Voorbeeld dashboard: 
-![Example](../readme/home_assistant_menu_clack_ws_nl)
+![Example](../readme/home_assistant_menu_clack_ws_nl.jpg)
 
 Het dashboard zelf kan geplaatst worden via home assistant drie puntjes - dashboard bewerken - ruwe configuratie editor
 Tekst uit bijvoorbeeld [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL) daar aan toevoegen en opslaan.
