@@ -11,6 +11,7 @@ Er wordt op de PCB onder andere gebruik gemaakt van
 
 Hier vind u de lokatie waar de clack reader het beste gemonteerd kan worden in de behuizing:
 [Foto1](../readme/montage1.jpg) [Foto2](../readme/montage2.jpg)
+
 En hier een [PDF](../readme/Clack_reader_v4_connections_on_clack_ws1.pdf) met een overzicht van de aansluitingen.
 
 De PCB heeft verder op de achterkant aansluiten om de clack flowmeter door te lussen met meegeleverd kabeltje
