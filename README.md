@@ -26,6 +26,12 @@ Both with or without the 2nd backwash programmed  (between brine and rinse)
       # Post fill no 2nd Backwash : BACKWASH/BRINE/RINSE/FILL
       # sPost fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
 
+ ## Dutch:
+[README](/readme/clack_uitleg_nl)
+
+## English:
+[README](/README/R_EN.md)
+
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
 
