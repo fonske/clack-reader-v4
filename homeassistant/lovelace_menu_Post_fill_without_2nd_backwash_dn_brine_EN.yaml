@@ -155,7 +155,7 @@
           - entity: sensor.clack_salt_level_height
             name: Height
           - entity: sensor.clack_salt_level_percent
-            name: Procent
+            name: Percent
           - entity: sensor.clack_fill_salt
             name: Fill salt
           - entity: sensor.clack_regenerated_on
