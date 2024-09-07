@@ -65,11 +65,6 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
         flow_rate = (1/id(pulse_per_liter) / delta_minutes);
         last_pulse = time;
 
-        // Cap the flow rate at a maximum of 25
-        if (flow_rate > 25) {
-          flow_rate = 25;
-        }
-
         // If the calculated flow rate is less the the minimum flow that the meter can read, we wont say there is a real flow just yet.
         // This could be the first of a set of new pulses, or sometimes water just slowly moves back and forth in the pipes. 
         if (flow_rate >= MINIMUM_FLOW_RATE) {
