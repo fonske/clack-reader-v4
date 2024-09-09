@@ -28,10 +28,10 @@ Copy all the simulation images from /www/images into it.
 Example: [/www/images](../www/images)
 
 Example dashboard: 
-![Example](../readme/home_assistant_menu_clack_ws_nl.jpg)
+![Example](../readme/home_assistant_menu_clack_ws_eng.jpg)
 
 You can add the dashboard via Home Assistant by going to the three dots - edit dashboard - raw configuration editor.
-Add the text from, for example, [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL) and save it.
+Add the text from, for example, [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml) and save it.
 You will now have an extra Clack menu in Home Assistant.
 
 To properly view the status bar, you can install a frontend application via HACS, such as bar-card and multiple-entity-row.
