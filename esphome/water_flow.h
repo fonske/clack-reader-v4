@@ -7,10 +7,14 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
   const int PIN_NUMBER = 7; // Pin number to detect pulses on
   double USAGE_PER_PULSE = 27.6; // Amount of pulses that must flow for the water sensor to send one Liter or Gallon
   const double MINIMUM_FLOW_RATE = .01; // .01 Minimum flow rate (in Gallons or Liters per minute) that the flow sensor can recognize. Technically, the slowest consistent flow that the EKM HD meter can read is .22 gal/min. But mine was able to read a flow as slow as .08 gal/min fairly consistently (pulse every ~55 seconds: (60 / (.08/0.075) ).
+  const double MAXIMUM_FLOW_RATE = 20;
   const double NEXT_PULSE_TIMEOUT_BUFFER_SEC = 2; // Buffer for waiting for next pulse to tell if water is still running. For example, if we expect the next pulse in 5 seconds, and we don't get a pulse in 5 + NEXT_PULSE_TIMEOUT_BUFFER_SEC seconds, it will report a flow rate of 0 to Home Assistant. If your USAGE_PER_PULSE value is much hight than .075, you will probably want to increase this a bit.
   /****************************/
-  const int SENSOR_DEBOUNCE_MS = 50;
+  const int SENSOR_DEBOUNCE_MS = 10;  //50
   double pulse_timeout_sec = 0;
+// Define a constant for the maximum publishing interval
+  const int PUBLISH_INTERVAL_MS = 300;
+  unsigned long last_publish_time = 0;
   bool pulse_timed_out = false;
   int current_pin_state = 0;
   double flow_rate = 0; // Used to calculate the current flow rate in Gallons or Liters per minute
@@ -39,6 +43,7 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
           clack_flow_rate->publish_state(0);
           flowTriggerState = !current_pin_state; // to calculate the flow rate sooner, we will use the next pulse as the "first" pulse, whether it's high or low
           pulse_timed_out = true; // set this so we only publish once when the flow stops
+//          id(clack_watermeter).publish_state(id(totalWaterUsage));
         }
         return; 
       }
@@ -57,7 +62,9 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
 
     if (id(water_meter_freeze) == false) {
     // Only increment the total_water_used on HIGH pulse
-      if (!pinState) { id(totalWaterUsage) += 1/id(pulse_per_liter); }
+      if (!pinState) { 
+        id(totalWaterUsage) += 1/id(pulse_per_liter); 
+      }
 
       if (pinState == flowTriggerState) {
         // Calculate flow rate
@@ -69,14 +76,18 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
         // This could be the first of a set of new pulses, or sometimes water just slowly moves back and forth in the pipes. 
         if (flow_rate >= MINIMUM_FLOW_RATE) {
           // publish flow_rate and total_water_used to Home Assistant
-          clack_flow_rate->publish_state(flow_rate);
-          id(clack_watermeter).publish_state(id(totalWaterUsage));
-//          total_water_used = id(totalWaterUsage);
-
+          // Check if 500 ms have passed since the last publish
+          if (millis() - last_publish_time >= PUBLISH_INTERVAL_MS) {
+            // Publish flow_rate and total_water_used to Home Assistant
+            clack_flow_rate->publish_state(flow_rate);
+            id(clack_watermeter).publish_state(id(totalWaterUsage));
+            // Update the last publish time
+            last_publish_time = millis();
+          }
           // Set a timeout for the next expected pulse + a buffer, depending of the current flow rate.
           // For example, if the water is flowing at 1GPM, that is 13.33PPM, or a pulse every 4.5 seconds.
-          // We would set the pulse_timeout_sec to 4.5 + NEXT_PULSE_TIMEOUT_BUFFER_SEC and if we don't get a pulse
-          // by then, we say the flow has stopped.
+          // We would set the pulse_timeout_sec to 4.5 + NEXT_PULSE_TIMEOUT_BUFFER_SEC and if we don't 
+          // get a pulse by then, we say the flow has stopped.
           pulse_timeout_sec = (60/((1/(1/id(pulse_per_liter))) * flow_rate)) + NEXT_PULSE_TIMEOUT_BUFFER_SEC;
         }
       }
