@@ -34,7 +34,7 @@ You can add the dashboard via Home Assistant by going to the three dots - edit d
 Add the text from, for example, [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml) and save it.
 You will now have an extra Clack menu in Home Assistant.
 
-To properly view the status bar, you can install a frontend application via HACS, such as bar-card and multiple-entity-row.
+To properly view the status bar, you can install a frontend application via HACS, such as bar-card, multiple-entity-row and card-mod.
 
 
 ## Automations
