@@ -30,7 +30,7 @@ Both with or without the 2nd backwash programmed  (between brine and rinse)
 [README](/readme/clack_uitleg_nl.md)
 
 ## English:
-[README](/README/R_EN.md)
+[README](/readme/clack_explanation_en.md)
 
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
