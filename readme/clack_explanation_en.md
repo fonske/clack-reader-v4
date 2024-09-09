@@ -41,7 +41,7 @@ To properly view the status bar, you can install a frontend application via HACS
 It is possible to receive a notification on a phone running the Home Assistant app, for example, in case of a water leak or when salt runs out.
 Be sure to change the entity of your own device in the code.
 
-Merge[clack_en.yaml](../homeassistant/clack_en.yaml) with automations.yaml (pay attention to indentations) or preferably:
+Merge [clack_en.yaml](../homeassistant/clack_en.yaml) with automations.yaml (pay attention to indentations) or preferably:
 
 ### File on your own location:
 Place [clack_en.yaml](../homeassistant/clack_en.yaml) at your own location and adjust configuration.yaml to:
