@@ -38,7 +38,7 @@ automation:
       after: 07:30:00
       before: '22:00:00'
     action:
-    - service: notify.mobile_app_iphone_van_a_c_a  #change to your own!
+    - action: notify.mobile_app_iphone_van_a_c_a  #change to your own!
       data:
         title: Be aware!
         message: Salt level watersoftener is low! Fill salt today!
@@ -64,7 +64,7 @@ automation:
       entity_id: binary_sensor.clack_leakage_detected
       to: "on"    
     action:
-    - service: notify.mobile_app_iphone_van_a_c_a
+    - action: notify.mobile_app_iphone_van_a_c_a
       data:
         title: Be aware!
         message: Leakage of water detected!

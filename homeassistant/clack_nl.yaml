@@ -38,7 +38,7 @@ automation:
       after: 07:30:00
       before: '22:00:00'
     action:
-    - service: notify.mobile_app_iphone_van_a_c_a
+    - action: notify.mobile_app_iphone_van_a_c_a
       data:
         title: Let op!
         message: Zout niveau van ontharder is laag! Vandaag gaan bijvullen!
@@ -65,7 +65,7 @@ automation:
       entity_id: binary_sensor.clack_lekkage_gedetecteerd
       to: "on"    
     action:
-    - service: notify.mobile_app_iphone_van_a_c_a
+    - action: notify.mobile_app_iphone_van_a_c_a
       data:
         title: Let op!
         message: Lekkage van water gedetecteerd!
