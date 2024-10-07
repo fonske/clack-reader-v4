@@ -9,6 +9,8 @@ sensor:
     name: ${clack_distance_tof}
     unit_of_measurement: cm
     accuracy_decimals: 1
+    device_class: distance
+    state_class: measurement
     icon: mdi:ruler
     internal: false
     address: 0x29
