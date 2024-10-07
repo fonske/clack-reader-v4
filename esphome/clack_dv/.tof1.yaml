@@ -10,6 +10,8 @@ sensor:
     unit_of_measurement: cm
     accuracy_decimals: 1
     icon: mdi:ruler
+    device_class: distance
+    state_class: measurement
     internal: false
     address: 0x29
     update_interval: 10s
