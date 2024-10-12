@@ -5,7 +5,6 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
 
   /** USER SPECIFIC SETTINGS **/
   const int PIN_NUMBER = 7; // Pin number to detect pulses on
-  double USAGE_PER_PULSE = 62; // Amount of pulses that must flow for the water sensor to send one Liter or Gallon
   const double MINIMUM_FLOW_RATE = .01; // .01 Minimum flow rate (in Gallons or Liters per minute) that the flow sensor can recognize. Technically, the slowest consistent flow that the EKM HD meter can read is .22 gal/min. But mine was able to read a flow as slow as .08 gal/min fairly consistently (pulse every ~55 seconds: (60 / (.08/0.075) ).
   const double MAXIMUM_FLOW_RATE = 20;
   const double NEXT_PULSE_TIMEOUT_BUFFER_SEC = 2; // Buffer for waiting for next pulse to tell if water is still running. For example, if we expect the next pulse in 5 seconds, and we don't get a pulse in 5 + NEXT_PULSE_TIMEOUT_BUFFER_SEC seconds, it will report a flow rate of 0 to Home Assistant. If your USAGE_PER_PULSE value is much hight than .075, you will probably want to increase this a bit.

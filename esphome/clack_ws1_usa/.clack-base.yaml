@@ -1848,8 +1848,8 @@ number:
   ##
   # Set pulse per gallons flowmeter
   - platform: template
-    id: clack_set_pulse_per_gallons
-    name: ${clack_set_pulse_per_gallons}
+    id: clack_set_pulse_per_gallon
+    name: ${clack_set_pulse_per_gallon}
     icon: mdi:pulse
     optimistic: true
     mode: box
@@ -1865,7 +1865,7 @@ number:
         - globals.set:
             id: pulse_per_gallon
             value: !lambda |-
-              return id(clack_set_pulse_per_gallons).state;
+              return id(clack_set_pulse_per_gallon).state;
 
   ##
   # Set minimum distance (from bottom sensor / above plastic cap)
