@@ -1856,7 +1856,7 @@ number:
     step: 0.05
     entity_category: config
     min_value: 0
-    max_value: 50
+    max_value: 75
     initial_value: 62.00
     restore_value: yes
     unit_of_measurement: " "
@@ -1878,10 +1878,10 @@ number:
     step: 0.5
     entity_category: config
     min_value: 0
-    max_value: 10
+    max_value: 33
     initial_value: 0
     restore_value: yes
-    unit_of_measurement: cm
+    unit_of_measurement: inch
     on_value:
       then:
         - script.execute: recalculate
@@ -1897,10 +1897,10 @@ number:
     step: 0.5
     entity_category: config
     min_value: 0
-    max_value: 100
-    initial_value: 30
+    max_value: 330
+    initial_value: 90
     restore_value: yes
-    unit_of_measurement: cm
+    unit_of_measurement: inch
     on_value:
       then:
         - script.execute: recalculate
@@ -1915,10 +1915,10 @@ number:
     step: 0.1
     entity_category: config
     min_value: 0
-    max_value: 10
+    max_value: 33
     initial_value: 1.5
     restore_value: yes
-    unit_of_measurement: cm
+    unit_of_measurement: inch
     update_interval: 600s
     on_value:
       then:
