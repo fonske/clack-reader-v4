@@ -21,7 +21,7 @@ sensor:
     sensors:
       id: distance_cm
       name: ${clack_distance_tof}
-      unit_of_measurement: cm
+      unit_of_measurement: inch
       accuracy_decimals: 1
       device_class: distance
       state_class: measurement
@@ -40,6 +40,7 @@ sensor:
             max_value: 230.0
 #        - median:
         - delta: 0.2
+        - lambda: return (x/ 0.39370079); # cm to inch
       on_value:
         then:
           - sensor.template.publish:

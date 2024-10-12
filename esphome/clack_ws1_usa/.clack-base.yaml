@@ -1205,7 +1205,7 @@ sensor:
     id: last_distance_cm
     name: ${clack_distance}
     icon: mdi:arrow-expand-vertical
-    unit_of_measurement: cm
+    unit_of_measurement: inch
     accuracy_decimals: 1
     device_class: distance
     state_class: measurement
