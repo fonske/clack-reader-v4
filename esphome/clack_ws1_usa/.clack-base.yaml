@@ -1372,7 +1372,7 @@ sensor:
   - platform: template
     id: clack_g_left
     name: ${clack_g_left}
-    unit_of_measurement: L
+    unit_of_measurement: gal
     device_class: water
     state_class: total
     accuracy_decimals: 0
