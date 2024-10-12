@@ -1341,10 +1341,6 @@ sensor:
     accuracy_decimals: 3
     on_value:
       - sensor.template.publish:
-          id: clack_m3_left
-          state: !lambda |-
-            return float(id(clack_capacity_gallons).state - id(clack_watermeter).state) * 0.001;
-      - sensor.template.publish:
           id: clack_g_left
           state: !lambda |-
             return int(id(clack_capacity_gallons).state - id(clack_watermeter).state);
@@ -1355,19 +1351,6 @@ sensor:
             return 0;
             }
             return float((id(clack_g_left).state / id(clack_capacity_gallons).state) * 100);
-
-  - platform: template
-    id: clack_m3_left
-    name: ${clack_m3_left}
-    unit_of_measurement: m³
-    device_class: water
-    state_class: total
-    accuracy_decimals: 2
-    update_interval: ${watermeter_update_interval}
-    filters:
-    - lambda: |-
-        if (x <= 0) return 0;
-        return x;
 
   - platform: template
     id: clack_g_left
