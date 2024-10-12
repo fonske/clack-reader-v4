@@ -1874,7 +1874,7 @@ number:
     entity_category: config
     min_value: 0
     max_value: 50
-    initial_value: 16.8
+    initial_value: 62.00
     restore_value: yes
     unit_of_measurement: " "
     on_value:
