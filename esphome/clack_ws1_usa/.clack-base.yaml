@@ -1325,7 +1325,7 @@ sensor:
       unit_of_measurement: gal/min # Gallons GPM or Liters per minute 
       accuracy_decimals: 3
       id: clack_flow_rate
-       device_class: volume_flow_rate
+      device_class: volume_flow_rate
       state_class: measurement
 
 
