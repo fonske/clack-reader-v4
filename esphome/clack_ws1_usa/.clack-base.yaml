@@ -43,11 +43,11 @@ globals:
     restore_value: yes
 #    initial_value: '00'
 
-# Clack DV flowmeter 27.60  / Clack WS1: 16.80 / (to be checked)
+# Clack WS1: 62.00 / (to be checked)
   - id: pulse_per_gallon
     type: float
     restore_value: yes
-    initial_value: '16.80'
+    initial_value: '62.00'
 
 # Define a global variable for the chlorinator delay duration in minutes
   - id: duration
