@@ -1322,8 +1322,8 @@ sensor:
     sensors:
     - name: ${clack_flow_rate}
       icon: mdi:waves-arrow-right
-      unit_of_measurement: L/min # Gallons GPM or Liters per minute 
-      accuracy_decimals: 2
+      unit_of_measurement: gal/min # Gallons GPM or Liters per minute 
+      accuracy_decimals: 3
       id: clack_flow_rate
        device_class: volume_flow_rate
       state_class: measurement
@@ -1335,10 +1335,10 @@ sensor:
     name: ${clack_watermeter_total}
     icon: mdi:water
     update_interval: ${watermeter_update_interval}
-    unit_of_measurement: L
+    unit_of_measurement: gal
     device_class: water
     state_class: total_increasing
-    accuracy_decimals: 1
+    accuracy_decimals: 3
     on_value:
       - sensor.template.publish:
           id: clack_m3_left

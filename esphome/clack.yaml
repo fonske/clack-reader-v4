@@ -1,7 +1,7 @@
 substitutions:
   # General substitutions:
-  name: clack
-  friendly_name: Clack
+  name: clack-usa
+  friendly_name: Clack usa
   device_description: "Esphome component for Clack WS1 softener with TOF sensor saltlevel detection"
   timezone: "Europe/Amsterdam"
   # Interval substitutions:
@@ -80,7 +80,6 @@ logger:
     switch: DEBUG
     button: DEBUG
     number: DEBUG
-    climate: DEBUG
     component: ERROR
 
 # Enable Web server.
