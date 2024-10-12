@@ -22,22 +22,22 @@ packages:
     ref: ws1_usa
     refresh: 0s
     files: [ 
-      esphome/clack_ws1/.clack-base.yaml,
-#      esphome/clack_ws1/.tof1.yaml,
-      esphome/clack_ws1/.tof2.yaml,
-      esphome/clack_ws1/.clack-optional.yaml,
-      esphome/clack_ws1/.clack-labels-en.yaml,
-      esphome/clack_ws1/board-esp32-atom-s3.yaml,
+      esphome/clack_ws1_usa/.clack-base.yaml,
+#      esphome/clack_ws1_usa/.tof1.yaml,
+      esphome/clack_ws1_usa/.tof2.yaml,
+      esphome/clack_ws1_usa/.clack-optional.yaml,
+      esphome/clack_ws1_usa/.clack-labels-en.yaml,
+      esphome/clack_ws1_usa/board-esp32-atom-s3.yaml,
     ]
 
 ### for developing/testing, uncomment local includes and comment out above remote_package packages part.
 #packages:
-##  substitutions: !include clack_ws1/.clack-labels-en.yaml
-#  device_base1:  !include clack_ws1/board-esp32-atom-s3.yaml
-#  device_base2:  !include clack_ws1/.clack-base.yaml
-##  device_base3: !include clack_ws1/.tof1.yaml
-#  device_base3:  !include clack_ws1/.tof2.yaml
-#  device_base4:  !include clack_ws1/.clack-optional.yaml
+##  substitutions: !include clack_ws1_usa/.clack-labels-en.yaml
+#  device_base1:  !include clack_ws1_usa/board-esp32-atom-s3.yaml
+#  device_base2:  !include clack_ws1_usa/.clack-base.yaml
+##  device_base3: !include clack_ws1_usa/.tof1.yaml
+#  device_base3:  !include clack_ws1_usa/.tof2.yaml
+#  device_base4:  !include clack_ws1_usa/.clack-optional.yaml
 
 time:
   - platform: sntp
