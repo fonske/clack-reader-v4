@@ -3,7 +3,7 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
   includes:
-    - water_flow.h
+    - water_flow_gallons.h
   on_boot:
     priority: -100
     then:
