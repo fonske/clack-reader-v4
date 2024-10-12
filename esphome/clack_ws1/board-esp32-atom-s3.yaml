@@ -33,7 +33,7 @@ binary_sensor:
               - sensor.template.publish:
                   id: clack_watermeter
                   state: !lambda |-
-                    return id(totalWaterUsage) += 0.1;
+                    return id(totalWaterUsage) += 0.03;
               - lambda: |-
                   ESP_LOGI("UseTest", "Use button pressed");
 

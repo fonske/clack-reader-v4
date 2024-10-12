@@ -13,7 +13,7 @@ esphome:
 api:
   reboot_timeout: 0s
   services:
-    - service: water_meter_value  # set the water meter to any value in liters
+    - service: water_meter_value  # set the water meter to any value in gallons
       variables:
         meter_value: float
       then:
@@ -44,7 +44,7 @@ globals:
 #    initial_value: '00'
 
 # Clack DV flowmeter 27.60  / Clack WS1: 16.80 / (to be checked)
-  - id: pulse_per_liter
+  - id: pulse_per_gallon
     type: float
     restore_value: yes
     initial_value: '16.80'
@@ -146,7 +146,7 @@ globals:
     restore_value: yes
     initial_value: '"Unknown"'
 
-  - id: save_total_liters_used
+  - id: save_total_gallons_used
     type: float
     restore_value: yes
     initial_value: '0.0'
@@ -213,7 +213,7 @@ script:
             id: clack_cycle_step
             state: !lambda |-
               return id(cycle_step) = "Idle";
-      - component.update: clack_save_total_liters_used
+      - component.update: clack_save_total_gallons_used
       - component.update: clack_save_total_time_used
       - component.update: clack_backwash_time
       - component.update: clack_brine_time
@@ -303,12 +303,12 @@ script:
       - lambda: 'id(wait_on_delay) = true;'
       - lambda: 'id(water_meter_freeze) = true;'
       ################
-      ## store used liters
+      ## store used gallons
       - globals.set:
-          id: save_total_liters_used
+          id: save_total_gallons_used
           value: !lambda |-
             return id(clack_watermeter).state;  
-      - component.update: clack_save_total_liters_used
+      - component.update: clack_save_total_gallons_used
       ## store used time
       - globals.set: 
           id: save_total_time_used
@@ -452,12 +452,12 @@ script:
     then:
       - lambda: 'id(wait_on_delay) = true;'
       - lambda: 'id(water_meter_freeze) = true;'
-      ## store used liters
+      ## store used gallons
       - globals.set:
-          id: save_total_liters_used
+          id: save_total_gallons_used
           value: !lambda |-
             return id(clack_watermeter).state;  
-      - component.update: clack_save_total_liters_used
+      - component.update: clack_save_total_gallons_used
       ## store used time
       - globals.set: 
           id: save_total_time_used
@@ -655,12 +655,12 @@ script:
       - component.update: clack_service_time
       - lambda: 'id(wait_on_delay) = true;'
       - lambda: 'id(water_meter_freeze) = true;'
-      ## store used liters
+      ## store used gallons
       - globals.set:
-          id: save_total_liters_used
+          id: save_total_gallons_used
           value: !lambda |-
             return id(clack_watermeter).state;  
-      - component.update: clack_save_total_liters_used
+      - component.update: clack_save_total_gallons_used
       ## store used time
       - globals.set: 
           id: save_total_time_used
@@ -816,12 +816,12 @@ script:
       - component.update: clack_service_time
       - lambda: 'id(wait_on_delay) = true;'
       - lambda: 'id(water_meter_freeze) = true;'
-      ## store used liters
+      ## store used gallons
       - globals.set:
-          id: save_total_liters_used
+          id: save_total_gallons_used
           value: !lambda |-
             return id(clack_watermeter).state;  
-      - component.update: clack_save_total_liters_used
+      - component.update: clack_save_total_gallons_used
       ## store used time
       - globals.set: 
           id: save_total_time_used
@@ -1343,18 +1343,18 @@ sensor:
       - sensor.template.publish:
           id: clack_m3_left
           state: !lambda |-
-            return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+            return float(id(clack_capacity_gallons).state - id(clack_watermeter).state) * 0.001;
       - sensor.template.publish:
-          id: clack_l_left
+          id: clack_g_left
           state: !lambda |-
-            return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+            return int(id(clack_capacity_gallons).state - id(clack_watermeter).state);
       - sensor.template.publish:
-          id: clack_percent_l_left
+          id: clack_percent_g_left
           state: !lambda |-
-            if (id(clack_capacity_liters).state <= 0) {
+            if (id(clack_capacity_gallons).state <= 0) {
             return 0;
             }
-            return float((id(clack_l_left).state / id(clack_capacity_liters).state) * 100);
+            return float((id(clack_g_left).state / id(clack_capacity_gallons).state) * 100);
 
   - platform: template
     id: clack_m3_left
@@ -1370,8 +1370,8 @@ sensor:
         return x;
 
   - platform: template
-    id: clack_l_left
-    name: ${clack_l_left}
+    id: clack_g_left
+    name: ${clack_g_left}
     unit_of_measurement: L
     device_class: water
     state_class: total
@@ -1383,8 +1383,8 @@ sensor:
         return x;
 
   - platform: template
-    id: clack_percent_l_left
-    name: ${clack_percent_l_left}
+    id: clack_percent_g_left
+    name: ${clack_percent_g_left}
     icon: mdi:water-percent
     unit_of_measurement: "%"
     device_class: water
@@ -1422,16 +1422,16 @@ sensor:
 
 
   - platform: template
-    name: ${clack_save_total_liters_used}
-    id: clack_save_total_liters_used
+    name: ${clack_save_total_gallons_used}
+    id: clack_save_total_gallons_used
     icon: mdi:water-check-outline
-    unit_of_measurement: L
+    unit_of_measurement: gal
     device_class: water
     state_class: total
     accuracy_decimals: 1
     update_interval: never
     lambda: |-
-      return id(save_total_liters_used);
+      return id(save_total_gallons_used);
 
   - platform: template
     name: clack_brine_time
@@ -1863,10 +1863,10 @@ text_sensor:
 # imput numbers as sliders for setting the dimensions of the tank and level alarm.
 number:
   ##
-  # Set pulse per liters flowmeter
+  # Set pulse per gallons flowmeter
   - platform: template
-    id: clack_set_pulse_per_liters
-    name: ${clack_set_pulse_per_liters}
+    id: clack_set_pulse_per_gallons
+    name: ${clack_set_pulse_per_gallons}
     icon: mdi:pulse
     optimistic: true
     mode: box
@@ -1880,9 +1880,9 @@ number:
     on_value:
       then:
         - globals.set:
-            id: pulse_per_liter
+            id: pulse_per_gallon
             value: !lambda |-
-              return id(clack_set_pulse_per_liters).state;
+              return id(clack_set_pulse_per_gallons).state;
 
   ##
   # Set minimum distance (from bottom sensor / above plastic cap)
@@ -1948,20 +1948,20 @@ number:
                 return {"${clack_no}"};
               }
   ##
-  # Set capacity liters
+  # Set capacity gallons
   - platform: template
-    id: clack_capacity_liters
-    name: ${clack_capacity_liters}
+    id: clack_capacity_gallons
+    name: ${clack_capacity_gallons}
     icon: mdi:water-opacity
     optimistic: true
     mode: slider
-    step: 100
+    step: 50
     entity_category: config
     min_value: 0
-    max_value: 12000
-    initial_value: 3700
+    max_value: 4000
+    initial_value: 1000
     restore_value: yes
-    unit_of_measurement: L
+    unit_of_measurement: gal
     on_value:
       then:
         - sensor.template.publish:
