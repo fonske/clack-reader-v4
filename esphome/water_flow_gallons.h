@@ -69,7 +69,7 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
       if (pinState == flowTriggerState) {
         // Calculate flow rate
         delta_minutes = ((time - last_pulse) / 60000.0);
-        flow_rate = (1/id(pulse_per_liter) / delta_minutes);
+        flow_rate = (1/id(pulse_per_gallon) / delta_minutes);
         last_pulse = time;
 
         // If the calculated flow rate is less the the minimum flow that the meter can read, we wont say there is a real flow just yet.
@@ -88,7 +88,7 @@ class WaterFlowSensor : public Component, public CustomAPIDevice {
           // For example, if the water is flowing at 1GPM, that is 13.33PPM, or a pulse every 4.5 seconds.
           // We would set the pulse_timeout_sec to 4.5 + NEXT_PULSE_TIMEOUT_BUFFER_SEC and if we don't 
           // get a pulse by then, we say the flow has stopped.
-          pulse_timeout_sec = (60/((1/(1/id(pulse_per_galon))) * flow_rate)) + NEXT_PULSE_TIMEOUT_BUFFER_SEC;
+          pulse_timeout_sec = (60/((1/(1/id(pulse_per_gallon))) * flow_rate)) + NEXT_PULSE_TIMEOUT_BUFFER_SEC;
         }
       }
     current_pin_state = pinState;
