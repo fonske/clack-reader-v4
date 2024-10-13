@@ -1177,7 +1177,7 @@ sensor:
   - platform: template
     name: clack_distance #${clack_distance}
     id:  clack_distance
-    unit_of_measurement: inch
+    unit_of_measurement: in
     accuracy_decimals: 2
     icon: "mdi:arrow-expand-vertical"
     device_class: distance
@@ -1205,7 +1205,7 @@ sensor:
     id: last_distance_cm
     name: ${clack_distance}
     icon: mdi:arrow-expand-vertical
-    unit_of_measurement: inch
+    unit_of_measurement: in
     accuracy_decimals: 2
     device_class: distance
     state_class: measurement
@@ -1296,7 +1296,7 @@ sensor:
   - platform: template
     id: clack_height
     name: ${clack_height}
-    unit_of_measurement: inch
+    unit_of_measurement: in
     accuracy_decimals: 2
     icon: "mdi:hydraulic-oil-level"
     update_interval: ${clack_height_update_interval}
@@ -1881,7 +1881,7 @@ number:
     max_value: 40
     initial_value: 15
     restore_value: yes
-    unit_of_measurement: inch
+    unit_of_measurement: in
     on_value:
       then:
         - script.execute: recalculate
@@ -1900,7 +1900,7 @@ number:
     max_value: 330
     initial_value: 90
     restore_value: yes
-    unit_of_measurement: inch
+    unit_of_measurement: in
     on_value:
       then:
         - script.execute: recalculate
@@ -1918,7 +1918,7 @@ number:
     max_value: 30
     initial_value: 4
     restore_value: yes
-    unit_of_measurement: inch
+    unit_of_measurement: in
     update_interval: 600s
     on_value:
       then:

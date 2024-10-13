@@ -21,7 +21,7 @@ sensor:
     sensors:
       id: distance_cm
       name: ${clack_distance_tof}
-      unit_of_measurement: inch
+      unit_of_measurement: in
       accuracy_decimals: 2
       device_class: distance
       state_class: measurement
