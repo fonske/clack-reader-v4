@@ -40,7 +40,7 @@ sensor:
             max_value: 230.0
 #        - median:
         - delta: 0.2
-        - lambda: return (x/ 0.39370079); # cm to inch
+        - lambda: return (x* 0.39370079); # cm to inch
       on_value:
         then:
           - sensor.template.publish:
