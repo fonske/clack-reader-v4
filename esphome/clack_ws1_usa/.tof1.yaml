@@ -1,11 +1,12 @@
 ## Time-of-Flight Distance Ranging Sensor Unit (VL53L0X) M5stack  SKU: U010
 ## Remark: I2C grove cable max. 5 mtr
 ## https://shop.m5stack.com/products/tof-sensor-unit
+## Actual measurement is in centimeters (converted to inch)
 
 sensor:
 # VL53L0X TOF               
   - platform: vl53l0x
-    id: distance_cm
+    id: distance_in
     name: ${clack_distance_tof}
     unit_of_measurement: in
     accuracy_decimals: 2
@@ -39,4 +40,4 @@ sensor:
         - sensor.template.publish:
             id: clack_distance
             state: !lambda |-
-              return id(distance_cm).state;
+              return id(distance_in).state;

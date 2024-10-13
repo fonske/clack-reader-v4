@@ -35,7 +35,7 @@ api:
         - sensor.template.publish:
             id: clack_distance
             state: !lambda |-
-              return id(last_distance_cm).state;
+              return id(last_distance_in).state;
 
 globals:
   - id: totalWaterUsage
@@ -208,7 +208,7 @@ script:
       - sensor.template.publish:
           id: clack_distance
           state: !lambda |-
-            return id(last_distance_cm).state;
+            return id(last_distance_in).state;
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
@@ -230,7 +230,7 @@ script:
       - sensor.template.publish:
           id: clack_height
           state: !lambda |-
-            return id(clack_saltlevel_height_max).state-id(last_distance_cm).state;
+            return id(clack_saltlevel_height_max).state-id(last_distance_in).state;
       - sensor.template.publish:
           id: clack_procent
           state: !lambda |-
@@ -1189,20 +1189,20 @@ sensor:
             id: last_distance
             value: !lambda |-
               const float old_distance = id(last_distance); 
-              const float new_distance = id(distance_cm).state;
+              const float new_distance = id(distance_in).state;
               if (new_distance > old_distance) {
                 return id(clack_distance).state;
               } else {
                 return old_distance;
               }
         - sensor.template.publish:
-            id: last_distance_cm
+            id: last_distance_in
             state: !lambda |-
               return id(last_distance);
         - script.execute: recalculate
 
   - platform: template
-    id: last_distance_cm
+    id: last_distance_in
     name: ${clack_distance}
     icon: mdi:arrow-expand-vertical
     unit_of_measurement: in

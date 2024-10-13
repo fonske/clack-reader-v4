@@ -2,6 +2,7 @@
 ## Remark: I2C grove cable max 2 mtr
 ## https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x
 ## tof_vl53l1x.h needed in root directory together with clack.yaml for compiling in esphome
+## Actual measurement is in centimeters (converted to inch)
 
 esphome:
   includes:
@@ -19,7 +20,7 @@ sensor:
       return {my_sensor};
 
     sensors:
-      id: distance_cm
+      id: distance_in
       name: ${clack_distance_tof}
       unit_of_measurement: in
       accuracy_decimals: 2
@@ -46,4 +47,4 @@ sensor:
           - sensor.template.publish:
               id: clack_distance
               state: !lambda |-
-                return id(distance_cm).state;
+                return id(distance_in).state;
