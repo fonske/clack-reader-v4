@@ -1338,7 +1338,7 @@ sensor:
     unit_of_measurement: gal
     device_class: water
     state_class: total_increasing
-    accuracy_decimals: 3
+    accuracy_decimals: 1
     on_value:
       - sensor.template.publish:
           id: clack_g_left
@@ -1358,7 +1358,7 @@ sensor:
     unit_of_measurement: gal
     device_class: water
     state_class: total
-    accuracy_decimals: 0
+    accuracy_decimals: 1
     update_interval: ${watermeter_update_interval}
     filters:
     - lambda: |-
