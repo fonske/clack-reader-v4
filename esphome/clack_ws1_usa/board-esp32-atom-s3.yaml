@@ -123,11 +123,11 @@ button:
         - globals.set:
             id: last_distance
             value: !lambda |-
-              return id(distance_cm).state;
+              return id(distance_in).state;
         - sensor.template.publish:
             id: clack_distance
             state: !lambda |-
-              return id(last_distance_cm).state;
+              return id(last_distance_in).state;
         - text_sensor.template.publish:
             id: clack_saltfill_last
             state: !lambda |-
