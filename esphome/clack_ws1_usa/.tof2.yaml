@@ -22,7 +22,7 @@ sensor:
       id: distance_cm
       name: ${clack_distance_tof}
       unit_of_measurement: inch
-      accuracy_decimals: 1
+      accuracy_decimals: 2
       device_class: distance
       state_class: measurement
       icon: mdi:ruler

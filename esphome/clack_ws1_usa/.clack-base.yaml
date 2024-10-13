@@ -25,7 +25,7 @@ api:
             state: !lambda |-
               return id(totalWaterUsage);
 
-    - service: last_distance_value #set last measured salt distance to any value in cm.
+    - service: last_distance_value #set last measured salt distance to any value in inch.
       variables:
         new_distance_value: float
       then:
@@ -234,8 +234,8 @@ script:
       - sensor.template.publish:
           id: clack_procent
           state: !lambda |-
-            const float max_distance = id(clack_saltlevel_height_max).state; // heigt in cm to lowest level
-            const float min_distance = id(clack_saltlevel_height_min).state; // height in cm to highest level
+            const float max_distance = id(clack_saltlevel_height_max).state; // height in inch to lowest level
+            const float min_distance = id(clack_saltlevel_height_min).state; // height in inch to highest level
             return int((1/((max_distance - min_distance)/id(clack_height).state))*100);
       - text_sensor.template.publish:
           id: clack_fill_salt
@@ -1177,8 +1177,8 @@ sensor:
   - platform: template
     name: clack_distance #${clack_distance}
     id:  clack_distance
-    unit_of_measurement: cm
-    accuracy_decimals: 1
+    unit_of_measurement: inch
+    accuracy_decimals: 2
     icon: "mdi:arrow-expand-vertical"
     device_class: distance
     state_class: measurement
@@ -1206,7 +1206,7 @@ sensor:
     name: ${clack_distance}
     icon: mdi:arrow-expand-vertical
     unit_of_measurement: inch
-    accuracy_decimals: 1
+    accuracy_decimals: 2
     device_class: distance
     state_class: measurement
     update_interval: never
@@ -1296,8 +1296,8 @@ sensor:
   - platform: template
     id: clack_height
     name: ${clack_height}
-    unit_of_measurement: cm
-    accuracy_decimals: 1
+    unit_of_measurement: inch
+    accuracy_decimals: 2
     icon: "mdi:hydraulic-oil-level"
     update_interval: ${clack_height_update_interval}
     device_class: distance
@@ -1878,8 +1878,8 @@ number:
     step: 0.5
     entity_category: config
     min_value: 0
-    max_value: 33
-    initial_value: 0
+    max_value: 40
+    initial_value: 15
     restore_value: yes
     unit_of_measurement: inch
     on_value:
@@ -1915,8 +1915,8 @@ number:
     step: 0.1
     entity_category: config
     min_value: 0
-    max_value: 33
-    initial_value: 1.5
+    max_value: 30
+    initial_value: 4
     restore_value: yes
     unit_of_measurement: inch
     update_interval: 600s
