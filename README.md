@@ -6,7 +6,7 @@
 
  Automatic recognision of the softener steps and measure the liters and m3 softened water by reading the clack flowmeter
 
-## Versions / Branches
+## 3 Versions / Branches
 main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
 
 ws1: Clack WS1 valve (CM(x) from AQMOS)
