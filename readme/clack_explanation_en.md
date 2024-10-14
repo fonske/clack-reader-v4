@@ -10,7 +10,7 @@ The PCB includes:
 - [3D printed](../readme/clack_tof-holder.stl)  TOF sensor housing, which can be attached with two stainless steel M4 bolts and nuts on the salt reservoir lid.
 
 Here you can find the location where the Clack Reader is best mounted inside the housing:
-[Photo1](../readme/montage1.jpg) [Photo2](../readme/montage2.jpg)
+[Photo1](../readme/mount_position_image1.jpg) [Photo2](../readme/mount_position_image2.jpg)
 
 Here is a [PDF](../readme/Clack_reader_v4_connections_on_clack_ws1.pdf) with an overview of the connections.
 
@@ -56,10 +56,8 @@ Restart Home Assistant.
 
 ## Explanation operation
 
-Met de schuifregelaars de juiste hoogtes instellen.
-Voorbeeld van de minimale en maximale hoogte vind u [hier.](../readme/min_max_NL.jpg) 
 Use the sliders to set the correct heights.
-An example of the minimum and maximum height can be found [here.](../readme/min_max_NL.jpg)
+An example of the minimum and maximum height can be found [here.](../readme/min_max_EN.jpg)
 
 Salt refill distance is the distance from which an alarm (automation) will be sent (the refill value will become "yes").
 This is measured from the bottom of the tank, so from the maximum distance upwards.
