@@ -6,19 +6,17 @@
 
  Automatic recognision of the softener steps and measure the liters and m3 softened water by reading the clack flowmeter
 
-## 2 Versions / Branches
+## 3 Versions / Branches
 main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
 
 ws1: Clack WS1 valve (CM(x) from AQMOS)
 
 ws1_usa: Clack WS1 valve with Gallons and Inches / US version
 
-Remark: Make sure to copy water_flow.h and tof_vl53l1x.h to your esphome directory before compiling the clack.yaml
+Remark: Make sure to copy water_flow_gallons.h and tof_vl53l1x.h to your esphome directory before compiling the clack.yaml
 There have been some bigger updates to the latest code: added L/min and alarm, also lovelace home assistant menu has been updated.
 
 Remark2: 6 august 2024: Added history regeneration and test button motor pulse to step through regeneration (with time delays stil working between steps)
-[example EN](/readme/last_changes_august_2024.jpg)
-[example NL](/readme/laaste_wijzigingen_august_2024.jpg)
 
 Remark3: 17 august 2024: Added more options to show the regeneration cycle. Pre fill (dry salt tank) and Post fill (wet salt tank)
 Both with or without the 2nd backwash programmed  (between brine and rinse)
@@ -26,10 +24,7 @@ Both with or without the 2nd backwash programmed  (between brine and rinse)
       # Pre fill no 2nd Backwash  : FILL/SERVICE/BACKWASH/BRINE/RINSE
       # Pre fill 2nd Backwash     : FILL/SERVICE/BACKWASH/BRINE/BACKWASH2/RINSE
       # Post fill no 2nd Backwash : BACKWASH/BRINE/RINSE/FILL
-      # sPost fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
-
- ## Dutch:
-[README](/readme/clack_uitleg_nl.md)
+      # Post fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
 
 ## English:
 [README](/readme/clack_explanation_en.md)
