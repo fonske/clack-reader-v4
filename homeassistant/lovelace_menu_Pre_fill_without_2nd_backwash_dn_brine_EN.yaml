@@ -17,8 +17,8 @@
                     entities:
                       - entity: sensor.clack_time_to_regen
                         name: time left
-                      - entity: sensor.clack_water_softener_m3_left
-                        name: m3 left
+                      - entity: sensor.clack_water_softener_gallons_left
+                        name: gallons left
                 style: |
                   ha-card {
                     border-radius: 20px
@@ -30,10 +30,10 @@
                   }          
                 title: Water softener
               - entities:
-                  - entity: sensor.clack_water_softener_percent_ltr_left
+                  - entity: sensor.clack_water_softener_percent_gallons_left
                     max: 100
                     min: 0
-                    name: Liters left
+                    name: Gallons left
                   - entity: sensor.clack_water_softener_percent_time_left
                     max: 100
                     min: 0
@@ -150,10 +150,8 @@
         entities:
           - entity: sensor.clack_water_meter
             name: Water meter
-          - entity: sensor.clack_water_softener_ltr_left
-            name: Water softener liters left
-          - entity: sensor.clack_water_softener_m3_left
-            name: Water softener m3 left
+          - entity: sensor.clack_water_softener_gallons_left
+            name: Water softener gallons left
           - entity: sensor.clack_water_flow_rate
             name: Water flow rate
           - entity: binary_sensor.clack_leakage_detected
@@ -231,8 +229,8 @@
             name: Function mode
           - entity: select.clack_regeneration_mode
             name: Regeneration mode
-          - entity: number.clack_set_pulse_per_ltr
-            name: Set pulse per ltr
+          - entity: number.clack_set_pulse_per_gallon
+            name: Set pulse per gallon
           - entity: number.clack_delay_leakage_alarm
             name: Delay water leakage alarm
           - entity: number.clack_chlorinator_active_time
@@ -245,8 +243,8 @@
             name: Fill salt distance
           - entity: number.clack_capacity_in_days
             name: Capacity in days
-          - entity: number.clack_capacity_in_liters
-            name: Capacity in liters
+          - entity: number.clack_capacity_in_gallons
+            name: Capacity in gallons
           - entity: number.clack_resinclean_days
             name: Resinclean days
           - entity: switch.clack_dp_sw_activate
