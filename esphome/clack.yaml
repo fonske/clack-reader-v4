@@ -1,7 +1,7 @@
 substitutions:
   # General substitutions:
-  name: clack-usa
-  friendly_name: Clack usa
+  name: clack
+  friendly_name: Clack
   device_description: "Esphome component for Clack WS1 softener with TOF sensor saltlevel detection"
   timezone: "Europe/Amsterdam"
   # Interval substitutions:
