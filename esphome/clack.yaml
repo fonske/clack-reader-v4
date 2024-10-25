@@ -2,7 +2,7 @@ substitutions:
   # General substitutions:
   name: clack
   friendly_name: Clack
-  device_description: "Esphome component for Clack WS1 softener with TOF sensor saltlevel detection"
+  device_description: "Esphome component for Clack WS1 softener without TOF sensor saltlevel detection"
   timezone: "Europe/Amsterdam"
   # Interval substitutions:
   salt_level_update_interval: 30s
@@ -13,35 +13,29 @@ substitutions:
 ### In order to use other language fix clack-label filename below:
 ### Currently supported languages are: en (English), nl (Dutch) and fr (French).
 ### ESP32-Atom-s3 is a M5STACK Atom s3 lite
-### tof1 is a VL53L0X M5stack. Distance measure up to 2 mtr. I2C grove cable max 5 mtr length
-### tof2 is a VL53L1X M5stack (ToF4M). Distance measure up to 4 mtr. I2C grove cable max 2 mtr length
 
 packages:
   remote_package:
     url: https://github.com/fonske/clack-reader-v4
-    ref: ws1
+    ref: ws1_no_tof
     refresh: 0s
     files: [ 
-      esphome/clack_ws1/.clack-base.yaml,
-#      esphome/clack_ws1/.tof1.yaml,
-      esphome/clack_ws1/.tof2.yaml,
-      esphome/clack_ws1/.clack-optional.yaml,
-#      esphome/clack_ws1/.clack-labels-nl.yaml,
-      esphome/clack_ws1/.clack-labels-en.yaml,
-#      esphome/clack_ws1/.clack-labels-fr.yaml,
-      esphome/clack_ws1/board-esp32-atom-s3.yaml,
+      esphome/clack_ws1_no_tof/.clack-base.yaml,
+      esphome/clack_ws1_no_tof/.clack-optional.yaml,
+#      esphome/clack_ws1_no_tof/.clack-labels-nl.yaml,
+      esphome/clack_ws1_no_tof/.clack-labels-en.yaml,
+#      esphome/clack_ws1_no_tof/.clack-labels-fr.yaml,
+      esphome/clack_ws1_no_tof/board-esp32-atom-s3.yaml,
     ]
 
 ### for developing/testing, uncomment local includes and comment out above remote_package packages part.
 #packages:
-##  substitutions: !include clack_ws1/.clack-labels-en.yaml
-#  substitutions: !include clack_ws1/.clack-labels-nl.yaml
-##  substitutions: !include clack_ws1/.clack-labels-fr.yaml
-#  device_base1:  !include clack_ws1/board-esp32-atom-s3.yaml
-#  device_base2:  !include clack_ws1/.clack-base.yaml
-##  device_base3: !include clack_ws1/.tof1.yaml
-#  device_base3:  !include clack_ws1/.tof2.yaml
-#  device_base4:  !include clack_ws1/.clack-optional.yaml
+##  substitutions: !include clack_ws1_no_tof/.clack-labels-en.yaml
+#  substitutions: !include clack_ws1_no_tof/.clack-labels-nl.yaml
+##  substitutions: !include clack_ws1_no_tof/.clack-labels-fr.yaml
+#  device_base1:  !include clack_ws1_no_tof/board-esp32-atom-s3.yaml
+#  device_base2:  !include clack_ws1_no_tof/.clack-base.yaml
+#  device_base4:  !include clack_ws1_no_tof/.clack-optional.yaml
 
 time:
   - platform: sntp
