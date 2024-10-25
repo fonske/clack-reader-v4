@@ -1,13 +1,9 @@
 
-# Clack reader V4 met Atom S3 lite en TOF sensor
+# Clack reader V4 met Atom S3 lite
 
 ## Hardware
 The PCB includes:
 - The [Atom S3 lite](https://www.tinytronics.nl/shop/nl/development-boards/microcontroller-boards/met-wi-fi/m5stack-atom-s3-lite-esp32-s3-development-board) from M5stack
-- The [TOF1 sensor](https://www.tinytronics.nl/shop/nl/platformen-en-systemen/m5stack/unit/m5stack-tof-unit)  (vl53l0x) or [TOF2 sensor](https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x) (vl53l1x) from M5stack
-- TOF1 can measure with a groove cable up to 5 meters (2x 2m + 1x 1m with connector blocks)
-- TOF2 can measure with a groove cable up to 3 meters (1x 2m + 1x 1m with connector blocks)
-- [3D printed](../readme/clack_tof-holder.stl)  TOF sensor housing, which can be attached with two stainless steel M4 bolts and nuts on the salt reservoir lid.
 
 Here you can find the location where the Clack Reader is best mounted inside the housing:
 [Photo1](../readme/montage1.jpg) [Photo2](../readme/montage2.jpg)
