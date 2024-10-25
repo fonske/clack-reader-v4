@@ -120,14 +120,6 @@ button:
     id: clack_reset_but_last_dist
     on_press:
       then:
-        - globals.set:
-            id: last_distance
-            value: !lambda |-
-              return id(distance_cm).state;
-        - sensor.template.publish:
-            id: clack_distance
-            state: !lambda |-
-              return id(last_distance_cm).state;
         - text_sensor.template.publish:
             id: clack_saltfill_last
             state: !lambda |-
