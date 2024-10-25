@@ -25,18 +25,6 @@ api:
             state: !lambda |-
               return id(totalWaterUsage);
 
-    - service: last_distance_value #set last measured salt distance to any value in cm.
-      variables:
-        new_distance_value: float
-      then:
-        - globals.set:
-            id: last_distance
-            value: !lambda "return ( new_distance_value ) ;"
-        - sensor.template.publish:
-            id: clack_distance
-            state: !lambda |-
-              return id(last_distance_cm).state;
-
 globals:
   - id: totalWaterUsage
     type: float
@@ -96,12 +84,6 @@ globals:
     type: std::string
     restore_value: yes
     initial_value: '"Never"'
-
-# Define a global variable to store last value of the distance
-  - id: last_distance
-    type: float
-    restore_value: yes
-#    initial_value: '0.00'
 
 # Define a global variable that blocks a new reg cycle
   - id: wait_on_delay
@@ -205,10 +187,6 @@ script:
       - component.update: clack_regeneration_last # add old date to dashboard when boot
       - component.update: time_to
       - component.update: clack_percent_time_left
-      - sensor.template.publish:
-          id: clack_distance
-          state: !lambda |-
-            return id(last_distance_cm).state;
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
@@ -222,29 +200,6 @@ script:
       - component.update: clack_fill_time
       - component.update: clack_service_time
       - component.update: clack_total_run_time
-##      - lambda: 'id(wait_on_delay) = false;'
-##      - lambda: 'id(water_meter_freeze) = false;'
-
-  - id: recalculate
-    then:
-      - sensor.template.publish:
-          id: clack_height
-          state: !lambda |-
-            return id(clack_saltlevel_height_max).state-id(last_distance_cm).state;
-      - sensor.template.publish:
-          id: clack_procent
-          state: !lambda |-
-            const float max_distance = id(clack_saltlevel_height_max).state; // heigt in cm to lowest level
-            const float min_distance = id(clack_saltlevel_height_min).state; // height in cm to highest level
-            return int((1/((max_distance - min_distance)/id(clack_height).state))*100);
-      - text_sensor.template.publish:
-          id: clack_fill_salt
-          state: !lambda |-
-            if (id(clack_height).state < id(clack_saltlevel_height_fill).state) {
-              return {"${clack_yes}"};
-            } else {
-              return {"${clack_no}"};
-            }
 
 ### Define a script that waits for a specified amount of time and then sets the leakage alarm bool
   - id: check_leakage
@@ -1172,45 +1127,6 @@ sensor:
           - component.update: clack_power_chlorinator  #template sensor          
     update_interval: 1s
 
-  ##
-  # TOF distance sensor.
-  - platform: template
-    name: clack_distance #${clack_distance}
-    id:  clack_distance
-    unit_of_measurement: cm
-    accuracy_decimals: 1
-    icon: "mdi:arrow-expand-vertical"
-    device_class: distance
-    state_class: measurement
-    internal: true
-    on_value:
-      then:
-        - globals.set:
-            id: last_distance
-            value: !lambda |-
-              const float old_distance = id(last_distance); 
-              const float new_distance = id(distance_cm).state;
-              if (new_distance > old_distance) {
-                return id(clack_distance).state;
-              } else {
-                return old_distance;
-              }
-        - sensor.template.publish:
-            id: last_distance_cm
-            state: !lambda |-
-              return id(last_distance);
-        - script.execute: recalculate
-
-  - platform: template
-    id: last_distance_cm
-    name: ${clack_distance}
-    icon: mdi:arrow-expand-vertical
-    unit_of_measurement: cm
-    accuracy_decimals: 1
-    device_class: distance
-    state_class: measurement
-    update_interval: never
-
   - platform: template
     id: clack_voltage
     name: ${clack_voltage}
@@ -1258,55 +1174,6 @@ sensor:
     update_interval: never
     lambda: |-
       return id(ch3_power).state;
-
-  ##
-  # ultrasonic distance sensor calculate tank_percentage
-  - platform: template
-    id: clack_procent
-    name: ${clack_procent}
-    unit_of_measurement: "%"
-    accuracy_decimals: 0
-    icon: "mdi:percent-box-outline"
-    update_interval: ${tank_percentage_update_interval}
-    state_class: measurement
-    filters:
-    - lambda: |-
-        if (x >= 100) return 100.0;
-        else if (x <= 0.0) return 0.0;
-        else return x;
-  ##
-  # Saltlevel animation picture on dashboard
-  - platform: copy
-    source_id: clack_procent
-    id: clack_salt_level
-    name: ${clack_animation}
-    filters:
-    - lambda: |-
-        if (x >= 80) return 100;
-        else if (x >= 65 && x <= 79) return 80;
-        else if (x >= 40 && x <= 64) return 60;
-        else if (x >= 20 && x <= 39) return 40;
-        else if (x >= 10 && x <= 19) return 20;
-        else if (x >= 5 && x <= 9) return 10;
-        else if (x <= 4) return 0;
-        else return x;
-
-  ##
-  # TOF distance sensor calculate salt level from bottom
-  - platform: template
-    id: clack_height
-    name: ${clack_height}
-    unit_of_measurement: cm
-    accuracy_decimals: 1
-    icon: "mdi:hydraulic-oil-level"
-    update_interval: ${clack_height_update_interval}
-    device_class: distance
-    state_class: measurement
-    filters:
-    - lambda: |-
-        if (x >= 100) return 100.0;
-        else if (x <= 0.0) return 0.0;
-        else return x;
 
 #------
 # CLACK
@@ -1885,69 +1752,6 @@ number:
             value: !lambda |-
               return id(clack_set_pulse_per_liters).state;
 
-  ##
-  # Set minimum distance (from bottom sensor / above plastic cap)
-  - platform: template
-    id: clack_saltlevel_height_min
-    name: ${clack_saltlevel_height_min}
-    icon: mdi:toggle-switch-variant
-    optimistic: true
-    mode: slider
-    step: 0.5
-    entity_category: config
-    min_value: 0
-    max_value: 10
-    initial_value: 0
-    restore_value: yes
-    unit_of_measurement: cm
-    on_value:
-      then:
-        - script.execute: recalculate
-
-  ##
-  # Set maximum distance (from bottom sensor / underneath plastic cap) to water level (to measure in pipe?)
-  - platform: template
-    id: clack_saltlevel_height_max
-    name: ${clack_saltlevel_height_max}
-    icon: mdi:toggle-switch-variant-off
-    optimistic: true
-    mode: slider
-    step: 0.5
-    entity_category: config
-    min_value: 0
-    max_value: 100
-    initial_value: 30
-    restore_value: yes
-    unit_of_measurement: cm
-    on_value:
-      then:
-        - script.execute: recalculate
-  ##
-  # Set alarm level
-  - platform: template
-    id: clack_saltlevel_height_fill
-    name: ${clack_saltlevel_height_fill}
-    icon: mdi:hydraulic-oil-temperature
-    optimistic: true
-    mode: slider
-    step: 0.1
-    entity_category: config
-    min_value: 0
-    max_value: 10
-    initial_value: 1.5
-    restore_value: yes
-    unit_of_measurement: cm
-    update_interval: 600s
-    on_value:
-      then:
-        - text_sensor.template.publish:
-            id: clack_fill_salt
-            state: !lambda |-
-              if (id(clack_height).state < id(clack_saltlevel_height_fill).state) {
-                return {"${clack_yes}"};
-              } else {
-                return {"${clack_no}"};
-              }
   ##
   # Set capacity liters
   - platform: template
