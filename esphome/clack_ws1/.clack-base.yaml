@@ -1933,7 +1933,7 @@ number:
     step: 0.1
     entity_category: config
     min_value: 0
-    max_value: 10
+    max_value: 25
     initial_value: 1.5
     restore_value: yes
     unit_of_measurement: cm
