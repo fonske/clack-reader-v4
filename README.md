@@ -135,7 +135,7 @@ Also copy the files tof_vl53l1x.h and water_flow_gallons.h to you're esphome dir
 ### Method
 Download a copy of this code and place it in your esphome folder. Also place the clack.yaml - secrets.yaml - water_flow_gallons.h and tof_vl53l1x.h into the esphome folder, ensuring to change the secrets.yaml details to your own credentials.
 
-From your ESPHome dashboard, create a local copy of the s3 firmware by clicking the three dots > Install > Manual Download > Modern Format
+From your ESPHome dashboard, create a local copy of the clack firmware (bin file) by clicking the three dots > Install > Manual Download > Modern Format
 
 To set the board into flash mode, hold the button on the left of the USB port while plugging in the USB cable that is connected to your desktop machine.
 
