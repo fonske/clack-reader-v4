@@ -133,7 +133,7 @@ You will first need to do a manual installation by putting the clack.yaml file i
 Also copy the files tof_vl53l1x.h and water_flow_gallons.h to you're esphome directory as they are needed for the flow meter calculation and distance TOF sensor.
 
 ### Method
-Download a copy of this code and place it in your esphome folder. Also place the example.yaml and secrets.yaml into the esphome folder, ensuring to change the example.yaml api and secrets.yaml details to your own credentials.
+Download a copy of this code and place it in your esphome folder. Also place the clack.yaml - secrets.yaml - water_flow_gallons.h and tof_vl53l1x.h into the esphome folder, ensuring to change the secrets.yaml details to your own credentials.
 
 From your ESPHome dashboard, create a local copy of the s3 firmware by clicking the three dots > Install > Manual Download > Modern Format
 
