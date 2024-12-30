@@ -19,7 +19,7 @@ The DP-SW can then be used to give the softener a delayed or immediate regenerat
 
 ## Software
 Everything is programmed in ESPHOME.
-Enter your own Wi-Fi details via the Wi-Fi hotspot with the password: configesp.
+Enter your own Wi-Fi details via the Wi-Fi hotspot with the password: configesp
 
 ## Lovelace menu
 To fully utilize the Lovelace menu with the salt level simulation as shown below in the dashboard, you need to create a folder /www/images in your Home Assistant directory.
