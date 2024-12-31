@@ -26,6 +26,13 @@ Remark3: 30 august 2024: Added regeneration mode steps, for upflow and downflow 
 Copy correct lovelace menu yaml for the correct regen mode choosen in the dropdown menu.
 When changing the softener from upflow to downflow in the softeners menu, a different injector needs to be placed and switch over with the position of the blind plug. See manual of the WS PI valve.
 
+When delivered the Clack reader has already the correct code on the Atom S3 esp.
+If needed, there can be downloaded new firmware to the Atom.
+
+***
+It is important to connect the TOF sensor to the 4p grove connector near the Atom S3. This needs to be done, before powering the PCB, otherwise the Atom will be in a reboot loop, and no wifi hotspot will be available to connect to.
+
+
 ## Contact
 Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
 
