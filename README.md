@@ -6,12 +6,14 @@
 
  Automatic recognision of the softener steps and measure the liters and m3 softened water by reading the clack flowmeter
 
-## 3 Versions / Branches
+## 4 Versions / Branches
 main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
 
 ws1: Clack WS1 valve (CM(x) from AQMOS)
 
 ws1_usa: Clack WS1 valve with Gallons and Inches / US version
+
+ws1_no_tof: Clack WS1 valve without the TOF sensor code (in case of TOF failure/damaged by water)
 
 Remark: Make sure to copy water_flow.h and tof_vl53l1x.h to your esphome directory before compiling the clack.yaml
 There have been some bigger updates to the latest code: added L/min and alarm, also lovelace home assistant menu has been updated.
