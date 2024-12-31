@@ -16,6 +16,7 @@ Here is a [PDF](../readme/Clack_reader_v4_connections_on_clack_ws1.pdf) with an 
 
 The PCB also has connections on the back to loop the clack flow meter with the supplied cable and a connector to attach the DP-SW (2-pin Molex connector).
 The DP-SW can then be used to give the softener a delayed or immediate regeneration, or prevent it. This depends on the settings in the softener control itself (refer to the manual).
+It is important to connect the TOF sensor to the 4p grove connector near the Atom S3. This needs to be done, before powering the PCB, otherwise the Atom will be in a reboot loop, and no wifi hotspot will be available to connect to.
 
 ## Software
 Everything is programmed in ESPHOME.
