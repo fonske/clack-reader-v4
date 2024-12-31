@@ -38,6 +38,12 @@ Help: Please open a issue on this git project.
 
 
 ## Setup
+When delivered the Clack reader has already the correct code on the Atom S3 esp.
+If needed, there can be downloaded new firmware to the Atom.
+
+***
+It is important to connect the TOF sensor to the 4p grove connector near the Atom S3. This needs to be done, before powering the PCB, otherwise the Atom will be in a reboot loop, and no wifi hotspot will be available to connect to.
+
 ```
 substitutions:
   # General substitutions:
