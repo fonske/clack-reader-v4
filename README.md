@@ -28,6 +28,12 @@ Both with or without the 2nd backwash programmed  (between brine and rinse)
       # Post fill no 2nd Backwash : BACKWASH/BRINE/RINSE/FILL
       # sPost fill 2nd Backwash   : BACKWASH/BRINE/BACKWASH2/RINSE/FILL   
 
+When delivered the Clack reader has already the correct code on the Atom S3 esp.
+If needed, there can be downloaded new firmware to the Atom.
+
+***
+It is important to connect the TOF sensor to the 4p grove connector near the Atom S3. This needs to be done, before powering the PCB, otherwise the Atom will be in a reboot loop, and no wifi hotspot will be available to connect to.
+
  ## Dutch:
 [README](/readme/clack_uitleg_nl.md)
 
