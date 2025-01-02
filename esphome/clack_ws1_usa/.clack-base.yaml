@@ -1106,7 +1106,7 @@ sensor:
         on_value:
           - component.update: clack_power  #template sensor
         on_value_range:
-          - above: 1.0
+          - above: 1.2  #setting was 1.0 for WS1. But to low for CE because of LCD screen power consumption
             then:
               - script.execute: decide_cycle  #choose what regeneration cycle to run
       bus_voltage:
