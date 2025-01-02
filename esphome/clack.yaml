@@ -3,7 +3,7 @@ substitutions:
   name: clack
   friendly_name: Clack
   device_description: "Esphome component for Clack WS1 softener with TOF sensor saltlevel detection"
-  timezone: "Europe/Amsterdam"
+  timezone: "America/Chicago"
   # Interval substitutions:
   salt_level_update_interval: 30s
   watermeter_update_interval: 600s # 10 minutes
@@ -40,7 +40,7 @@ packages:
 #  device_base4:  !include clack_ws1_usa/.clack-optional.yaml
 
 time:
-  - platform: sntp
+  - platform: homeassistant
     id: sntp_time
     timezone: ${timezone}
     # Enable this with your own NTP server if your device is on a no internet IOT lan. 
