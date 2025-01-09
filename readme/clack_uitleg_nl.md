@@ -1,75 +1,104 @@
 
-# Clack reader V4 met Atom S3 lite en TOF sensor
+# Clack Reader V4 met Atom S3 lite en TOF sensor
 
 ## Hardware
-Er wordt op de PCB onder andere gebruik gemaakt van 
-- de [Atom S3 lite](https://www.tinytronics.nl/shop/nl/development-boards/microcontroller-boards/met-wi-fi/m5stack-atom-s3-lite-esp32-s3-development-board) van M5stack
-- de [TOF1 sensor](https://www.tinytronics.nl/shop/nl/platformen-en-systemen/m5stack/unit/m5stack-tof-unit)  (vl53l0x) of [TOF2 sensor](https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x) (vl53l1x) van M5stack
-- TOF1 kan met een grove kabeltje van maximaal 5 mtr meten (2x 2mtr + 1x 1mtr met tussenblokjes)
-  TOF2 kan met een grove kabeltje van maximaal 3 mtr meten (1x2 mtr + 1x 1mtr met tussenblokjes)
-- [3D printed](../readme/clack_tof-holder.stl)  TOF sensor behuizing welke met twee rvs M4 boutjes en moertjes vast gezet kan worden op het deksel van het zout reservoir.
+De kit bevat:
+- [Atom S3 lite](https://www.tinytronics.nl/shop/nl/development-boards/microcontroller-boards/met-wi-fi/m5stack-atom-s3-lite-esp32-s3-development-board) van M5stack
+- [TOF1 sensor](https://www.tinytronics.nl/shop/nl/platformen-en-systemen/m5stack/unit/m5stack-tof-unit) (vl53l0x) of [TOF2 sensor](https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x) (vl53l1x) van M5stack
+  - TOF1 kan met een Grove kabel tot 5 meter meten (2x 2m + 1x 1m met connectorblokken)
+  - TOF2 kan met een Grove kabel tot 3 meter meten (1x 2m + 1x 1m met connectorblokken)
+- PCB met connectors ([visueel overzicht](../readme/Clack_reader_v4_connections_on_clack_ws1_EN.pdf) van de aansluitingen)
+  - Stroom in/uit - Doorgeefverbindingen om het stroomverbruik en regeneratiestappen te monitoren (4-draads connector)
+  - Flowmeter in/uit - Doorgeefverbindingen om het waterverbruik te monitoren (3-draads connector, aan de achterkant van de PCB)
+  - DP-SW - Hiermee kan een vertraagde of onmiddellijke regeneratie worden gestart of kan regeneratie worden voorkomen. De functionaliteit hangt af van de instellingen in de waterontharder zelf (raadpleeg de handleiding)
+- [3D-geprinte](../readme/clack_tof-holder.stl) TOF sensorbehuizing die met twee roestvrijstalen M4 bouten en moeren aan het deksel van het zoutreservoir kan worden bevestigd
 
-Hier vind u de lokatie waar de clack reader het beste gemonteerd kan worden in de behuizing:
-[Foto1](../readme/montage1.jpg) [Foto2](../readme/montage2.jpg)
+> [!WAARSCHUWING]
+> Het is belangrijk om de TOF sensor aan te sluiten op de 4p Grove connector <ins>dichtbij</ins>, niet op, de Atom S3. Dit moet gebeuren voordat de PCB van stroom wordt voorzien, anders zal de Atom in een herstartlus komen en zal de Wi-Fi hotspot niet beschikbaar zijn om verbinding mee te maken.
 
-En hier een [PDF](../readme/Clack_reader_v4_connections_on_clack_ws1.pdf) met een overzicht van de aansluitingen.
+## Hardware afbeeldingen
+| Afbeelding | Beschrijving |
+| --- | --- |
+| [pcb_front.jpg](../readme/pcb_front.jpg) | Voorkant van Clack Reader |
+| [pcb_back.jpg](../readme/pcb_back.jpg) | Achterkant van Clack Reader |
+| [mount_position_image1.jpg](../readme/mount_position_image1.jpg) | Beste locatie voor het monteren van Clack Reader in de Clack WS1 behuizing |
+| [mount_position_image2.jpg](../readme/mount_position_image2.jpg) | Beste locatie voor het monteren van Clack Reader in de Clack WS1 behuizing |
 
-De PCB heeft verder op de achterkant aansluiten om de clack flowmeter door te lussen met meegeleverd kabeltje
-En een aansluiting om de DP-SW aan te sluiten (2 polige molexstekker)
-De DP-SW kan dan gebruikt worden om de ontharder een uitgestelde of direkte regeneratie te geven of te voorkomen. Afhankelijk van wat u insteld in de ontharder besturing zelf (zie handleiding)
+## Firmware
+De Clack Reader PCB is geprogrammeerd in ESPHome en wordt vooraf geflasht geleverd. Je kunt ervoor kiezen om de meegeleverde versie te gebruiken of opnieuw te flashen vanuit deze Git-repo.
 
-## Software
-Alles is in ESPHOME geprogrammeerd.
-Eigen wifi gegevens invullen via wifi hotspot met als wachtwoord: configesp
+Als je de vooraf geflashte versie gebruikt, schakel dan de Clack Reader in (met de TOF sensor aangesloten), maak verbinding met de `Clack` hotspot met het wachtwoord `configesp`, en voer de Wi-Fi gegevens van je netwerk in.
 
-## Lovelace menu
-Om het lovelace menu volledig te benutten met de zoutniveau simulatie zoals hieronder in het dashboard te zien is, dient er een map /www/images aangemaakt te worden in je home assistant directory.
-Kopieer daar alle simulatie plaatjes in van [/www/images](../www/images)
+# Home Assistant
 
-Voorbeeld dashboard: 
-![Example](../readme/home_assistant_menu_clack_ws_nl.jpg)
+## Lovelace Dashboard
+![Voorbeeld](../readme/home_assistant_menu_clack_ws_eng.jpg)
 
-Het dashboard zelf kan geplaatst worden via home assistant drie puntjes - dashboard bewerken - ruwe configuratie editor
-Tekst uit bijvoorbeeld [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml](../home_assistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL) daar aan toevoegen en opslaan.
-U heeft nu een extra menu Clack in home assistant
+Om het bovenstaande dashboard toe te voegen aan Home Assistant:
+1. Maak een map `/www/images` in je `homeassistant` directory
+1. Kopieer de afbeeldingen van [/www/images](../www/images) naar de nieuwe map. Deze afbeeldingen ondersteunen de weergave van de zoutniveau-simulatie.
+1. Navigeer naar je Home Assistant dashboard
+1. Klik rechtsboven op het potlood (dashboard bewerken)
+1. Klik op de drie puntjes en selecteer 'Raw configuration editor'
+1. Voeg de tekst toe van het juiste dashboard YAML bestand uit de [homeassistant](../homeassistant) map van deze repo (bijv. [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml](../homeassistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml)) en sla op
+1. Je hebt nu een nieuwe Clack weergave in Home Assistant
 
-Ook om de status balk goed te zien kunt u via HACS een frontend toepassing installeren, zoals bar-card, multiple-entity-row en card-mod.
+> [!BELANGRIJK]
+> Om de statusbalk correct weer te geven, gebruik [HACS](https://hacs.xyz) om de volgende frontend applicaties te installeren (onder voorbehoud van wijzigingen):
+> - bar-card
+> - multiple-entity-row
+> - stack-in-card
 
+## Automatiseringen
+Het is mogelijk om meldingen te ontvangen op een mobiele telefoon die de Home Assistant app gebruikt. Bijvoorbeeld wanneer een mogelijk waterlek wordt gedetecteerd of wanneer het zout opraakt. Voorbeeldautomatiseringen zijn beschikbaar in [clack_en.yaml](../homeassistant/clack_en.yaml). De onderstaande opties kunnen worden gebruikt om deze automatiseringen toe te voegen aan Home Assistant.
 
-## Automations
-Het is mogelijk een notificatie te ontvangen op een telefoon waar home assistant app op draait.
-Bijvoorbeeld bij waterlekkage of wanneer het zout op is.
-Verander dan nog wel de entiteit van uw eigen device in de code.
+> [!BELANGRIJK]
+> Pas de `action` waarden aan om je eigen mobiele apparaat te gebruiken (bijv. vervang `- action: notify.mobile_app_iphone_van_a_c_a`)
 
-[clack_nl.yaml](../homeassistant/clack_nl.yaml) samenvoegen met automations.yaml (let op inspringingen) of beter:
+### Optie 1 - Gebruik de Home Assistant [Packages](https://www.home-assistant.io/docs/configuration/packages/) functionaliteit
+1. Maak een map onder `/config`, bij voorkeur genaamd `packages`, en kopieer [clack_en.yaml](../homeassistant/clack_en.yaml) naar de directory
+1. Pas je `configuration.yaml` aan om toe te voegen:
 
-### Bestand op eigen lokatie:
-[clack_nl.yaml](../homeassistant/clack_nl.yaml) op een eigen lokatie zetten:
-configuration.yaml aanpassen naar:
+>```yml
+> homeassistant:
+>   packages: !include_dir_named packages
+> ```
 
-```yml
-homeassistant:
-  packages: !include_dir_named packages
-```
+3. Herstart Home Assistant
 
-Dan directory /packages aanmaken in /config en daar de automation_saltalarm_nl.yaml in kopieren
-HA opnieuw starten
+> [!WAARSCHUWING]
+> Hoewel automatiseringen die zijn toegevoegd met behulp van het [Packages](https://www.home-assistant.io/docs/configuration/packages/) patroon zichtbaar zijn in Home Assistant op het `Settings/Automations` scherm, kunnen ze niet worden gewijzigd via de Home Assistant UI. Om ze te wijzigen, bewerk je het package YAML bestand en herstart je Home Assistant.
+
+### Optie 2 - Voeg clack_en.yaml samen met automations.yaml
+Voeg de `automations:` sectie van [clack_en.yaml](../homeassistant/clack_en.yaml) samen met automations.yaml (let op de inspringingen).
+
+## Configuratie
+
+Gebruik de schuifregelaars op het dashboard om het systeem te configureren.
+
+> [!TIP]
+> Een diagram dat de min/max zoutafstand uitlegt, is hier te vinden. [hier.](../readme/min_max_EN.jpg)
+
+| Instelling | Beschrijving | Voorbeeld |
+| --- | --- | ---- |
+| Vertraging waterlek alarm | Minuten van constante waterstroom die `binary_sensor.clack_leakage_detected` zal activeren om `true` te worden, waardoor automatiseringen (meldingen) kunnen worden geactiveerd | 30 min |
+| Min. zoutafstand | Afstand tussen de TOF sensor en het zout <ins>wanneer de zoutcontainer vol is</ins> | 10 cm |
+| Max. zoutafstand | Afstand tussen de TOF sensor en het zout <ins>wanneer het zout op het laagste niveau is</ins> (leeg)| 35 cm |
+| Vul zoutafstand | Inches zout die nog in de tank zit, waaronder `sensor.clack_fill_salt` `true` wordt en automatiseringen (meldingen) kunnen worden geactiveerd | 4 cm |
+| Capaciteit in dagen | Aantal dagen dat de Clack controller is ingesteld om te regenereren als het aantal gallons capaciteit nog niet is overschreden | 14 dagen |
+| Capaciteit in liters | Liters capaciteit die de Clack controller weergeeft direct na een regeneratie | 3500 ltr |
 
 ## Uitleg werking
 
-Met de schuifregelaars de juiste hoogtes instellen.
-Voorbeeld van de minimale en maximale hoogte vind u [hier.](../readme/min_max_NL.jpg) 
-Zout bijvullen afstand is de afstand vanaf wanneer er een alarm (automation) zal verstuurd worden (waarde van Bijvullen wordt dan "ja")
-Dit is gemeten vanaf de onderkant van de tank, dus vanaf de maximale afstand naar boven toe.
+### Zoutmeetlogica
+Aangezien veel waterontharders water boven het zout hebben (klein zoutreservoir), is er een slimme functie ingebouwd in de afstandsmeting.
 
-Omdat er veel waterontharders zijn waar het water boven het zout staat (klein zoutreservoir), zit er een slimme functie ingebouwd in de afstandmeting.
-Namelijk, de sensor meet de afstand naar beneden toe. De te meten afstand wordt dan alleen maar groter als het zout op raakt.
-Kortere afstanden worden dan ook niet geregistreerd als laatste waarde, enkel langere afstanden. Zo heeft water wat boven het zout uitkomt geen meet invloed meer.
-Er zijn 2 registratie: Afstand en Afstand TOF.
-Afstand is de meting met de slimme functie. Afstand TOF meet nog steeds continu elke 10 sec maar heeft geen invloed op de procent schaal of berekeningen daaraan.
+De sensor meet de afstand naar beneden tot het zout. Die gemeten afstand zou alleen moeten toenemen naarmate het zout afneemt.
+Hierdoor worden kortere afstanden niet geregistreerd als de meest recente waarde, alleen langere. Op deze manier beïnvloedt het stijgende water boven het zout de meting niet.
 
-
+Er zijn twee metingen: Afstand en TOF Afstand.
+Afstand is de meting met de slimme functie. TOF Afstand wordt continu elke 10 seconden gemeten maar heeft geen invloed op het 'Clack zoutniveau percentage' en beïnvloedt de Afstand niet tenzij het groter meet dan de Afstand.
 
 ### Zout bijvullen
-In het dashboard zitten een aantal drukknoppen met diverse functie's.
-De drukknop "Reset zout bijgevuld" zal de afstand TOF en afstand weer gelijk maken, waardoor de afstandsmeting gereset wordt en de nieuwe zouthoogte weer gemeten en geregistreerd wordt.
+
+Bij het bijvullen van je zoutcontainer druk je op de 'Reset fill salt' knop op het dashboard. Dit zal de TOF Afstand en Afstand gelijkmaken, waardoor de afstandsmeting opnieuw wordt ingesteld zodat het nieuwe zoutniveau opnieuw kan worden gemeten en geregistreerd. Onthoud dat de slimme functie anders de Afstand niet zou laten toenemen.
