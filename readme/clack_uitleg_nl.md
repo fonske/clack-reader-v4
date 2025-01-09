@@ -77,7 +77,7 @@ Voeg de `automations:` sectie van [clack_en.yaml](../homeassistant/clack_en.yaml
 Gebruik de schuifregelaars op het dashboard om het systeem te configureren.
 
 > [!TIP]
-> Een diagram dat de min/max zoutafstand uitlegt, is hier te vinden. [hier.](../readme/min_max_EN.jpg)
+> Een diagram dat de min/max zoutafstand uitlegt, is hier te vinden. [hier.](../readme/min_max_NL.jpg)
 
 | Instelling | Beschrijving | Voorbeeld |
 | --- | --- | ---- |
