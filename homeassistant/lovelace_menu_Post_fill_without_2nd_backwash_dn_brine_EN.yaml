@@ -118,7 +118,7 @@
                 - type: section
                 - entity: sensor.clack_cycle_total_runtime
                   icon: mdi:timer-sand
-                  name: Total time past
+                  name: Total time elapsed
           - type: entities
             entities:
               - entity: sensor.clack_operation_time
