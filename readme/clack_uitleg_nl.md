@@ -5,8 +5,8 @@
 De kit bevat:
 - [Atom S3 lite](https://www.tinytronics.nl/shop/nl/development-boards/microcontroller-boards/met-wi-fi/m5stack-atom-s3-lite-esp32-s3-development-board) van M5stack
 - [TOF1 sensor](https://www.tinytronics.nl/shop/nl/platformen-en-systemen/m5stack/unit/m5stack-tof-unit) (vl53l0x) of [TOF2 sensor](https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x) (vl53l1x) van M5stack
-  - TOF1 kan met een Grove kabel tot 5 meter meten (2x 2m + 1x 1m met connectorblokken)
-  - TOF2 kan met een Grove kabel tot 3 meter meten (1x 2m + 1x 1m met connectorblokken)
+  - TOF1 kan met een Grove kabel tot 5 meter meten (2x 2m + 1x 1m met connectorblokje)
+  - TOF2 kan met een Grove kabel tot 3 meter meten (1x 2m + 1x 1m met connectorblokje)
 - PCB met connectors ([visueel overzicht](../readme/Clack_reader_v4_connections_on_clack_ws1_EN.pdf) van de aansluitingen)
   - Stroom in/uit - Doorgeefverbindingen om het stroomverbruik en regeneratiestappen te monitoren (4-draads connector)
   - Flowmeter in/uit - Doorgeefverbindingen om het waterverbruik te monitoren (3-draads connector, aan de achterkant van de PCB)
