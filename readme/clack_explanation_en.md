@@ -85,7 +85,7 @@ Use the sliders on the dashboard to configure the system.
 | Delay water leakage alarm | Minutes of constant water flow that will trigger `binary_sensor.clack_leakage_detected` to turn `true`, allowing automations (alerts) to trigger | 30 min |
 | Min. salt distance | Distance between the TOF sensor and the salt <ins>when the salt container is full</ins> | 10 cm. |
 | Max. salt distance | Distance between the TOF sensor and the salt <ins>when the salt is at its lowest level</ins> (empty)| 35 cm. |
-| Fill salt distance | Inches of salt remaining in the tank, below which `sensor.clack_fill_salt` turns `true` and automations (alerts) may trigger | 1.5 cm |
+| Fill salt distance | Centimeters of salt remaining in the tank, below which `sensor.clack_fill_salt` turns `true` and automations (alerts) may trigger | 5 cm. |
 | Capacity in days | Number of days the Clack controller is set to regen at if the liters of capacity has not yet been exceeded | 14 days |
 | Capacity in liters | Liters of capacity that the Clack controller displays immediately after a regen | 3500 ltr. |
 
