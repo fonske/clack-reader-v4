@@ -13,7 +13,7 @@ De kit bevat:
   - DP-SW - Hiermee kan een vertraagde of onmiddellijke regeneratie worden gestart of kan regeneratie worden voorkomen. De functionaliteit hangt af van de instellingen in de waterontharder zelf (raadpleeg de handleiding)
 - [3D-geprinte](../readme/clack_tof-holder.stl) TOF sensorbehuizing die met twee roestvrijstalen M4 bouten en moeren aan het deksel van het zoutreservoir kan worden bevestigd
 
-> [!WAARSCHUWING]
+> [!WARNING]
 > Het is belangrijk om de TOF sensor aan te sluiten op de 4p Grove connector <ins>dichtbij</ins>, niet op, de Atom S3. Dit moet gebeuren voordat de PCB van stroom wordt voorzien, anders zal de Atom in een herstartlus komen en zal de Wi-Fi hotspot niet beschikbaar zijn om verbinding mee te maken.
 
 ## Hardware afbeeldingen
@@ -43,7 +43,7 @@ Om het bovenstaande dashboard toe te voegen aan Home Assistant:
 1. Voeg de tekst toe van het juiste dashboard YAML bestand uit de [homeassistant](../homeassistant) map van deze repo (bijv. [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml](../homeassistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml)) en sla op
 1. Je hebt nu een nieuwe Clack weergave in Home Assistant
 
-> [!BELANGRIJK]
+> [!IMPORTANT]
 > Om de statusbalk correct weer te geven, gebruik [HACS](https://hacs.xyz) om de volgende frontend applicaties te installeren (onder voorbehoud van wijzigingen):
 > - bar-card
 > - multiple-entity-row
@@ -52,7 +52,7 @@ Om het bovenstaande dashboard toe te voegen aan Home Assistant:
 ## Automatiseringen
 Het is mogelijk om meldingen te ontvangen op een mobiele telefoon die de Home Assistant app gebruikt. Bijvoorbeeld wanneer een mogelijk waterlek wordt gedetecteerd of wanneer het zout opraakt. Voorbeeldautomatiseringen zijn beschikbaar in [clack_en.yaml](../homeassistant/clack_en.yaml). De onderstaande opties kunnen worden gebruikt om deze automatiseringen toe te voegen aan Home Assistant.
 
-> [!BELANGRIJK]
+> [!IMPORTANT]
 > Pas de `action` waarden aan om je eigen mobiele apparaat te gebruiken (bijv. vervang `- action: notify.mobile_app_iphone_van_a_c_a`)
 
 ### Optie 1 - Gebruik de Home Assistant [Packages](https://www.home-assistant.io/docs/configuration/packages/) functionaliteit
@@ -66,7 +66,7 @@ Het is mogelijk om meldingen te ontvangen op een mobiele telefoon die de Home As
 
 3. Herstart Home Assistant
 
-> [!WAARSCHUWING]
+> [!WARNING]
 > Hoewel automatiseringen die zijn toegevoegd met behulp van het [Packages](https://www.home-assistant.io/docs/configuration/packages/) patroon zichtbaar zijn in Home Assistant op het `Settings/Automations` scherm, kunnen ze niet worden gewijzigd via de Home Assistant UI. Om ze te wijzigen, bewerk je het package YAML bestand en herstart je Home Assistant.
 
 ### Optie 2 - Voeg clack_en.yaml samen met automations.yaml
