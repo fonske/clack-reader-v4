@@ -20,7 +20,7 @@ The kit includes:
 | Image | Description |
 | --- | --- |
 | [pcb_front.jpg](../readme/pcb_front.jpg) | Front of Clack Reader |
-| [pcb_back.jpg](../readme/pcb_front.jpg) | Back of Clack Reader |
+| [pcb_back.jpg](../readme/pcb_back.jpg) | Back of Clack Reader |
 | [mount_position_image1.jpg](../readme/mount_position_image1.jpg) | Best location for mounting Clack Reader inside the Clack WS1 housing |
 | [mount_position_image2.jpg](../readme/mount_position_image2.jpg) | Best location for mounting Clack Reader inside the Clack WS1 housing |
 
