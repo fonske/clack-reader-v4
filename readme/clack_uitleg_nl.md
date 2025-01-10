@@ -39,8 +39,8 @@ Om het bovenstaande dashboard toe te voegen aan Home Assistant:
 1. Kopieer de afbeeldingen van [/www/images](../www/images) naar de nieuwe map. Deze afbeeldingen ondersteunen de weergave van de zoutniveau-simulatie.
 1. Navigeer naar je Home Assistant dashboard
 1. Klik rechtsboven op het potlood (dashboard bewerken)
-1. Klik op de drie puntjes en selecteer 'Raw configuration editor'
-1. Voeg de tekst toe van het juiste dashboard YAML bestand uit de [homeassistant](../homeassistant) map van deze repo (bijv. [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml](../homeassistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_EN.yaml)) en sla op
+1. Klik op de drie puntjes en selecteer 'Ruwe configuratie editor'
+1. Voeg de tekst toe van het juiste dashboard YAML bestand uit de [homeassistant](../homeassistant) map van deze repo (bijv. [lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml](../homeassistant/lovelace_menu_Post_fill_with_2nd_backwash_dn_brine_NL.yaml)) en sla op
 1. Je hebt nu een nieuwe Clack weergave in Home Assistant
 
 > [!IMPORTANT]
@@ -50,13 +50,13 @@ Om het bovenstaande dashboard toe te voegen aan Home Assistant:
 > - stack-in-card
 
 ## Automatiseringen
-Het is mogelijk om meldingen te ontvangen op een mobiele telefoon die de Home Assistant app gebruikt. Bijvoorbeeld wanneer een mogelijk waterlek wordt gedetecteerd of wanneer het zout opraakt. Voorbeeldautomatiseringen zijn beschikbaar in [clack_en.yaml](../homeassistant/clack_en.yaml). De onderstaande opties kunnen worden gebruikt om deze automatiseringen toe te voegen aan Home Assistant.
+Het is mogelijk om meldingen te ontvangen op een mobiele telefoon die de Home Assistant app gebruikt. Bijvoorbeeld wanneer een mogelijk waterlek wordt gedetecteerd of wanneer het zout opraakt. Voorbeeldautomatiseringen zijn beschikbaar in [clack_nl.yaml](../homeassistant/clack_nl.yaml). De onderstaande opties kunnen worden gebruikt om deze automatiseringen toe te voegen aan Home Assistant.
 
 > [!IMPORTANT]
 > Pas de `action` waarden aan om je eigen mobiele apparaat te gebruiken (bijv. vervang `- action: notify.mobile_app_iphone_van_a_c_a`)
 
 ### Optie 1 - Gebruik de Home Assistant [Packages](https://www.home-assistant.io/docs/configuration/packages/) functionaliteit
-1. Maak een map onder `/config`, bij voorkeur genaamd `packages`, en kopieer [clack_en.yaml](../homeassistant/clack_en.yaml) naar de directory
+1. Maak een map onder `/config`, bij voorkeur genaamd `packages`, en kopieer [clack_nl.yaml](../homeassistant/clack_nl.yaml) naar de directory
 1. Pas je `configuration.yaml` aan om toe te voegen:
 
 >```yml
@@ -70,7 +70,7 @@ Het is mogelijk om meldingen te ontvangen op een mobiele telefoon die de Home As
 > Hoewel automatiseringen die zijn toegevoegd met behulp van het [Packages](https://www.home-assistant.io/docs/configuration/packages/) patroon zichtbaar zijn in Home Assistant op het `Settings/Automations` scherm, kunnen ze niet worden gewijzigd via de Home Assistant UI. Om ze te wijzigen, bewerk je het package YAML bestand en herstart je Home Assistant.
 
 ### Optie 2 - Voeg clack_en.yaml samen met automations.yaml
-Voeg de `automations:` sectie van [clack_en.yaml](../homeassistant/clack_en.yaml) samen met automations.yaml (let op de inspringingen).
+Voeg de `automations:` sectie van [clack_nl.yaml](../homeassistant/clack_nl.yaml) samen met automations.yaml (let op de inspringingen).
 
 ## Configuratie
 
