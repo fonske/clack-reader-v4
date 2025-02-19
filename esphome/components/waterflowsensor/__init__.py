@@ -3,7 +3,7 @@ import esphome.codegen as cg
 from esphome.components import sensor
 from esphome.const import CONF_ID, CONF_PIN
 
-water_flow_sensor_ns = cg.esphome_ns.namespace('water_flow_sensor')
+water_flow_sensor_ns = cg.esphome_ns.namespace('waterflowsensor')
 WaterFlowSensor = water_flow_sensor_ns.class_('WaterFlowSensor', cg.Component, sensor.Sensor)
 
 CONF_FLOW_RATE = 'flow_rate'
