@@ -4,13 +4,13 @@ from esphome.components import sensor
 from esphome.const import CONF_ID, CONF_PIN
 
 water_flow_sensor_ns = cg.esphome_ns.namespace('waterflowsensor')
-WaterFlowSensor = water_flow_sensor_ns.class_('WaterFlowSensor', cg.Component, sensor.Sensor)
+WaterFlowSensor = water_flow_sensor_ns.class_('waterflowsensor', cg.Component, sensor.Sensor)
 
 CONF_FLOW_RATE = 'flow_rate'
 CONF_TOTAL_USAGE = 'total_usage'
 
 CONFIG_SCHEMA = cv.Schema({
-    cv.GenerateID(): cv.declare_id(WaterFlowSensor),
+    cv.GenerateID(): cv.declare_id(waterflowsensor),
     cv.Required(CONF_PIN): cv.pin,
     cv.Optional(CONF_FLOW_RATE): sensor.sensor_schema(),
     cv.Optional(CONF_TOTAL_USAGE): sensor.sensor_schema(),
