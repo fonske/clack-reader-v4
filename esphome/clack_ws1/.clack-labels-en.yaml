@@ -51,6 +51,8 @@ substitutions:
   clack_regeneration_mode: Regeneration mode
   clack_pre_fill_no_2nd_backwash: Pre fill no 2nd Backwash
   clack_pre_fill_2nd_backwash: Pre fill 2nd Backwash
+  clack_pre_fill_upflow: Pre fill Upflow
+  clack_pre_fill_upflow_2: Pre fill Upflow 2
   clack_post_fill_no_2nd_backwash: Post fill no 2nd Backwash
   clack_post_fill_2nd_backwash: Post fill 2nd Backwash
   clack_time_to_regen: Time to regen
