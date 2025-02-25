@@ -2318,7 +2318,7 @@ number:
     step: 1
     entity_category: config
     min_value: 0
-    max_value: 21
+    max_value: 28
     initial_value: 14
     restore_value: yes
     unit_of_measurement: ${days}
