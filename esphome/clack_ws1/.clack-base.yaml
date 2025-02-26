@@ -2294,7 +2294,7 @@ number:
     icon: mdi:water-opacity
     optimistic: true
     mode: slider
-    step: 100
+    step: 10
     entity_category: config
     min_value: 0
     max_value: 12000
