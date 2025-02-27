@@ -39,6 +39,12 @@ packages:
 #  device_base3:  !include clack_ws1_usa/.tof2.yaml
 #  device_base4:  !include clack_ws1_usa/.clack-optional.yaml
 
+external_components:
+  - source:
+      type: git
+      url: https://github.com/robertklep/esphome-custom-component
+    components: [ custom, custom_component ]
+    
 time:
   - platform: homeassistant
     id: sntp_time
