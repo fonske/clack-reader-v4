@@ -37,6 +37,12 @@ packages:
 #  device_base2:  !include clack_ws1_no_tof/.clack-base.yaml
 #  device_base4:  !include clack_ws1_no_tof/.clack-optional.yaml
 
+external_components:
+  - source:
+      type: git
+      url: https://github.com/robertklep/esphome-custom-component
+    components: [ custom, custom_component ]
+    
 time:
   - platform: sntp
     id: sntp_time
