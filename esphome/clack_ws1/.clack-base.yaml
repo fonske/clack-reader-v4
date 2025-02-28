@@ -698,8 +698,6 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - lambda: |-
-          id(start_time_total) = id(sntp_time).now().timestamp;
       - delay: 17s
       - wait_until:
           condition:
@@ -859,8 +857,6 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - lambda: |-
-          id(start_time_total) = id(sntp_time).now().timestamp;
       - delay: 17s
       - wait_until:
           condition:
@@ -1066,8 +1062,6 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - lambda: |-
-          id(start_time_total) = id(sntp_time).now().timestamp;
       - delay: 17s
       - wait_until:
           condition:
@@ -1117,6 +1111,7 @@ script:
       - delay: 30s
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
+      
 ###  Define a script that visualize the cycle steps in regeneration 5 step cycle "pre upflow 2"
   - id: cycle_steps_5cycle_pre_upflow_2
     mode: single
@@ -1244,8 +1239,6 @@ script:
               return id(cycle_step) = "Backwash";
       - lambda: |-
           id(start_time) = id(sntp_time).now().timestamp;
-      - lambda: |-
-          id(start_time_total) = id(sntp_time).now().timestamp;
       - delay: 17s
       - wait_until:
           condition:
