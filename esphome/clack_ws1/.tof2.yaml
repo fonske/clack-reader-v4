@@ -1,48 +1,58 @@
 ## Time-of-Flight Distance Unit (VL53L1X) M5stack  SKU: U172
 ## Remark: I2C grove cable max 2 mtr
 ## https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x
-## tof_vl53l1x.h needed in root directory together with clack.yaml for compiling in esphome
 
-esphome:
-  includes:
-    - tof_vl53l1x.h  #ToF4M M5stack
-  libraries:
-    - "Wire"
-    - "pololu/VL53L1X"
+external_components:
+  - source: github://mrtoy-me/esphome-components-test@main
+    components: [ vl53l1x ]
+    refresh: 0s
 
 sensor:
 # VL53L1X TOF               
-  - platform: custom
-    lambda: |-
-      auto my_sensor = new MyCustomSensor();
-      App.register_component(my_sensor);
-      return {my_sensor};
+  - platform: vl53l1x
+    i2c_id: bus_a
+    address: 0x29
+    distance_mode: short
+    update_interval: 60s
+    distance:
+      # name: My Raw Distance # comment out if not needed in HA UI
+      id: vl53l1x_raw_distance
+    range_status:
+      # name: My Range Status # comment out if not needed in HA UI
+      id: vl53l1x_range_status
 
-    sensors:
-      id: distance_cm
-      name: ${clack_distance_tof}
-      unit_of_measurement: cm
-      accuracy_decimals: 1
-      device_class: distance
-      state_class: measurement
-      icon: mdi:ruler
-      internal: false
-      filters:
-        - lambda: |-
-            if (isnan(x)) {
-              return 0;
-            } else {
-              return x;
-            }
-        - lambda: return x/10;
-        - clamp:
-            min_value: 0.0
-            max_value: 230.0
+  - platform: template
+    name: ${clack_distance_tof}
+    id: distance_cm
+    update_interval: 60s
+    unit_of_measurement: "cm"
+    accuracy_decimals: 1
+    device_class: distance
+    state_class: measurement
+    icon: mdi:ruler
+    internal: false
+    lambda: |-
+       if (id(vl53l1x_range_status).state > 0) {
+         return NAN;
+       } else {
+         return id(vl53l1x_raw_distance).state;
+       }
+    filters:
+      - lambda: |-
+          if (isnan(x)) {
+            return 0;
+          } else {
+            return x;
+          }
+      - lambda: return x/10;
+      - clamp:
+          min_value: 0.0
+          max_value: 230.0
 #        - median:
-        - delta: 0.2
-      on_value:
-        then:
-          - sensor.template.publish:
-              id: clack_distance
-              state: !lambda |-
-                return id(distance_cm).state;
+      - delta: 0.2
+    on_value:
+      then:
+        - sensor.template.publish:
+            id: clack_distance
+            state: !lambda |-
+              return id(distance_cm).state;
