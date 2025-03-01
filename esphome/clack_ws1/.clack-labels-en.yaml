@@ -49,12 +49,19 @@ substitutions:
   clack_regen: clack regen
   clack_brine: During brine
   clack_regeneration_mode: Regeneration mode
+  #F=FILL, S=SERVICE, BW=BACKWASH, BW2=BACKWASH2, BR=BRINE, R=RINSE
   clack_pre_fill_no_2nd_backwash: Pre fill no 2nd Backwash
+  clack_pre_fill_no_2nd_backwash_steps: "F/S/BW/BR/R"
   clack_pre_fill_2nd_backwash: Pre fill 2nd Backwash
+  clack_pre_fill_2nd_backwash_steps: "F/S/BW/BR/BW2/R"
   clack_pre_fill_upflow: Pre fill Upflow
+  clack_pre_fill_upflow_steps: "F/S/BR/BW/R"
   clack_pre_fill_upflow_2: Pre fill Upflow 2
+  clack_pre_fill_upflow_2_steps: "F/S/BR/R/BW"
   clack_post_fill_no_2nd_backwash: Post fill no 2nd Backwash
+  clack_post_fill_no_2nd_backwash_steps: "BW/BR/R/F"
   clack_post_fill_2nd_backwash: Post fill 2nd Backwash
+  clack_post_fill_2nd_backwash_steps: "BW/BR/BW2/R/F"
   clack_time_to_regen: Time to regen
   clack_time_to_regen_hours: Time to regen hours
   clack_percent_time_left: Water softener percent time left
@@ -66,6 +73,7 @@ substitutions:
   clack_resinclean_last: Resinclean on
   clack_saltfill_last: Salt fill on
   clack_cycle_step: Cycle step
+  clack_cycle_steps: Cycle steps
   clack_use_tst_but: Test button use pulse
   clack_resinclean_reset_button: Resinclean Reset
   clack_regen_stop_script: Test button Regen stop
@@ -111,4 +119,3 @@ text_sensor:
     update_interval: never
     lambda: |-
       return id(fill_last);
-
