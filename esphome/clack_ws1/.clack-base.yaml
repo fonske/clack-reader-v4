@@ -2,8 +2,6 @@
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
-  includes:
-    - water_flow.h
   on_boot:
     priority: -100
     then:
@@ -12,20 +10,20 @@ esphome:
 # Enable Home Assistant API
 api:
   reboot_timeout: 0s
-  services:
-    - service: water_meter_value  # set the water meter to any value in liters
+  actions:
+    - action: water_meter_value
       variables:
         meter_value: float
       then:
         - globals.set:
             id: totalWaterUsage
             value: !lambda "return ( meter_value ) ;"
-        - sensor.template.publish:
-            id: clack_watermeter
-            state: !lambda |-
-              return id(totalWaterUsage);
+        - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
 
-    - service: last_distance_value #set last measured salt distance to any value in cm.
+    - action: last_distance_value #set last measured salt distance to any value in cm.
       variables:
         new_distance_value: float
       then:
@@ -209,6 +207,10 @@ script:
           id: clack_distance
           state: !lambda |-
             return id(last_distance_cm).state;
+      - pulse_meter.set_total_pulses: # Publish the initial state of totalWaterUsage on boot
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
@@ -291,6 +293,10 @@ script:
       - globals.set:
           id: totalWaterUsage
           value: '00'        
+      - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
       - sensor.template.publish:
           id: clack_watermeter
           state: !lambda |-
@@ -1640,52 +1646,7 @@ sensor:
 #------
 # CLACK
 #------
-  ##
-  #  Flow Rate
-  - platform: custom
-    lambda: |-
-      auto wf = new WaterFlowSensor();
-      App.register_component(wf);
-      return {wf->clack_flow_rate};
-
-    sensors:
-    - name: ${clack_flow_rate}
-      icon: mdi:waves-arrow-right
-      unit_of_measurement: L/min # Gallons GPM or Liters per minute 
-      accuracy_decimals: 2
-      id: clack_flow_rate
-      device_class: volume_flow_rate
-      state_class: measurement
-
-
-
-  #  Watermeter
-  - platform: template
-    id: clack_watermeter
-    name: ${clack_watermeter_total}
-    icon: mdi:water
-    update_interval: ${watermeter_update_interval}
-    unit_of_measurement: L
-    device_class: water
-    state_class: total_increasing
-    accuracy_decimals: 1
-    on_value:
-      - sensor.template.publish:
-          id: clack_m3_left
-          state: !lambda |-
-            return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
-      - sensor.template.publish:
-          id: clack_l_left
-          state: !lambda |-
-            return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
-      - sensor.template.publish:
-          id: clack_percent_l_left
-          state: !lambda |-
-            if (id(clack_capacity_liters).state <= 0) {
-            return 0;
-            }
-            return float((id(clack_l_left).state / id(clack_capacity_liters).state) * 100);
-
+#  Watermeter
   - platform: template
     id: clack_m3_left
     name: ${clack_m3_left}
