@@ -1855,7 +1855,7 @@ sensor:
         - component.update: clack_total_run_time_txt
 
   - platform: internal_temperature
-    name: "Internal Temperature"
+    name: "Internal Temperature"  
 
 select:
   - id: clack_select_chl_or_dpsw
@@ -1878,18 +1878,42 @@ select:
     options:
       - ${clack_post_fill_no_2nd_backwash}
       - ${clack_post_fill_2nd_backwash}
-      - ${clack_pre_fill_no_2nd_backwash}
-      - ${clack_pre_fill_2nd_backwash}
       - ${clack_pre_fill_upflow}
       - ${clack_pre_fill_upflow_2}
+      - ${clack_pre_fill_no_2nd_backwash}
+      - ${clack_pre_fill_2nd_backwash}
     initial_option: ${clack_post_fill_no_2nd_backwash}
     optimistic: true
     restore_value: true
     entity_category: config
     update_interval: never
+    on_value:
+      - text_sensor.template.publish:
+          id: clack_all_cycle_steps
+          state: !lambda |-
+            if(id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}")
+              return { "${clack_post_fill_no_2nd_backwash_steps}" };
+            else if(id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}")
+              return { "${clack_post_fill_2nd_backwash_steps}" };
+            else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow}")
+              return { "${clack_pre_fill_upflow_steps}" };
+            else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}")
+              return { "${clack_pre_fill_upflow_2_steps}" };
+            else if(id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}")
+              return { "${clack_pre_fill_no_2nd_backwash_steps}" };
+            else if(id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}")
+              return { "${clack_pre_fill_2nd_backwash_steps}" };
+            else
+              return { "" };
 ##
 # Text sensors with general information.
 text_sensor:
+# Textsensor "clack_all_cycle_steps"
+  - platform: template
+    name: ${clack_cycle_steps}
+    id: clack_all_cycle_steps
+    icon: mdi:basket-fill
+    update_interval: never
   ##
   # Expose ESPHome version as sensor.
   - platform: version
