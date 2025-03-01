@@ -14,6 +14,7 @@ i2c:
     sda: GPIO6  
     scl: GPIO5  
     scan: true
+    frequency: 400kHz
     timeout: 50ms
 
 binary_sensor:
