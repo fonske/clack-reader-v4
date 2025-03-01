@@ -98,8 +98,8 @@ The sensor measures the distance downwards to the salt. That measured distance s
 Because of this, shorter distances are not recorded as the most recent value, only longer ones. This way, water rising above the salt does not affect the measurement.
 
 There are two readings: Distance and TOF Distance.
-Distance is the measurement with the smart function. TOF Distance is continuously measured every 10 seconds but has no effect on the 'Clack salt level percent' and does not affect Distance unless the it measures greater than Distance.
+Distance is the measurement with the smart function. TOF Distance is continuously measured every 10 seconds but has no effect on the 'Clack salt level percent' and does not affect Distance unless it measures greater than Distance.
 
 ### Refilling Salt
 
-When refilling your salt container, press the 'Reset fill salt' button on the dashboard. This will equalize the TOF Distance and Distance values, thereby resetting the distance measurement so that the new salt level can be measured and recorded again. Recall that the smart function would otherwise not let Distance increase.
+When refilling your salt container, press the 'Reset fill salt' button on the dashboard. This will equalize the TOF Distance and Distance values, thereby resetting the distance measurement so that the new salt level can be measured and recorded again. Recall that the smart function would otherwise not let Distance decrease.

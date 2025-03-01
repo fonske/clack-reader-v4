@@ -1,22 +1,20 @@
 # Clack Reader v4
- Esphome component for Clack WS PI (disc valve) Ecosoft LESS and WS1 softener with M5stack TOF sensor saltlevel detection
+ ESPHome component for Clack WS PI (disc valve) Ecosoft LESS and WS1 valves.
  
- Relay for control of the chlorinator module from AQMOS
- and Power measurement with ina3221
+ Features:
+ - Salt level detection from M5stack TOF (time of flight) sensor
+ - AQMOS chlorinator module control using a relay
+ - Recognition of softener steps via INA3221 power measurement
+ - Measurement of water flow rate (L/min or gal/min) and softener capacity remaining (m<sup>3</sup> or gal) by reading the Clack flowmeter
 
- Automatic recognision of the softener steps and measure the liters and m3 softened water by reading the clack flowmeter
+## Versions / Branches
+- **main**: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
+- **ws1**: Clack WS1 valve (CM(x) from AQMOS)
+- **ws1_usa**: Clack WS1 valve with gallons and inches (US version)
+- **ws1_no_tof**: Clack WS1 valve without the TOF sensor code (in case of TOF failure/damaged by water)
 
-## 4 Versions / Branches
-main: Clack WS PI valve (DiscValve) (ECOSOFT LESS-10 / 15 / 20 from AQMOS)
-
-ws1: Clack WS1 valve (CM(x) from AQMOS)
-
-ws1_usa: Clack WS1 valve with Gallons and Inches / US version
-
-ws1_no_tof: Clack WS1 valve without the TOF sensor code (in case of TOF failure/damaged by water)
-
-Remark: Make sure to copy water_flow_gallons.h and tof_vl53l1x.h to your esphome directory before compiling the clack.yaml
-There have been some bigger updates to the latest code: added L/min and alarm, also lovelace home assistant menu has been updated.
+Remark: Make sure to copy water_flow_gallons.h and tof_vl53l1x.h to your ESPHome directory before compiling the clack.yaml
+There have been some bigger updates to the latest code: added L/min and alarm, also lovelace Home Assistant menu has been updated.
 
 Remark2: 6 august 2024: Added history regeneration and test button motor pulse to step through regeneration (with time delays stil working between steps)
 
@@ -137,11 +135,11 @@ web_server:
 ```
 
 ## Installation
-You will first need to do a manual installation by putting the clack.yaml file into your esphome folder then using the modern format in ESPHome to get a local copy of the firmware and finally use https://web.esphome.io/ to install over USB.
-Also copy the files tof_vl53l1x.h and water_flow_gallons.h to you're esphome directory as they are needed for the flow meter calculation and distance TOF sensor.
+You will first need to do a manual installation by putting the clack.yaml file into your ESPHome folder then using the modern format in ESPHome to get a local copy of the firmware and finally use https://web.esphome.io/ to install over USB.
+Also copy the files tof_vl53l1x.h and water_flow_gallons.h to you're ESPHome directory as they are needed for the flow meter calculation and distance TOF sensor.
 
 ### Method
-Download a copy of this code and place it in your esphome folder. Also place the clack.yaml - secrets.yaml - water_flow_gallons.h and tof_vl53l1x.h into the esphome folder, ensuring to change the secrets.yaml details to your own credentials.
+Download a copy of this code and place it in your ESPHome folder. Also place the clack.yaml - secrets.yaml - water_flow_gallons.h and tof_vl53l1x.h into the ESPHome folder, ensuring to change the secrets.yaml details to your own credentials.
 
 From your ESPHome dashboard, create a local copy of the clack firmware (bin file) by clicking the three dots > Install > Manual Download > Modern Format
 
