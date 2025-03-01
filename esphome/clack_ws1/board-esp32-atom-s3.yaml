@@ -147,6 +147,8 @@ button:
         - script.stop: cycle_steps_5cycle_pre
         - script.stop: cycle_steps_4cycle_post
         - script.stop: cycle_steps_5cycle_post
+        - script.stop: cycle_steps_5cycle_pre_upflow
+        - script.stop: cycle_steps_5cycle_pre_upflow_2
         - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
