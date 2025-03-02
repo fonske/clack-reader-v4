@@ -13,42 +13,36 @@ substitutions:
 ### In order to use other language fix clack-label filename below:
 ### Currently supported languages are: en (English), nl (Dutch) and fr (French).
 ### ESP32-Atom-s3 is a M5STACK Atom s3 lite
-### tof1 is a VL53L0X M5stack. Distance measure up to 2 mtr. I2C grove cable max 5 mtr length
+### tof1 is a VL53L0X M5stack. Distance measure up to 2 mtr. I2C grove cable max 6 mtr length
 ### tof2 is a VL53L1X M5stack (ToF4M). Distance measure up to 4 mtr. I2C grove cable max 2 mtr length
 
-packages:
-  remote_package:
-    url: https://github.com/fonske/clack-reader-v4
-    ref: main
-    refresh: 0s
-    files: [ 
-      esphome/clack_dv/.clack-base.yaml,
-#      esphome/clack_dv/.tof1.yaml,
-      esphome/clack_dv/.tof2.yaml,
-      esphome/clack_dv/.clack-optional.yaml,
-#      esphome/clack_dv/.clack-labels-nl.yaml,
-#      esphome/clack_dv/.clack-labels-fr.yaml,
-      esphome/clack_dv/.clack-labels-en.yaml,
-      esphome/clack_dv/board-esp32-atom-s3.yaml,
-    ]
-
-### for developing/testing, uncomment local includes and comment out above remote_package packages part.
 #packages:
-##  substitutions: !include clack_dv/.clack-labels-en.yaml
-#  substitutions: !include clack_dv/.clack-labels-nl.yaml
-##  substitutions: !include clack_dv/.clack-labels-fr.yaml
-#  device_base1:  !include clack_dv/board-esp32-atom-s3.yaml
-#  device_base2:  !include clack_dv/.clack-base.yaml
-#  device_base3: !include clack_dv/.tof1.yaml
-##  device_base3:  !include clack_dv/.tof2.yaml
-#  device_base4:  !include clack_dv/.clack-optional.yaml
+#  remote_package:
+#    url: https://github.com/fonske/clack-reader-v4
+#    ref: main
+#    refresh: 0s
+#    files: [ 
+#      esphome/clack_dv/.clack-base.yaml,
+##      esphome/clack_dv/.tof1.yaml,
+#      esphome/clack_dv/.tof2.yaml,
+#      esphome/clack_dv/.waterflow.yaml,
+#      esphome/clack_dv/.clack-optional.yaml,
+##      esphome/clack_dv/.clack-labels-nl.yaml,
+#      esphome/clack_dv/.clack-labels-en.yaml,
+#      esphome/clack_dv/board-esp32-atom-s3.yaml,
+#    ]
 
-external_components:
-  - source:
-      type: git
-      url: https://github.com/robertklep/esphome-custom-component
-    components: [ custom, custom_component ]
-    
+## for developing/testing, uncomment local includes and comment out above remote_package packages part.
+packages:
+#  substitutions: !include clack_dv/.clack-labels-en.yaml
+  substitutions: !include clack_dv/.clack-labels-nl.yaml
+  device_base1:  !include clack_dv/board-esp32-atom-s3.yaml
+  device_base2:  !include clack_dv/.clack-base.yaml
+#  device_base3: !include clack_dv/.tof1.yaml
+  device_base3:  !include clack_dv/.tof2.yaml
+  device_base4:  !include clack_dv/.waterflow.yaml
+  device_base4:  !include clack_dv/.clack-optional.yaml
+
 time:
   - platform: sntp
     id: sntp_time
@@ -65,11 +59,13 @@ wifi:
   password: !secret wifi_password
   fast_connect: true
   power_save_mode: light
+#  reboot_timeout: 0s
+
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${name}"
     password: "configesp"
-    ap_timeout: 15s
+    ap_timeout: 30s
 
 # Enable Over The Air Updates
 ota:

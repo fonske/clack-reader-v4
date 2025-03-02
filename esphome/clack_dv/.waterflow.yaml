@@ -1,0 +1,49 @@
+sensor:
+  - platform: pulse_meter
+    name: ${clack_flow_rate}
+    pin:
+      number: GPIO7
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - lambda: return x / id(pulse_per_liter);
+    timeout: 2s
+    icon: mdi:waves-arrow-right
+    unit_of_measurement: L/min # Gallons GPM or Liters per minute 
+    accuracy_decimals: 2
+    id: clack_flow_rate
+    device_class: volume_flow_rate
+    state_class: measurement
+
+    total:
+      id: clack_watermeter
+      name: ${clack_watermeter_total}
+      icon: mdi:water
+      #update_interval: ${watermeter_update_interval}
+      unit_of_measurement: L
+      device_class: water
+      state_class: total_increasing
+      accuracy_decimals: 1
+      filters:
+      - lambda: return x / id(pulse_per_liter);
+      on_value:
+        - globals.set:
+            id: totalWaterUsage
+            value: !lambda |-
+              return id(clack_watermeter).state;
+        - sensor.template.publish:
+            id: clack_m3_left
+            state: !lambda |-
+              return float(id(clack_capacity_liters).state - id(clack_watermeter).state) * 0.001;
+        - sensor.template.publish:
+            id: clack_l_left
+            state: !lambda |-
+              return id(clack_capacity_liters).state - id(clack_watermeter).state;
+        - sensor.template.publish:
+            id: clack_percent_l_left
+            state: !lambda |-
+              if (id(clack_capacity_liters).state <= 0) {
+              return 0;
+              }
+              return float((id(clack_l_left).state / id(clack_capacity_liters).state) * 100);

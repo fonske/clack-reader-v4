@@ -4,17 +4,17 @@ esp32:
   board: esp32-s3-devkitc-1
 ## Atom S3 lite  
   framework:
-    #type: esp-idf 
-    type: arduino
-    version: latest
+    type: esp-idf 
+    #type: arduino
+    #version: latest
 
 i2c:
 ## use I2C bus external, not on ESP GPIO1 and GPIO2
   - id: bus_a
     sda: GPIO6  
     scl: GPIO5  
-    scan: true
-    timeout: 10ms
+    scan: false
+    frequency: 400kHz
 
 binary_sensor:
 ## temporary test button for testing water meter pulse
