@@ -39,7 +39,7 @@ sensor:
         - sensor.template.publish:
             id: clack_l_left
             state: !lambda |-
-              return int(id(clack_capacity_liters).state - id(clack_watermeter).state);
+              return id(clack_capacity_liters).state - id(clack_watermeter).state;
         - sensor.template.publish:
             id: clack_percent_l_left
             state: !lambda |-
