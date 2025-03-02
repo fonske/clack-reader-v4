@@ -297,10 +297,6 @@ script:
             id: clack_flow_rate
             value: !lambda |-
               return id(totalWaterUsage) * id(pulse_per_liter);
-      - sensor.template.publish:
-          id: clack_watermeter
-          state: !lambda |-
-            return id(totalWaterUsage);
 
 ###  Define a script that visualize the cycle steps in regeneration cycle 4 steps
   - id: cycle_steps_4cycle_post
@@ -2272,7 +2268,7 @@ number:
     icon: mdi:water-opacity
     optimistic: true
     mode: slider
-    step: 10
+    step: 1
     entity_category: config
     min_value: 0
     max_value: 12000
@@ -2281,10 +2277,11 @@ number:
     unit_of_measurement: L
     on_value:
       then:
-        - sensor.template.publish:
-            id: clack_watermeter
-            state: !lambda |-
-              return id(totalWaterUsage);
+        - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
+
   ##
   # Set capacity days
   - platform: template
