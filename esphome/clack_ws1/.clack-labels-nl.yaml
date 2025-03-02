@@ -49,10 +49,19 @@ substitutions:
   clack_regen: clack regen
   clack_brine: Tijdens bezouten
   clack_regeneration_mode: Regeneratie mode
+  #F=FILL, S=SERVICE, BW=BACKWASH, BW2=BACKWASH2, BR=BRINE, R=RINSE
   clack_pre_fill_no_2nd_backwash: Droge zoutbak geen 2e Backwash
+  clack_pre_fill_no_2nd_backwash_steps: "F/S/BW/BR/R"
   clack_pre_fill_2nd_backwash: Droge zoutbak 2e Backwash
+  clack_pre_fill_2nd_backwash_steps: "F/S/BW/BR/BW2/R"
+  clack_pre_fill_upflow: Pre fill Upflow
+  clack_pre_fill_upflow_steps: "F/S/BR/BW/R"
+  clack_pre_fill_upflow_2: Pre fill Upflow 2
+  clack_pre_fill_upflow_2_steps: "F/S/BR/R/BW"
   clack_post_fill_no_2nd_backwash: Natte zoutbak geen 2e Backwash
+  clack_post_fill_no_2nd_backwash_steps: "BW/BR/R/F"
   clack_post_fill_2nd_backwash: Natte zoutbak 2e Backwash
+  clack_post_fill_2nd_backwash_steps: "BW/BR/BW2/R/F"
   clack_time_to_regen: Tijd tot regen.
   clack_time_to_regen_hours: Tijd tot regen uren
   clack_percent_time_left: Waterontharder procent tijd over
@@ -64,6 +73,7 @@ substitutions:
   clack_resinclean_last: Harscleaner op
   clack_saltfill_last: Zout bijgevuld op
   clack_cycle_step: Cyclus stap
+  clack_cycle_steps: Cycle stappen
   clack_use_tst_but: Testknop verbruik pulse
   clack_resinclean_reset_button: Harsclean reset
   clack_regen_stop_script: Testknop Regen stop
