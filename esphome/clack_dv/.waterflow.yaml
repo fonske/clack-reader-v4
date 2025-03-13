@@ -9,7 +9,6 @@ sensor:
     filters:
       - lambda: return x / id(pulse_per_liter);
     timeout: 2s
-    internal_filter_mode: PULSE
     icon: mdi:waves-arrow-right
     unit_of_measurement: L/min # Gallons GPM or Liters per minute 
     accuracy_decimals: 2
