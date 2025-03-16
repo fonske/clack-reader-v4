@@ -21,6 +21,7 @@ substitutions:
   clack_capacity_days: Capacity in days
   clack_chlorinator_delay: Chlorinator active time
   clack_leakage_alarm_delay: Delay leakage alarm
+  clack_water_flow_timeout_delay: Water Flow Timeout
   clack_test_motor_run: Test button motor run
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneration pulse
