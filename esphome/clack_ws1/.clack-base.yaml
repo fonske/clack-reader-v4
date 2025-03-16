@@ -2377,12 +2377,12 @@ number:
     name: ${clack_water_flow_timeout_delay}
     icon: mdi:waves-arrow-right
     optimistic: true
-    mode: slider
+    mode: box
     step: 0.1
     entity_category: config
     min_value: 0
     max_value: 300
-    initial_value: 7
+    initial_value: 6.5
     restore_value: yes
     unit_of_measurement: "s"
     on_value:
