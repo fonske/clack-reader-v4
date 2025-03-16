@@ -88,6 +88,8 @@ Use the sliders on the dashboard to configure the system.
 | Fill salt distance | Centimeters of salt remaining in the tank, below which `sensor.clack_fill_salt` turns `true` and automations (alerts) may trigger | 5 cm. |
 | Capacity in days | Number of days the Clack controller is set to regen at if the liters of capacity has not yet been exceeded | 14 days |
 | Capacity in liters | Liters of capacity that the Clack controller displays immediately after a regen | 3500 ltr. |
+| Pulses per ltr | Pulse meter is used to measure water flow. It measures pulses per minute. To convert pulses into liters of water this setting is used. The bigger this value the slower water flow will be. | 16.3 pulses/ltr. |
+| Water flow timeout | If no water flow pulse is detected in this amount of time then water flow will be considered 0. The bigger is this value the longer it will take for water flow meter to detect that flow has stopped. But the bigger this value the smaller quantities of flowing water will be detectable by the water flow meter. | 7 s |
 
 ## Explanation of Operation
 
