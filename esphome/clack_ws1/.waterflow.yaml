@@ -7,6 +7,7 @@ sensor:
         input: true
         pullup: true
     filters:
+      - throttle_average: 300ms
       - lambda: return x / id(pulse_per_liter);
     timeout: 6.5s
     internal_filter_mode: PULSE
