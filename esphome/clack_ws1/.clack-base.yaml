@@ -61,9 +61,9 @@ globals:
 
 # Define a global variable for the water flow timeout in seconds
   - id: duration_water_flow_timeout
-    type: int
+    type: float
     restore_value: yes
-    initial_value: '7'
+    initial_value: '6.5'
 
 # Define a global variable for last regeneration time
   - id: cycle_step
@@ -2378,7 +2378,7 @@ number:
     icon: mdi:waves-arrow-right
     optimistic: true
     mode: slider
-    step: 1
+    step: 0.1
     entity_category: config
     min_value: 0
     max_value: 300
@@ -2389,6 +2389,6 @@ number:
       then:
         - globals.set:
             id: duration_water_flow_timeout
-            value: !lambda 'return int(x);'
+            value: !lambda 'return float(x);'
         - lambda: !lambda |-
             id(clack_flow_rate).set_timeout_us(uint32_t(id(duration_water_flow_timeout) * 1000000UL));
