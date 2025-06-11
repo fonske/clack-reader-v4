@@ -84,16 +84,16 @@ globals:
 #    initial_value: "0"
 
  # Define a global variable for resinclean datetime
-  - id: resinclean_date_last
-    type: std::string
-    restore_value: yes
-    initial_value: '"Never"'
+#  - id: resinclean_date_last
+#    type: std::string
+#    restore_value: yes
+#    initial_value: '"Never"'
 
  # Define a global variable for resinclean time
-  - id: resinclean_last
-    type: int
-    restore_value: yes
-#    initial_value: "0"
+ # - id: resinclean_last
+ #   type: int
+ #   restore_value: yes
+##    initial_value: "0"
 
  # Define a global variable for fill_last datetime
   - id: fill_last
@@ -205,7 +205,7 @@ script:
   - id: on_boot
     then:
       - component.update: clack_saltfill_last  # add old date to dashboard when boot
-      - component.update: clack_resinclean_last # add old date to dashboard when boot
+#      - component.update: clack_resinclean_last # add old date to dashboard when boot
       - component.update: clack_regeneration_last # add old date to dashboard when boot
       - component.update: time_to
       - component.update: clack_percent_time_left
@@ -1942,26 +1942,26 @@ text_sensor:
     lambda: |-
       return id(save_total_time_used);
 
-  - platform: template
-    name: ${clack_time_to_resinclean}
-    id: time_to_resinclean
-    icon: mdi:bacteria-outline
-    update_interval: 600s
-    lambda: |-
-      char str[32];
-      if(id(resinclean_last) == 0){
-        return {"Unknown"};
-      }
-      int hours = (id(resinclean_last) - id(sntp_time).now().timestamp) / 3600 + (id(resinclean_capacity_days).state * 24);
-      int days = hours / 24;
-      hours %= 24;
-      if( days > 0){
-        sprintf(str, "%id %ih", days, hours);
-      }
-      else{
-        sprintf(str, "%ih", hours);
-      }
-      return { str };
+#  - platform: template
+#    name: ${clack_time_to_resinclean}
+#    id: time_to_resinclean
+#    icon: mdi:bacteria-outline
+#    update_interval: 600s
+#    lambda: |-
+#      char str[32];
+#      if(id(resinclean_last) == 0){
+#        return {"Unknown"};
+#      }
+#      int hours = (id(resinclean_last) - id(sntp_time).now().timestamp) / 3600 + (id(resinclean_capacity_days).state * 24);
+#      int days = hours / 24;
+#      hours %= 24;
+#      if( days > 0){
+#        sprintf(str, "%id %ih", days, hours);
+#      }
+#      else{
+#        sprintf(str, "%ih", hours);
+#      }
+#      return { str };
 
   - platform: template
     name: ${clack_cycle_runtime}
@@ -2280,8 +2280,8 @@ number:
     step: 1
     entity_category: config
     min_value: 0
-    max_value: 12000
-    initial_value: 3700
+    max_value: 20000
+    initial_value: 18600
     restore_value: yes
     unit_of_measurement: L
     on_value:
@@ -2312,22 +2312,22 @@ number:
         - component.update: clack_percent_time_left
   ##
   # Set resinclean capacity days
-  - platform: template
-    id: resinclean_capacity_days
-    name: ${clack_resinclean_capacity_days}
-    icon: mdi:calendar-clock
-    optimistic: true
-    mode: slider
-    step: 1
-    entity_category: config
-    min_value: 0
-    max_value: 365
-    initial_value: 120
-    restore_value: yes
-    unit_of_measurement: ${days}
-    on_value:
-      then:
-        - component.update: time_to_resinclean
+ # - platform: template
+ #   id: resinclean_capacity_days
+ #   name: ${clack_resinclean_capacity_days}
+ #   icon: mdi:calendar-clock
+ #   optimistic: true
+ #   mode: slider
+ #   step: 1
+ #   entity_category: config
+ #   min_value: 0
+ #   max_value: 365
+ #   initial_value: 120
+ #   restore_value: yes
+ #   unit_of_measurement: ${days}
+ #   on_value:
+ #     then:
+ #       - component.update: time_to_resinclean
   ##
   # Set chlorinator relay off-delay
   - platform: template

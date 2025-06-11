@@ -19,7 +19,7 @@ substitutions:
 packages:
   remote_package:
     url: https://github.com/fonske/clack-reader-v4
-    ref: ws1
+    ref: ws1_de_ironing
     refresh: 0s
     files: [ 
       esphome/clack_ws1/.clack-base.yaml,
