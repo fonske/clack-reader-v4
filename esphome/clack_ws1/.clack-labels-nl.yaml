@@ -123,36 +123,6 @@ text_sensor:
         - "Sat -> zat"
         - "Sun -> zon" 
 
-  # Expose last resinclean information as sensor
-  - platform: template
-    name: ${clack_resinclean_last}
-    id: clack_resinclean_last
-    icon: mdi:clock-start
-    update_interval: never
-    lambda: |-
-      return id(resinclean_date_last);
-    filters:   
-      - substitute:
-        - "Jan -> jan"
-        - "Feb -> feb"
-        - "Mar -> mar"
-        - "Apr -> apr"
-        - "May -> mei"
-        - "Jun -> jun"
-        - "Jul -> jul"
-        - "Aug -> aug"
-        - "Sep -> sep"
-        - "Okt -> okt"
-        - "Nov -> nov"
-        - "Dec -> dec"
-        - "Mon -> maa"
-        - "Tue -> din"
-        - "Wed -> woe"
-        - "Thu -> don"
-        - "Fri -> vri"
-        - "Sat -> zat"
-        - "Sun -> zon" 
-
   # Expose last salt fill information as sensor
   - platform: template
     name: ${clack_saltfill_last}
