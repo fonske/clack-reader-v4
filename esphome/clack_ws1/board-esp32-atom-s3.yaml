@@ -97,23 +97,6 @@ button:
         - lambda: |-
             id(clack_use_test_button).publish_state(false);
 
-  - platform: template
-    name: ${clack_resinclean_reset_button}
-    id: clack_resinclean_reset_button
-    on_press:
-      - globals.set:
-          id: resinclean_last
-          value: !lambda |-
-            return id(sntp_time).now().timestamp;
-      - text_sensor.template.publish:
-          id: clack_resinclean_last
-          state: !lambda |-
-            char str[32];
-            time_t currTime = id(sntp_time).now().timestamp;
-            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
-            id(resinclean_date_last) = str;
-            return  { str };
-      - component.update: time_to_resinclean #set down counter
 
   - platform: template
     name: ${clack_reset_but_last_dist}
