@@ -45,7 +45,7 @@ To add the dashboard shown above to Home Assistant:
 
 > [!IMPORTANT]
 > To properly view the status bar, use [HACS](https://hacs.xyz) to install the following frontend applications (subject to change):
-> - bar-card
+> - bar-card https://github.com/spacerokk/bar-card
 > - multiple-entity-row
 > - stack-in-card
 
