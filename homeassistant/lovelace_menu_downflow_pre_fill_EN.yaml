@@ -14,11 +14,13 @@
                       entity: sensor.clack_cycle_step
                       name: 'cycle: '
                     state_header: used
+                    format: precision2
                     entities:
                       - entity: sensor.clack_time_to_regen
                         name: time left
                       - entity: sensor.clack_water_softener_m3_left
                         name: m3 left
+                        format: precision2
                 style: |
                   ha-card {
                     border-radius: 20px
