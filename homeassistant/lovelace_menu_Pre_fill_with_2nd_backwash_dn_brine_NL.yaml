@@ -14,11 +14,13 @@
                       entity: sensor.clack_cyclus_stap
                       name: 'cyclus: '
                     state_header: verbr.
+                    format: precision2
                     entities:
                       - entity: sensor.clack_tijd_tot_regen
                         name: tijd over
                       - entity: sensor.clack_waterontharder_m3_over
                         name: m3 over
+                        format: precision2
                 style: |
                   ha-card {
                     border-radius: 20px
