@@ -45,7 +45,7 @@ Om het bovenstaande dashboard toe te voegen aan Home Assistant:
 
 > [!IMPORTANT]
 > Om de statusbalk correct weer te geven, gebruik [HACS](https://hacs.xyz) om de volgende frontend applicaties te installeren (onder voorbehoud van wijzigingen):
-> - bar-card
+> - bar-card https://github.com/spacerokk/bar-card
 > - multiple-entity-row
 > - stack-in-card
 
