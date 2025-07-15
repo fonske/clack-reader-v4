@@ -60,7 +60,8 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   fast_connect: true
-  power_save_mode: light
+  power_save_mode: high
+  reboot_timeout: 0s
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${name}"
