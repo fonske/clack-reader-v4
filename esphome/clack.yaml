@@ -16,35 +16,35 @@ substitutions:
 ### tof1 is a VL53L0X M5stack. Distance measure up to 2 mtr. I2C grove cable max 6 mtr length
 ### tof2 is a VL53L1X M5stack (ToF4M). Distance measure up to 4 mtr. I2C grove cable max 2 mtr length
 
-#packages:
-#  remote_package:
-#    url: https://github.com/fonske/clack-reader-v4
-#    ref: main
-#    refresh: 0s
-#    files: [ 
-#      esphome/clack_dv/.clack-base.yaml,
-##      esphome/clack_dv/.tof1.yaml,
-#      esphome/clack_dv/.tof2.yaml,
-#      esphome/clack_dv/.waterflow.yaml,
-#      esphome/clack_dv/.clack-optional.yaml,
-##      esphome/clack_dv/.clack-labels-nl.yaml,
-#      esphome/clack_dv/.clack-labels-en.yaml,
-#      esphome/clack_dv/board-esp32-atom-s3.yaml,
-#    ]
+packages:
+  remote_package:
+    url: https://github.com/fonske/clack-reader-v4
+    ref: main
+    refresh: 0s
+    files: [ 
+      esphome/clack_dv/.clack-base.yaml,
+#      esphome/clack_dv/.tof1.yaml,
+      esphome/clack_dv/.tof2.yaml,
+      esphome/clack_dv/.waterflow.yaml,
+      esphome/clack_dv/.clack-optional.yaml,
+#      esphome/clack_dv/.clack-labels-nl.yaml,
+      esphome/clack_dv/.clack-labels-en.yaml,
+      esphome/clack_dv/board-esp32-atom-s3.yaml,
+    ]
 
 ## for developing/testing, uncomment local includes and comment out above remote_package packages part.
-packages:
-#  substitutions: !include clack_dv/.clack-labels-en.yaml
-  substitutions: !include clack_dv/.clack-labels-nl.yaml
-  device_base1:  !include clack_dv/board-esp32-atom-s3.yaml
-  device_base2:  !include clack_dv/.clack-base.yaml
-#  device_base3: !include clack_dv/.tof1.yaml
-  device_base3:  !include clack_dv/.tof2.yaml
-  device_base4:  !include clack_dv/.waterflow.yaml
-  device_base4:  !include clack_dv/.clack-optional.yaml
+#packages:
+##  substitutions: !include clack_dv/.clack-labels-en.yaml
+#  substitutions: !include clack_dv/.clack-labels-nl.yaml
+#  device_base1:  !include clack_dv/board-esp32-atom-s3.yaml
+#  device_base2:  !include clack_dv/.clack-base.yaml
+##  device_base3: !include clack_dv/.tof1.yaml
+#  device_base3:  !include clack_dv/.tof2.yaml
+#  device_base4:  !include clack_dv/.waterflow.yaml
+#  device_base5:  !include clack_dv/.clack-optional.yaml
 
 time:
-  - platform: sntp
+  - platform: homeassistant
     id: sntp_time
     timezone: ${timezone}
     # Enable this with your own NTP server if your device is on a no internet IOT lan. 
