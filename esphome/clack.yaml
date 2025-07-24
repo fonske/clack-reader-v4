@@ -66,12 +66,6 @@ wifi:
     password: "configesp"
     ap_timeout: 15s
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "${name}"
-    password: "configesp"
-    ap_timeout: 30s
-
 # Enable Over The Air Updates
 ota:
   platform: esphome
