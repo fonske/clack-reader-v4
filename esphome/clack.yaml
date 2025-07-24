@@ -23,12 +23,12 @@ packages:
     refresh: 0s
     files: [ 
       esphome/clack_dv/.clack-base.yaml,
-#      esphome/clack_dv/.tof1.yaml,
+#     esphome/clack_dv/.tof1.yaml,
       esphome/clack_dv/.tof2.yaml,
       esphome/clack_dv/.waterflow.yaml,
       esphome/clack_dv/.clack-optional.yaml,
-#      esphome/clack_dv/.clack-labels-nl.yaml,
-      esphome/clack_dv/.clack-labels-en.yaml,
+      esphome/clack_dv/.clack-labels-nl.yaml,
+#      esphome/clack_dv/.clack-labels-en.yaml,
       esphome/clack_dv/board-esp32-atom-s3.yaml,
     ]
 
@@ -41,10 +41,10 @@ packages:
 ##  device_base3: !include clack_dv/.tof1.yaml
 #  device_base3:  !include clack_dv/.tof2.yaml
 #  device_base4:  !include clack_dv/.waterflow.yaml
-#  device_base5:  !include clack_dv/.clack-optional.yaml
+#  device_base4:  !include clack_dv/.clack-optional.yaml
 
 time:
-  - platform: homeassistant
+  - platform: sntp
     id: sntp_time
     timezone: ${timezone}
     # Enable this with your own NTP server if your device is on a no internet IOT lan. 
@@ -58,13 +58,14 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   fast_connect: true
-  power_save_mode: high
-  reboot_timeout: 0s
+  power_save_mode: light
+#  reboot_timeout: 0s
+
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${name}"
     password: "configesp"
-    ap_timeout: 15s
+    ap_timeout: 30s
 
 # Enable Over The Air Updates
 ota:
