@@ -27,8 +27,8 @@ packages:
       esphome/clack_dv/.tof2.yaml,
       esphome/clack_dv/.waterflow.yaml,
       esphome/clack_dv/.clack-optional.yaml,
-      esphome/clack_dv/.clack-labels-nl.yaml,
-#      esphome/clack_dv/.clack-labels-en.yaml,
+#      esphome/clack_dv/.clack-labels-nl.yaml,
+      esphome/clack_dv/.clack-labels-en.yaml,
       esphome/clack_dv/board-esp32-atom-s3.yaml,
     ]
 
