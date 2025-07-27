@@ -6,7 +6,7 @@ esp32:
 ## Atom S3 lite  
   framework:
     type: esp-idf
-    version: recommended
+    version: 5.3.1
     # Custom sdkconfig options
     sdkconfig_options:
       COMPILER_OPTIMIZATION_SIZE: y
