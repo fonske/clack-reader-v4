@@ -1081,7 +1081,7 @@ sensor:
     name: ${clack_percent_time_left}
     icon: mdi:progress-clock
     unit_of_measurement: "%"
-    device_class: duration
+    device_class: ""
     state_class: measurement
     accuracy_decimals: 1
     update_interval: 600s
