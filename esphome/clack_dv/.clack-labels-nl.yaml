@@ -21,7 +21,7 @@ substitutions:
   clack_capacity_days: Capaciteit in dagen
   clack_chlorinator_delay: Chlorinator aktief tijd
   clack_leakage_alarm_delay: Vertraging lekkage alarm
-  clack_water_flow_timeout_delay: Vertraging flowmeting
+  clack_water_flow_timeout_delay: Water flow timeout
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneratie pulse
   clack_ip: Waterontharder IP
