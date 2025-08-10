@@ -208,13 +208,13 @@
               - entity: sensor.clack_zoutniveau_voor_dashboard
                 image: local/images/softener.png
                 state_image:
-                  '0': local/images/softener0.png
-                  '10': local/images/softener10.png
-                  '20': local/images/softener20.png
-                  '40': local/images/softener40.png
-                  '60': local/images/softener60.png
-                  '80': local/images/softener80.png
-                  '100': local/images/softener100.png
+                  '0.0': local/images/softener0.png
+                  '10.0': local/images/softener10.png
+                  '20.0': local/images/softener20.png
+                  '40.0': local/images/softener40.png
+                  '60.0': local/images/softener60.png
+                  '80.0': local/images/softener80.png
+                  '100.0': local/images/softener100.png
                 style:
                   left: 0%
                   top: 0%
