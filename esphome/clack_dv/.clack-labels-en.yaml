@@ -13,7 +13,7 @@ substitutions:
   clack_version: Version
   clack_regeneration_last: Regenerated on
   clack_fill_salt: Fill salt
-  clack_set_pulse_per_liters: Set pulse per ltr
+  clack_set_pulse_per_liters: Pulses per ltr
   clack_saltlevel_height_min: Min salt distance
   clack_saltlevel_height_max: Max salt distance
   clack_saltlevel_height_fill: Fill salt distance
@@ -21,6 +21,7 @@ substitutions:
   clack_capacity_days: Capacity in days
   clack_chlorinator_delay: Chlorinator active time
   clack_leakage_alarm_delay: Delay leakage alarm
+  clack_water_flow_timeout_delay: Water flow timeout
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneration pulse
   clack_ip: Water softener IP

@@ -66,6 +66,7 @@ substitutions:
   clack_motor_running: Motor running
   clack_water_flowing: Water flowing  
   clack_water_leakage: Leakage detected
+  clack_water_flow_timeout_delay: Water flow timeout
   clack_test_motor_run: Test button motor run
   clack_save_total_liters_used: Capacity used
   clack_save_total_time_used: Operation time

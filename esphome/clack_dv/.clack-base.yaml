@@ -59,6 +59,12 @@ globals:
     restore_value: yes
     initial_value: '30'
 
+# Define a global variable for the water flow timeout in seconds
+  - id: duration_water_flow_timeout
+    type: float
+    restore_value: yes
+    initial_value: '6.5'
+
 # Define a global variable for last regeneration time
   - id: cycle_step
     type: std::string
@@ -211,6 +217,9 @@ script:
             id: clack_flow_rate
             value: !lambda |-
               return id(totalWaterUsage) * id(pulse_per_liter);
+      - sensor.template.publish: # Set initial value of water flow rate to 0 to avoid Unknown value
+            id: clack_flow_rate
+            state: 0
       - text_sensor.template.publish:
             id: clack_cycle_step
             state: !lambda |-
@@ -2002,3 +2011,27 @@ number:
         - globals.set:
             id: duration_leakage
             value: !lambda 'return int(x);'
+
+
+  ##
+  # Set minimum time delay for considering water flow stopped
+  - platform: template
+    id: clack_water_flow_timeout_delay
+    name: ${clack_water_flow_timeout_delay}
+    icon: mdi:waves-arrow-right
+    optimistic: true
+    mode: box
+    step: 0.1
+    entity_category: config
+    min_value: 0
+    max_value: 300
+    initial_value: 6.5
+    restore_value: yes
+    unit_of_measurement: "s"
+    on_value:
+      then:
+        - globals.set:
+            id: duration_water_flow_timeout
+            value: !lambda 'return float(x);'
+        - lambda: !lambda |-
+            id(clack_flow_rate).set_timeout_us(uint32_t(id(duration_water_flow_timeout) * 1000000UL));

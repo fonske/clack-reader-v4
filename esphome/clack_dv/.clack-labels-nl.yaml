@@ -13,7 +13,7 @@ substitutions:
   clack_version: Versie
   clack_regeneration_last: Geregenereerd op
   clack_fill_salt: Zout bijvullen
-  clack_set_pulse_per_liters: Pulse per liter
+  clack_set_pulse_per_liters: Pulsen per liter
   clack_saltlevel_height_min: Min afstand zout
   clack_saltlevel_height_max: Max afstand zout
   clack_saltlevel_height_fill: Zout bijvullen afstand
@@ -21,6 +21,7 @@ substitutions:
   clack_capacity_days: Capaciteit in dagen
   clack_chlorinator_delay: Chlorinator aktief tijd
   clack_leakage_alarm_delay: Vertraging lekkage alarm
+  clack_water_flow_timeout_delay: Vertraging flowmeting
   clack_watermeter_pulse: Watermeter pulse
   clack_regeneration_pulse: Regeneratie pulse
   clack_ip: Waterontharder IP
