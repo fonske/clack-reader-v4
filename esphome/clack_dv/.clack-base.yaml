@@ -213,10 +213,10 @@ script:
           id: clack_distance
           state: !lambda |-
             return id(last_distance_cm).state;
-#      - pulse_meter.set_total_pulses: # Publish the initial state of totalWaterUsage on boot
-#            id: clack_flow_rate
-#            value: !lambda |-
-#              return id(totalWaterUsage) * id(pulse_per_liter);
+      - pulse_meter.set_total_pulses: # Publish the initial state of totalWaterUsage on boot
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
       - sensor.template.publish: # Set initial value of water flow rate to 0 to avoid Unknown value
             id: clack_flow_rate
             state: 0
