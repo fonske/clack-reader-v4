@@ -122,18 +122,8 @@ globals:
     restore_value: yes
     initial_value: '0'
 
-  - id: run_time
-    type: int
-    restore_value: yes
-    initial_value: '0'
-
   # cycle timer total
   - id: start_time_total
-    type: int
-    restore_value: yes
-    initial_value: '0'
-
-  - id: run_time_total
     type: int
     restore_value: yes
     initial_value: '0'
