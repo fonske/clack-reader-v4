@@ -68,7 +68,7 @@ substitutions:
   clack_water_leakage: Lekkage gedetecteerd
   clack_test_motor_run: Test button motor run
   clack_save_total_liters_used: Verbruikt
-  clack_save_total_time_used: Werkings tijd
+  clack_save_total_operation_time: Werkings tijd
   clack_brine_time_txt: Brine
   clack_backwash_time_txt: Backwash
   clack_backwash2_time_txt: Backwash2
@@ -79,14 +79,16 @@ substitutions:
 
 text_sensor:
   # Expose last regeneration information as sensor
+  # Textsensor "clack_regeneration_last"
   - platform: template
     name: ${clack_regeneration_last}
     id: clack_regeneration_last
     icon: mdi:clock-start
     update_interval: never
     lambda: |-
-      return id(regen_date_last);
-    filters:   
+      time_t datetime = id(regen_last);
+      ${format_datetime_readable}
+    filters:
       - substitute:
         - "Jan -> jan"
         - "Feb -> feb"
@@ -106,17 +108,19 @@ text_sensor:
         - "Thu -> don"
         - "Fri -> vri"
         - "Sat -> zat"
-        - "Sun -> zon" 
+        - "Sun -> zon"
 
   # Expose last resinclean information as sensor
+  # Textsensor "clack_resinclean_last"
   - platform: template
     name: ${clack_resinclean_last}
     id: clack_resinclean_last
     icon: mdi:clock-start
     update_interval: never
     lambda: |-
-      return id(resinclean_date_last);
-    filters:   
+      time_t datetime = id(resinclean_last);
+      ${format_datetime_readable}
+    filters:
       - substitute:
         - "Jan -> jan"
         - "Feb -> feb"
@@ -136,17 +140,23 @@ text_sensor:
         - "Thu -> don"
         - "Fri -> vri"
         - "Sat -> zat"
-        - "Sun -> zon" 
+        - "Sun -> zon"
 
   # Expose last salt fill information as sensor
+  # Textsensor "clack_saltfill_last"
   - platform: template
     name: ${clack_saltfill_last}
     id: clack_saltfill_last
     icon: mdi:clock-start
     update_interval: never
     lambda: |-
-      return id(fill_last);
-    filters:   
+      time_t datetime = id(saltfill_last);
+      if (datetime <= 0) {
+        ESP_LOGI("main", "Fallback to 'fill_last' since the new 'saltfill_last' does not have the salt fill time set yet: %f", id(fill_last));
+        return std::string(id(fill_last));
+      }
+      ${format_datetime_readable}
+    filters:
       - substitute:
         - "Jan -> jan"
         - "Feb -> feb"
@@ -166,4 +176,4 @@ text_sensor:
         - "Thu -> don"
         - "Fri -> vri"
         - "Sat -> zat"
-        - "Sun -> zon" 
+        - "Sun -> zon"

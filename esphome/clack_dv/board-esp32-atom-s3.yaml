@@ -3,7 +3,7 @@
 esp32:
   board: esp32-s3-devkitc-1
   flash_size: 8MB
-## Atom S3 lite  
+  ## Atom S3 lite
   framework:
     type: esp-idf
     version: recommended
@@ -13,17 +13,18 @@ esp32:
       CONFIG_BT_ENABLED: n
 
 i2c:
-## use I2C bus external, not on ESP GPIO1 and GPIO2
+  ## use I2C bus external, not on ESP GPIO1 and GPIO2
   - id: bus_a
-    sda: GPIO6  
-    scl: GPIO5  
+    sda: GPIO6
+    scl: GPIO5
     scan: false
     frequency: 400kHz
 
 binary_sensor:
-## temporary test button for testing water meter pulse
+  ## temporary test button for testing water meter pulse
+  # Binary sensor "clack_use_test_button"
   - id: clack_use_test_button
-#    name: Test button use pulse
+    name: clack_use_test_button
     platform: template
     internal: true
     filters:
@@ -41,6 +42,7 @@ binary_sensor:
               - lambda: |-
                   ESP_LOGI("UseTest", "Use button pressed");
 
+  # Binary sensor "init_state"
   - platform: template
     name: Block regen
     id: init_state
@@ -56,6 +58,7 @@ binary_sensor:
 # ## temporary test button for testing regeneration pulse
 switch:
   # Chlorinator Relay
+  # Switch "chlorinator_relay"
   - platform: gpio
     pin:
       number: GPIO8
@@ -66,6 +69,7 @@ switch:
     entity_category: config
 
 button:
+  # Button "clack_use_tst_but"
   - platform: template
     name: ${clack_use_tst_but}
     id: clack_use_tst_but
@@ -77,46 +81,27 @@ button:
         - lambda: |-
             id(clack_use_test_button).publish_state(false);
 
+  # Button "clack_resinclean_reset_button"
   - platform: template
     name: ${clack_resinclean_reset_button}
     id: clack_resinclean_reset_button
     on_press:
-      - globals.set:
-          id: resinclean_last
-          value: !lambda |-
-            return id(sntp_time).now().timestamp;
-      - text_sensor.template.publish:
-          id: clack_resinclean_last
-          state: !lambda |-
-            char str[32];
-            time_t currTime = id(sntp_time).now().timestamp;
-            strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
-            id(resinclean_date_last) = str;
-            return  { str };
-      - component.update: time_to_resinclean #set down counter
+      - lambda: |-
+          id(resinclean_last) = id(sntp_time).now().timestamp;
+      - component.update: clack_resinclean_last
 
+  # Button "clack_reset_but_last_dist"
   - platform: template
     name: ${clack_reset_but_last_dist}
     id: clack_reset_but_last_dist
     on_press:
       then:
-        - globals.set:
-            id: last_distance
-            value: !lambda |-
-              return id(distance_cm).state;
-        - sensor.template.publish:
-            id: clack_distance
-            state: !lambda |-
-              return id(last_distance_cm).state;
-        - text_sensor.template.publish:
-            id: clack_saltfill_last
-            state: !lambda |-
-              char str[32];
-              time_t currTime = id(sntp_time).now().timestamp;
-              strftime(str, sizeof(str), "%a %d %b %H:%M", localtime(&currTime));
-              id(fill_last) = str;
-              return  { str };
+        - component.update: clack_distance_tof
+        - lambda: |-
+            id(saltfill_last) = id(sntp_time).now().timestamp;
+        - component.update: clack_saltfill_last
 
+  # Button "clack_regen_stop_script"
   - platform: template
     name: ${clack_regen_stop_script}
     id: clack_regen_stop_script
