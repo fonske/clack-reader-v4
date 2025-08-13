@@ -3,12 +3,12 @@
 ## https://shop.m5stack.com/products/time-of-flight-distance-unit-vl53l1x
 
 external_components:
-  - source: github://mrtoy-me/esphome-components-test@main
+  - source: github://mrtoy-me/esphome-vl53l1x@main
     components: [ vl53l1x ]
     refresh: 0s
 
 sensor:
-# VL53L1X TOF               
+  # VL53L1X TOF
   - platform: vl53l1x
     i2c_id: bus_a
     address: 0x29
@@ -23,7 +23,7 @@ sensor:
 
   - platform: template
     name: ${clack_distance_tof}
-    id: distance_cm
+    id: clack_distance_tof
     update_interval: 60s
     unit_of_measurement: "cm"
     accuracy_decimals: 1
@@ -32,11 +32,11 @@ sensor:
     icon: mdi:ruler
     internal: false
     lambda: |-
-       if (id(vl53l1x_range_status).state > 0) {
-         return NAN;
-       } else {
-         return id(vl53l1x_raw_distance).state;
-       }
+      if (id(vl53l1x_range_status).state > 0) {
+        return NAN;
+      } else {
+        return id(vl53l1x_raw_distance).state;
+      }
     filters:
       - lambda: |-
           if (isnan(x)) {
@@ -48,11 +48,9 @@ sensor:
       - clamp:
           min_value: 0.0
           max_value: 230.0
-#        - median:
       - delta: 0.2
     on_value:
       then:
-        - sensor.template.publish:
-            id: clack_distance
-            state: !lambda |-
-              return id(distance_cm).state;
+        - lambda: |-
+            id(last_distance) = float(x);
+        - component.update: clack_distance
