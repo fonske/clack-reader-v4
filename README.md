@@ -1,4 +1,4 @@
-## Advise not to update the code. 
+## Advise not to update the code for the moment. 
 Rewriting and updating the code "work in progress".
 
 # Clack Reader v4
