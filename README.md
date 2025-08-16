@@ -1,4 +1,5 @@
-# advise not to update the code. Rewriting and updating the code "work in progress".
+## Advise not to update the code. 
+Rewriting and updating the code "work in progress".
 
 # Clack Reader v4
  Esphome component for Clack WS PI (disc valve) Ecosoft LESS and Clack WS1 softener with M5stack TOF sensor saltlevel detection
