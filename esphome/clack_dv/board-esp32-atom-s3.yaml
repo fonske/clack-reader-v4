@@ -111,15 +111,4 @@ button:
         - script.stop: cycle_steps_pre_upflow
         - script.stop: cycle_steps_post_downflow
         - script.stop: cycle_steps_pre_downflow
-        - text_sensor.template.publish:
-            id: clack_cycle_step
-            state: !lambda |-
-              return id(cycle_step) = "Idle";
-        - lambda: |-
-            id(start_time) = 0;
-        - lambda: |-
-            id(start_time_total) = 0;
-        - component.update: timer1
-        - component.update: timer2
-        - lambda: 'id(wait_on_delay) = false;'
-        - lambda: 'id(water_meter_freeze) = false;'
+        - script.execute: reset_cycle_steps

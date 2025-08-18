@@ -209,10 +209,6 @@ script:
       - sensor.template.publish: # Set initial value of water flow rate to 0 to avoid Unknown value
           id: clack_flow_rate
           state: 0
-      - text_sensor.template.publish:
-          id: clack_cycle_step
-          state: !lambda |-
-            return id(cycle_step) = "Idle";
       - component.update: clack_save_total_liters_used
       - component.update: clack_save_total_operation_time
       - component.update: clack_backwash_time
@@ -221,6 +217,9 @@ script:
       - component.update: clack_rinse_time
       - component.update: clack_fill_time
       - component.update: clack_service_time
+      - lambda: |-
+          id(cycle_step) = "Idle";
+      - component.update: clack_cycle_step
       - component.update: clack_cycle_runtime
       - component.update: clack_cycle_total_runtime
       - component.update: clack_total_run_time
@@ -328,17 +327,22 @@ script:
       # Step 1: Brine
       - script.execute: start_brine_cycle
       - script.execute: chlorinator_start
+      - script.wait: chlorinator_start
       - script.execute: continue_brine_cycle
+      - script.wait: continue_brine_cycle
       # Step 2: Backwash
       - script.execute: start_backwash_cycle
       - script.execute: chlorinator_stop
       - script.execute: continue_backwash_cycle
+      - script.wait: continue_backwash_cycle
       # Step 3: Rinse
       - script.execute: start_rinse_cycle
       - script.execute: continue_rinse_cycle
+      - script.wait: continue_rinse_cycle
       # Step 4: Fill
       - script.execute: start_fill_cycle
       - script.execute: continue_fill_cycle
+      - script.wait: continue_fill_cycle
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
@@ -353,22 +357,28 @@ script:
       # Step 1: Fill - keep running water meter
       - script.execute: start_fill_cycle
       - script.execute: continue_fill_cycle
+      - script.wait: continue_fill_cycle
       # Step 2: Service - keep running water meter
       - script.execute: start_service_cycle
       - script.execute: continue_service_cycle
+      - script.wait: continue_service_cycle
       # Intermediate "pre" flow steps
       - script.execute: intermediate_pre_cycle_steps
       # Step 3: Brine
       - script.execute: start_brine_cycle
       - script.execute: chlorinator_start
+      - script.wait: chlorinator_start
       - script.execute: continue_brine_cycle
+      - script.wait: continue_brine_cycle
       # Step 4: Backwash
       - script.execute: start_backwash_cycle
       - script.execute: chlorinator_stop
       - script.execute: continue_backwash_cycle
+      - script.wait: continue_backwash_cycle
       # Step 5: Rinse
       - script.execute: start_rinse_cycle
       - script.execute: continue_rinse_cycle
+      - script.wait: continue_rinse_cycle
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
@@ -383,20 +393,26 @@ script:
       # Step 1: Backwash
       - script.execute: start_backwash_cycle
       - script.execute: continue_backwash_cycle
+      - script.wait: continue_backwash_cycle
       # Step 2: Brine
       - script.execute: start_brine_cycle
       - script.execute: chlorinator_start
+      - script.wait: chlorinator_start
       - script.execute: continue_brine_cycle
+      - script.wait: continue_brine_cycle
       # Step 3: Backwash2
       - script.execute: start_backwash2_cycle
       - script.execute: chlorinator_stop
       - script.execute: continue_backwash2_cycle
+      - script.wait: continue_backwash2_cycle
       # Step 4: Rinse
       - script.execute: start_rinse_cycle
       - script.execute: continue_rinse_cycle
+      - script.wait: continue_rinse_cycle
       # Step 5: Fill
       - script.execute: start_fill_cycle
       - script.execute: continue_fill_cycle
+      - script.wait: continue_fill_cycle
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
@@ -411,25 +427,32 @@ script:
       # Step 1: Fill - keep running water meter
       - script.execute: start_fill_cycle
       - script.execute: continue_fill_cycle
+      - script.wait: continue_fill_cycle
       # Step 2: Service - keep running water meter
       - script.execute: start_service_cycle
       - script.execute: continue_service_cycle
+      - script.wait: continue_service_cycle
       # Intermediate "pre" flow steps
       - script.execute: intermediate_pre_cycle_steps
       # Step 3: Backwash
       - script.execute: start_backwash_cycle
       - script.execute: continue_backwash_cycle
+      - script.wait: continue_backwash_cycle
       # Step 4: Brine
       - script.execute: start_brine_cycle
       - script.execute: chlorinator_start
+      - script.wait: chlorinator_start
       - script.execute: continue_brine_cycle
+      - script.wait: continue_brine_cycle
       # Step 5: Backwash2
       - script.execute: start_backwash2_cycle
       - script.execute: chlorinator_stop
       - script.execute: continue_backwash2_cycle
+      - script.wait: continue_backwash2_cycle
       # Step 6: Rinse
       - script.execute: start_rinse_cycle
       - script.execute: continue_rinse_cycle
+      - script.wait: continue_rinse_cycle
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
@@ -465,6 +488,7 @@ script:
     then:
       - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
+      - component.update: clack_cycle_total_runtime
 
   # Script "start_brine_cycle"
   - id: start_brine_cycle
@@ -486,7 +510,7 @@ script:
           timeout: 4800s
       ## store Brine time
       - lambda: |-
-          id(save_brine_time) = id(sntp_time).now().timestamp - id(start_time);
+          id(save_brine_time) = id(clack_cycle_runtime).state;
       - component.update: clack_brine_time
 
   # Script "start_backwash_cycle"
@@ -509,7 +533,7 @@ script:
           timeout: 1000s
       ## store Backwash time
       - lambda: |-
-          id(save_backwash_time) = id(sntp_time).now().timestamp - id(start_time);
+          id(save_backwash_time) = id(clack_cycle_runtime).state;
       - component.update: clack_backwash_time
 
   # Script "start_backwash2_cycle"
@@ -532,7 +556,7 @@ script:
           timeout: 1000s
       ## store Backwash2 time
       - lambda: |-
-          id(save_backwash2_time) = id(sntp_time).now().timestamp - id(start_time);
+          id(save_backwash2_time) = id(clack_cycle_runtime).state;
       - component.update: clack_backwash2_time
 
   # Script "start_rinse_cycle"
@@ -555,7 +579,7 @@ script:
           timeout: 1000s
       ## store Rinse time
       - lambda: |-
-          id(save_rinse_time) = id(sntp_time).now().timestamp - id(start_time);
+          id(save_rinse_time) = id(clack_cycle_runtime).state;
       - component.update: clack_rinse_time
 
   # Script "start_fill_cycle"
@@ -578,7 +602,7 @@ script:
           timeout: 400s
       ## store Fill time
       - lambda: |-
-          id(save_fill_time) = id(sntp_time).now().timestamp - id(start_time);
+          id(save_fill_time) = id(clack_cycle_runtime).state;
       - component.update: clack_fill_time
 
   # Script "start_service_cycle"
@@ -601,7 +625,7 @@ script:
           timeout: 14500s
       ## store Service time
       - lambda: |-
-          id(save_service_time) = id(sntp_time).now().timestamp - id(start_time);
+          id(save_service_time) = id(clack_cycle_runtime).state;
       - component.update: clack_service_time
 
   # Script "initial_post_cycle_steps"
@@ -663,6 +687,10 @@ script:
           id(cycle_step) = "Idle";
           id(start_time) = 0;
           id(start_time_total) = 0;
+      - component.update: clack_cycle_step
+      - component.update: clack_cycle_runtime
+      - component.update: clack_cycle_total_runtime
+      - lambda: |-
           id(wait_on_delay) = false;
           id(water_meter_freeze) = false;
 
