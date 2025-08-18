@@ -15,13 +15,11 @@ api:
       variables:
         meter_value: float
       then:
-        - lambda: |-
-            id(totalWaterUsage) = float(meter_value);
-        - component.update: clack_watermeter_total
         - pulse_meter.set_total_pulses:
             id: clack_flow_rate
             value: !lambda |-
-              return id(totalWaterUsage) * id(pulse_per_liter);
+              id(water_meter_force_overwrite) = true;
+              return float(meter_value) * id(pulse_per_liter);
 
     - action: last_distance_value #set last measured salt distance to any value in cm.
       variables:
@@ -108,6 +106,12 @@ globals:
   - id: water_meter_freeze
     type: bool
     restore_value: yes
+    initial_value: 'false'
+
+  # Define a global variable to force overwrite the totalWaterUsage value
+  - id: water_meter_force_overwrite
+    type: bool
+    restore_value: no
     initial_value: 'false'
 
   # Define a global variable that shows motor run
@@ -282,13 +286,11 @@ script:
   - id: reset_water_meter
     mode: restart
     then:
-      - lambda: |-
-          id(totalWaterUsage) = 0.0;
-      - component.update: clack_watermeter_total
       - pulse_meter.set_total_pulses:
           id: clack_flow_rate
           value: !lambda |-
-            return id(totalWaterUsage) * id(pulse_per_liter);
+            id(water_meter_force_overwrite) = true;
+            return 0;
 
   ### Define a script that visualize the cycle steps in regeneration
   # Script "decide_cycle"

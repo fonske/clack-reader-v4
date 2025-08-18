@@ -31,16 +31,19 @@ binary_sensor:
       - delayed_on_off: 50ms
     on_press:
       then:
+        - lambda: |-
+            ESP_LOGI("main", "Water meter freeze? %s", id(water_meter_freeze) ? "Yes" : "No");
         - if:
             condition:
               lambda: 'return id(water_meter_freeze) == false;'
             then:
-              - sensor.template.publish:
-                  id: clack_watermeter
-                  state: !lambda |-
-                    return id(totalWaterUsage) += 0.1;
-              - lambda: |-
-                  ESP_LOGI("UseTest", "Use button pressed");
+              # We have to calculate the number of pulses by multiplying the liters with the pulse per liter setting.
+              # Because of the precision of 1 decimal for the total sensor, adding 0.1 L is not always visible.
+              # The pulse_meter sensor has a precision of 2 decimals, which is a little more precise.
+              - pulse_meter.set_total_pulses:
+                  id: clack_flow_rate
+                  value: !lambda |-
+                    return (id(totalWaterUsage) + 0.1) * id(pulse_per_liter);
 
   # Binary sensor "init_state"
   - platform: template
@@ -75,11 +78,13 @@ button:
     id: clack_use_tst_but
     on_press:
       then:
-        - lambda: |-
-            id(clack_use_test_button).publish_state(true);
+        - binary_sensor.template.publish:
+            id: clack_use_test_button
+            state: true
         - delay: 100ms
-        - lambda: |-
-            id(clack_use_test_button).publish_state(false);
+        - binary_sensor.template.publish:
+            id: clack_use_test_button
+            state: false
 
   # Button "clack_resinclean_reset_button"
   - platform: template
