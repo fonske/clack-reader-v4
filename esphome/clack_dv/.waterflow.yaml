@@ -39,10 +39,14 @@ sensor:
             return x / id(pulse_per_liter);
       on_value:
         then:
-          # Prevent the global 'totalWaterUsage' from being overwritten by 0.
           # The pulse_meter sensor returns 0 on reboot or flash, which would result in a reset of 'totalWaterUsage'
+          # Prevent the global 'totalWaterUsage' from being overwritten by 0.
+          # Only allow writing a value greater than 0, except when an update is forced (e.g. at a water meter reset)
           - lambda: |-
-              if (id(clack_watermeter).state > 0) {
+              ESP_LOGI("main", "Value of 'clack_watermeter': %f", id(clack_watermeter).state);
+              ESP_LOGI("main", "Force overwrite 'totalWaterUsage'? %s", id(water_meter_force_overwrite) ? "Yes" : "No");
+              if (id(water_meter_force_overwrite) || id(clack_watermeter).state > 0) {
                 id(totalWaterUsage) = id(clack_watermeter).state;
+                id(water_meter_force_overwrite) = false;
               }
           - component.update: clack_watermeter_total
