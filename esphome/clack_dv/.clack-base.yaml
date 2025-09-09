@@ -21,6 +21,18 @@ api:
               id(water_meter_force_overwrite) = true;
               return float(meter_value) * id(pulse_per_liter);
 
+    - action: water_m3_left
+      variables:
+        m3_left: float
+      then:
+        - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              id(water_meter_force_overwrite) = true;
+              float liters_left = float(m3_left) * 1000;
+              float meter_value = id(clack_capacity_liters).state - liters_left;
+              return float(meter_value) * id(pulse_per_liter);
+
     - action: last_distance_value #set last measured salt distance to any value in cm.
       variables:
         new_distance_value: float
