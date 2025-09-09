@@ -713,6 +713,9 @@ interval:
             - component.update: clack_cycle_total_runtime
 
 binary_sensor:
+  - platform: status
+    name: ${clack_status}
+
   - platform: template
     name: ${clack_motor_running}
     id: bin_sens_motor_run

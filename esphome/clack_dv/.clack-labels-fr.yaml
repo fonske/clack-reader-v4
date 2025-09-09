@@ -28,6 +28,7 @@ substitutions:
   clack_wifi_signal_db: dB signal WiFi
   clack_wifi_signal_db_percent: Signal WiFi
   clack_uptime: Durée de fonctionnement
+  clack_status: État de connexion
   clack_chlorinator: Chlorinateur
   clack_salt_level_measurement: Mesure du Sel
   hours: heures
