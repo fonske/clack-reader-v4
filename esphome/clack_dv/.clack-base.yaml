@@ -233,8 +233,8 @@ script:
       - component.update: clack_rinse_time
       - component.update: clack_fill_time
       - component.update: clack_service_time
-      - lambda: |-
-          id(cycle_step) = "Idle";
+#      - lambda: |-
+#          id(cycle_step) = "Idle";
       - component.update: clack_cycle_step
       - component.update: clack_cycle_runtime
       - component.update: clack_cycle_total_runtime
