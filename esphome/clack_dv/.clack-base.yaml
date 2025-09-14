@@ -360,6 +360,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ### Define a script that visualize the cycle steps in regeneration cycle "pre" and "Upflow brining"
   # Script "cycle_steps_pre_upflow"
@@ -396,6 +397,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ### Define a script that visualize the cycle steps in regeneration cycle "post" and "Downflow brining"
   # Script "cycle_steps_post_downflow"
@@ -430,6 +432,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ### Define a script that visualize the cycle steps in regeneration cycle "pre" and "Downflow brining"
   # Script "cycle_steps_pre_downflow"
@@ -470,6 +473,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ## Cycle step scripts
   # Script "update_total_liters_used"
@@ -707,6 +711,7 @@ script:
       - lambda: |-
           id(wait_on_delay) = false;
           id(water_meter_freeze) = false;
+      - delay: 5s
 
 interval:
   - interval: 1s

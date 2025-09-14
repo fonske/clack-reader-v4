@@ -117,3 +117,4 @@ button:
         - script.stop: cycle_steps_post_downflow
         - script.stop: cycle_steps_pre_downflow
         - script.execute: reset_cycle_steps
+        - script.wait: reset_cycle_steps
