@@ -20,9 +20,9 @@ packages:
     url: https://github.com/fonske/clack-reader-v4
     ref: main
     refresh: 0s
-    files: [ 
+    files: [
       esphome/clack_dv/.clack-base.yaml,
-#     esphome/clack_dv/.tof1.yaml,
+#      esphome/clack_dv/.tof1.yaml,
       esphome/clack_dv/.tof2.yaml,
       esphome/clack_dv/.waterflow.yaml,
       esphome/clack_dv/.clack-optional.yaml,
@@ -57,7 +57,7 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   fast_connect: true
-  power_save_mode: light
+  power_save_mode: none
 #  reboot_timeout: 0s
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
