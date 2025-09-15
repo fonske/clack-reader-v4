@@ -21,6 +21,18 @@ api:
               id(water_meter_force_overwrite) = true;
               return float(meter_value) * id(pulse_per_liter);
 
+    - action: water_m3_left
+      variables:
+        m3_left: float
+      then:
+        - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              id(water_meter_force_overwrite) = true;
+              float liters_left = float(m3_left) * 1000;
+              float meter_value = id(clack_capacity_liters).state - liters_left;
+              return float(meter_value) * id(pulse_per_liter);
+
     - action: last_distance_value #set last measured salt distance to any value in cm.
       variables:
         new_distance_value: float
@@ -221,8 +233,8 @@ script:
       - component.update: clack_rinse_time
       - component.update: clack_fill_time
       - component.update: clack_service_time
-      - lambda: |-
-          id(cycle_step) = "Idle";
+#      - lambda: |-
+#          id(cycle_step) = "Idle";
       - component.update: clack_cycle_step
       - component.update: clack_cycle_runtime
       - component.update: clack_cycle_total_runtime
@@ -295,7 +307,7 @@ script:
   ### Define a script that visualize the cycle steps in regeneration
   # Script "decide_cycle"
   - id: decide_cycle
-    mode: restart
+    mode: single
     then:
       - script.execute: clack_motor_run  #give pulse when motor runs to different step.
       # Upflow - Post fill    : BRINE/BACKWASH/RINSE/FILL
@@ -348,6 +360,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ### Define a script that visualize the cycle steps in regeneration cycle "pre" and "Upflow brining"
   # Script "cycle_steps_pre_upflow"
@@ -384,6 +397,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ### Define a script that visualize the cycle steps in regeneration cycle "post" and "Downflow brining"
   # Script "cycle_steps_post_downflow"
@@ -418,6 +432,7 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ### Define a script that visualize the cycle steps in regeneration cycle "pre" and "Downflow brining"
   # Script "cycle_steps_pre_downflow"
@@ -458,11 +473,12 @@ script:
       # Final flow steps
       - script.execute: update_total_run_time
       - script.execute: reset_cycle_steps
+      - script.wait: reset_cycle_steps
 
   ## Cycle step scripts
   # Script "update_total_liters_used"
   - id: update_total_liters_used
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(save_total_liters_used) = id(totalWaterUsage);
@@ -470,7 +486,7 @@ script:
 
   # Script "update_total_operation_time"
   - id: update_total_operation_time
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(save_total_operation_time) = id(sntp_time).now().timestamp - id(regen_last);
@@ -478,7 +494,7 @@ script:
 
   # Script "update_regen_last"
   - id: update_regen_last
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(regen_last) = id(sntp_time).now().timestamp;
@@ -486,7 +502,7 @@ script:
 
   # Script "update_regeneration_start_time"
   - id: update_regeneration_start_time
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(start_time_total) = id(sntp_time).now().timestamp;
@@ -494,7 +510,7 @@ script:
 
   # Script "start_brine_cycle"
   - id: start_brine_cycle
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(cycle_step) = "Brine";
@@ -503,7 +519,7 @@ script:
 
   # Script "continue_brine_cycle"
   - id: continue_brine_cycle
-    mode: restart
+    mode: single
     then:
       - delay: 10s
       - wait_until:
@@ -517,7 +533,7 @@ script:
 
   # Script "start_backwash_cycle"
   - id: start_backwash_cycle
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(cycle_step) = "Backwash";
@@ -526,7 +542,7 @@ script:
 
   # Script "continue_backwash_cycle"
   - id: continue_backwash_cycle
-    mode: restart
+    mode: single
     then:
       - delay: 10s
       - wait_until:
@@ -540,7 +556,7 @@ script:
 
   # Script "start_backwash2_cycle"
   - id: start_backwash2_cycle
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(cycle_step) = "Backwash2";
@@ -549,7 +565,7 @@ script:
 
   # Script "continue_backwash2_cycle"
   - id: continue_backwash2_cycle
-    mode: restart
+    mode: single
     then:
       - delay: 10s
       - wait_until:
@@ -563,7 +579,7 @@ script:
 
   # Script "start_rinse_cycle"
   - id: start_rinse_cycle
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(cycle_step) = "Rinse";
@@ -572,7 +588,7 @@ script:
 
   # Script "continue_rinse_cycle"
   - id: continue_rinse_cycle
-    mode: restart
+    mode: single
     then:
       - delay: 10s
       - wait_until:
@@ -586,7 +602,7 @@ script:
 
   # Script "start_fill_cycle"
   - id: start_fill_cycle
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(cycle_step) = "Fill";
@@ -595,7 +611,7 @@ script:
 
   # Script "continue_fill_cycle"
   - id: continue_fill_cycle
-    mode: restart
+    mode: single
     then:
       - delay: 10s
       - wait_until:
@@ -609,7 +625,7 @@ script:
 
   # Script "start_service_cycle"
   - id: start_service_cycle
-    mode: restart
+    mode: single
     then:
       - lambda: |-
           id(cycle_step) = "Service";
@@ -618,7 +634,7 @@ script:
 
   # Script "continue_service_cycle"
   - id: continue_service_cycle
-    mode: restart
+    mode: single
     then:
       - delay: 10s
       - wait_until:
@@ -632,7 +648,7 @@ script:
 
   # Script "initial_post_cycle_steps"
   - id: initial_post_cycle_steps
-    mode: restart
+    mode: single
     then:
       - lambda: id(wait_on_delay) = true;
       - lambda: id(water_meter_freeze) = true;
@@ -649,7 +665,7 @@ script:
 
   # Script "initial_pre_cycle_steps"
   - id: initial_pre_cycle_steps
-    mode: restart
+    mode: single
     then:
       - lambda: id(wait_on_delay) = true;
       ################
@@ -658,7 +674,7 @@ script:
 
   # Script "intermediate_pre_cycle_steps"
   - id: intermediate_pre_cycle_steps
-    mode: restart
+    mode: single
     then:
       ## store used liters
       - script.execute: update_total_liters_used
@@ -673,7 +689,7 @@ script:
 
   # Script "update_total_run_time"
   - id: update_total_run_time
-    mode: restart
+    mode: single
     then:
       ## store Total run time
       - lambda: |-
@@ -682,7 +698,7 @@ script:
 
   # Script "reset_cycle_steps"
   - id: reset_cycle_steps
-    mode: restart
+    mode: single
     then:
       # Idle
       - lambda: |-
@@ -695,6 +711,7 @@ script:
       - lambda: |-
           id(wait_on_delay) = false;
           id(water_meter_freeze) = false;
+      - delay: 5s
 
 interval:
   - interval: 1s
@@ -713,6 +730,9 @@ interval:
             - component.update: clack_cycle_total_runtime
 
 binary_sensor:
+  - platform: status
+    name: ${clack_status}
+
   - platform: template
     name: ${clack_motor_running}
     id: bin_sens_motor_run
