@@ -52,7 +52,6 @@ sensor:
       - delta: 0.2
     on_value:
       then:
-        - sensor.template.publish:
-            id: clack_distance
-            state: !lambda |-
-              return id(distance_cm).state;
+        - lambda: |-
+            id(last_distance) = float(x);
+        - component.update: clack_distance
