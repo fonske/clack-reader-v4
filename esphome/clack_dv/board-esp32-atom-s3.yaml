@@ -18,7 +18,7 @@ i2c:
     sda: GPIO6
     scl: GPIO5
     scan: false
-    frequency: 400kHz
+#    frequency: 400kHz
 
 binary_sensor:
   ## temporary test button for testing water meter pulse
