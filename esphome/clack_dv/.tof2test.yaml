@@ -23,7 +23,7 @@ sensor:
 
   - platform: template
     name: ${clack_distance_tof}
-    id: distance_cm
+    id: clack_distance_tof
     update_interval: 60s
     unit_of_measurement: "cm"
     accuracy_decimals: 1
