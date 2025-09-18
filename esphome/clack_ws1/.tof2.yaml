@@ -22,8 +22,8 @@ sensor:
       id: vl53l1x_range_status
 
   - platform: template
-    name: ${clack_distance_tof}
     id: distance_cm
+    name: ${clack_distance_tof}
     update_interval: 60s
     unit_of_measurement: "cm"
     accuracy_decimals: 1
