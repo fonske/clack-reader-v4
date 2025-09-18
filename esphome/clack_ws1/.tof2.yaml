@@ -48,9 +48,11 @@ sensor:
       - clamp:
           min_value: 0.0
           max_value: 230.0
+#        - median:
       - delta: 0.2
     on_value:
       then:
-        - lambda: |-
-            id(last_distance) = float(x);
-        - component.update: clack_distance
+        - sensor.template.publish:
+            id: clack_distance
+            state: !lambda |-
+              return id(distance_cm).state;
