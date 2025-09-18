@@ -23,7 +23,7 @@ sensor:
 
   - platform: template
     name: ${clack_distance_tof}
-    id: clack_distance_tof
+    id: distance_cm
     update_interval: 60s
     unit_of_measurement: "cm"
     accuracy_decimals: 1
@@ -55,4 +55,4 @@ sensor:
         - sensor.template.publish:
             id: clack_distance
             state: !lambda |-
-              return id(clack_distance_tof).state;
+              return id(distance_cm).state;
