@@ -55,4 +55,4 @@ sensor:
         - sensor.template.publish:
             id: clack_distance
             state: !lambda |-
-              return id(distance_cm).state;
+              return id(clack_distance_tof).state;
