@@ -5,18 +5,23 @@ utility_meter:
   clack_waterverbruik_dit_kwartier:  
     source: sensor.clack_watermeter
     cycle: quarter-hourly
+    unique_id: clack_waterverbruik_dit_kwartier
   clack_waterverbruik_dit_uur:
     source: sensor.clack_watermeter
     cycle: hourly
+    unique_id: clack_waterverbruik_dit_uur
   clack_waterverbruik_vandaag:
     source: sensor.clack_watermeter
-    cycle: daily 
+    cycle: daily
+    unique_id: clack_waterverbruik_vandaag
   clack_waterverbruik_maand:
     source: sensor.clack_watermeter
     cycle: monthly
+    unique_id: clack_waterverbruik_maand
   clack_waterverbruik_jaar:
     source: sensor.clack_watermeter
-    cycle: yearly 
+    cycle: yearly
+    unique_id: clack_waterverbruik_jaar
 
 #-----------
 #AUTOMATIONS
