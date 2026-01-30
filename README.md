@@ -42,9 +42,6 @@ It is important to connect the TOF sensor to the 4p grove connector near the Ato
 ## English:
 [README](/readme/clack_explanation_en.md)
 
-## Contact
-Purchase: alphonsuijtdehaag at gmail dot com, if you are interested in a PCB with M5Stack Atom s3 lite
-
 Help: Please open a issue on this git project.
 
 ![Example](/readme/pcb_transp.png)
