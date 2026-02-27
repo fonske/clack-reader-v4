@@ -22,6 +22,8 @@ substitutions:
   clack_capacity_days: Capacité Restante (JOURS)
   clack_chlorinator_delay: Temps d'activation du Chlorinateur
   clack_leakage_alarm_delay: Délai d'alarme fuite
+  clack_water_flow_timeout_delay: Water flow timeout
+  clack_test_motor_run: Test button motor run
   clack_watermeter_pulse: Impulsion du compteur d'eau
   clack_regeneration_pulse: Impulsion de regénération
   clack_ip: Adresse IP de l'adoucisseur
@@ -29,6 +31,10 @@ substitutions:
   clack_wifi_signal_db_percent: Signal WiFi
   clack_uptime: Durée de fonctionnement
   clack_chlorinator: Chlorinateur
+  clack_chlorinator_sw: Chlorinator / DP-SW
+  clack_dp_sw_init_regen: DP-SW Initialise regen
+  clack_dp_sw_hold_regen: DP-SW Hold regen
+  clack_dp_sw_init_hold: DP-SW Activate
   clack_salt_level_measurement: Mesure du niveau de sel
   hours: heures
   days: jours
@@ -45,10 +51,19 @@ substitutions:
   clack_regen: Régénération clack
   clack_brine: Pendant la saumure
   clack_regeneration_mode: Mode de régénération
-  clack_upflow_post_fill: Upflow - Post fill
-  clack_upflow_pre_fill: Upflow - Pre fill
-  clack_downflow_post_fill: Downflow - Post fill
-  clack_downflow_pre_fill: Downflow - Pre fill
+  #F=FILL, S=SERVICE, BW=BACKWASH, BW2=BACKWASH2, BR=BRINE, R=RINSE
+  clack_pre_fill_no_2nd_backwash: Pre fill no 2nd Backwash
+  clack_pre_fill_no_2nd_backwash_steps: "F/S/BW/BR/R"
+  clack_pre_fill_2nd_backwash: Pre fill 2nd Backwash
+  clack_pre_fill_2nd_backwash_steps: "F/S/BW/BR/BW2/R"
+  clack_pre_fill_upflow: Pre fill Upflow
+  clack_pre_fill_upflow_steps: "F/S/BR/BW/R"
+  clack_pre_fill_upflow_2: Pre fill Upflow 2
+  clack_pre_fill_upflow_2_steps: "F/S/BR/R/BW"
+  clack_post_fill_no_2nd_backwash: Post fill no 2nd Backwash
+  clack_post_fill_no_2nd_backwash_steps: "BW/BR/R/F"
+  clack_post_fill_2nd_backwash: Post fill 2nd Backwash
+  clack_post_fill_2nd_backwash_steps: "BW/BR/BW2/R/F"
   clack_time_to_regen: Temps de régénération
   clack_time_to_regen_hours: Temps de régénération (Heures)
   clack_percent_time_left: Temps restant (%)
@@ -60,16 +75,15 @@ substitutions:
   clack_resinclean_last: Nettoyage Résine on
   clack_saltfill_last: Remplir Sel on
   clack_cycle_step: Etapes du cycle
+  clack_cycle_steps: Cycle steps
   clack_use_tst_but: BOUTON TEST impulsion
   clack_resinclean_reset_button: Nettoyage Résine Reset
   clack_regen_stop_script: BOUTON TEST stop régénération
   clack_motor_running: Fonctionnement du moteur
   clack_water_flowing: Débit d'eau
   clack_water_leakage: Fuite détéctée
-  clack_water_flow_timeout_delay: Débit d'eau durée dépasée
-  clack_test_motor_run: BOUTON TEST moteur
   clack_save_total_liters_used: TOTAL eau consommé
-  clack_save_total_operation_time: Temps de fonctionnement Total
+  clack_save_total_time_used: Temps de fonctionnement Total
   clack_brine_time_txt: Brine
   clack_backwash_time_txt: Backwash
   clack_backwash2_time_txt: Backwash2
@@ -77,10 +91,10 @@ substitutions:
   clack_fill_time_txt: Fill
   clack_service_time_txt: Service
   clack_total_run_time_txt: Temps d'excécution Total
+  clack_block_regen: Block regen
 
 text_sensor:
   # Expose last regeneration information as sensor
-  # Textsensor "clack_regeneration_last"
   - platform: template
     name: ${clack_regeneration_last}
     id: clack_regeneration_last
