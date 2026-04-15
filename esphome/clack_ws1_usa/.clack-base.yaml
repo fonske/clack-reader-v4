@@ -1316,7 +1316,7 @@ sensor:
   - platform: custom
     lambda: |-
       auto wf = new WaterFlowSensor();
-      App.register_component(wf);
+      App.register_component_(wf);
       return {wf->clack_flow_rate};
 
     sensors:
