@@ -2,8 +2,6 @@
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
-  includes:
-    - water_flow_gallons.h
   on_boot:
     priority: -100
     then:
@@ -370,7 +368,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -393,7 +391,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
       - delay: 17s
@@ -517,7 +515,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -540,7 +538,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
       - delay: 17s
@@ -720,7 +718,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -881,7 +879,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -904,7 +902,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
       - delay: 17s
@@ -972,25 +970,25 @@ script:
           then:
             - if:
                 condition:
-                  lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}";'
+                  lambda: 'return id(clack_select_cycle).current_option() == "${clack_pre_fill_no_2nd_backwash}";'
                 then:
                   - script.execute: cycle_steps_4cycle_pre   # fill/service/backwash/brine/backwash2/rinse
                 else:
                   - if:
                       condition:
-                        lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}";'
+                        lambda: 'return id(clack_select_cycle).current_option() == "${clack_pre_fill_2nd_backwash}";'
                       then:
                         - script.execute: cycle_steps_5cycle_pre  # fill/service/backwash/brine/backwash2/rinse  
                       else:
                         - if:
                             condition:
-                              lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}";'
+                              lambda: 'return id(clack_select_cycle).current_option() == "${clack_post_fill_no_2nd_backwash}";'
                             then:
                               - script.execute: cycle_steps_4cycle_post # backwash/brine/rinse/fill    
                             else:
                               - if:
                                   condition:
-                                    lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}";'
+                                    lambda: 'return id(clack_select_cycle).current_option() == "${clack_post_fill_2nd_backwash}";'
                                   then:
                                     - script.execute: cycle_steps_5cycle_post  # backwash/brine/backwash2/rinse/fill
 
@@ -1313,20 +1311,22 @@ sensor:
 #------
   ##
   #  Flow Rate
-  - platform: custom
-    lambda: |-
-      auto wf = new WaterFlowSensor();
-      App.register_component(wf);
-      return {wf->clack_flow_rate};
-
-    sensors:
-    - name: ${clack_flow_rate}
-      icon: mdi:waves-arrow-right
-      unit_of_measurement: gal/min # Gallons GPM or Liters per minute 
-      accuracy_decimals: 2
-      id: clack_flow_rate
-      device_class: volume_flow_rate
-      state_class: measurement
+  - platform: clack_water_flow
+    id: clack_flow_rate
+    name: ${clack_flow_rate}
+    pin:
+      number: GPIO7
+      mode:
+        input: true
+        pullup: true
+    total_water_usage: totalWaterUsage
+    pulse_per_gallon: pulse_per_gallon
+    water_meter_freeze: water_meter_freeze
+    watermeter_sensor: clack_watermeter
+    unit_of_measurement: gal/min
+    accuracy_decimals: 2
+    device_class: volume_flow_rate
+    state_class: measurement
 
 
   #  Watermeter
@@ -1370,7 +1370,6 @@ sensor:
     name: ${clack_percent_g_left}
     icon: mdi:water-percent
     unit_of_measurement: "%"
-    device_class: water
     state_class: measurement
     accuracy_decimals: 1
     update_interval: ${watermeter_update_interval}
@@ -1385,7 +1384,6 @@ sensor:
     name: ${clack_percent_time_left}
     icon: mdi:progress-clock
     unit_of_measurement: "%"
-    device_class: duration
     state_class: measurement
     accuracy_decimals: 1
     update_interval: 600s

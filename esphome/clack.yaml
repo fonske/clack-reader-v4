@@ -16,34 +16,43 @@ substitutions:
 ### tof1 is a VL53L0X M5stack. Distance measure up to 2 mtr. I2C grove cable max 5 mtr length
 ### tof2 is a VL53L1X M5stack (ToF4M). Distance measure up to 4 mtr. I2C grove cable max 2 mtr length
 
+### Option 1 (remote): use remote_package from GitHub. Comment out Option 2 when using this.
 packages:
   remote_package:
     url: https://github.com/fonske/clack-reader-v4
     ref: ws1_usa
-    refresh: 0s
-    files: [ 
-      esphome/clack_ws1_usa/.clack-base.yaml,
-#      esphome/clack_ws1_usa/.tof1.yaml,
-      esphome/clack_ws1_usa/.tof2.yaml,
-      esphome/clack_ws1_usa/.clack-optional.yaml,
-      esphome/clack_ws1_usa/.clack-labels-en.yaml,
-      esphome/clack_ws1_usa/board-esp32-atom-s3.yaml,
-    ]
+    files:
+      - esphome/clack_ws1_usa/.clack-labels-en.yaml
+      - esphome/clack_ws1_usa/board-esp32-atom-s3.yaml
+      - esphome/clack_ws1_usa/.clack-base.yaml
+      - esphome/clack_ws1_usa/.tof2.yaml
+      - esphome/clack_ws1_usa/.clack-optional.yaml
+    refresh: 1d
 
-### for developing/testing, uncomment local includes and comment out above remote_package packages part.
+### Option 2 (local): for developing/testing. Comment out Option 1 when using this.
 #packages:
-##  substitutions: !include clack_ws1_usa/.clack-labels-en.yaml
+#  substitutions: !include clack_ws1_usa/.clack-labels-en.yaml
 #  device_base1:  !include clack_ws1_usa/board-esp32-atom-s3.yaml
 #  device_base2:  !include clack_ws1_usa/.clack-base.yaml
-##  device_base3: !include clack_ws1_usa/.tof1.yaml
 #  device_base3:  !include clack_ws1_usa/.tof2.yaml
 #  device_base4:  !include clack_ws1_usa/.clack-optional.yaml
 
+### Option 1 (remote): use git source from GitHub. Comment out Option 2 when using this.
 external_components:
   - source:
       type: git
-      url: https://github.com/robertklep/esphome-custom-component
-    components: [ custom, custom_component ]
+      url: https://github.com/fonske/clack-reader-v4
+      ref: ws1_usa
+      path: components
+    components: [ clack_water_flow ]
+    refresh: 1d
+
+### Option 2 (local): for developing/testing. Comment out Option 1 when using this.
+#external_components:
+#  - source:
+#      type: local
+#      path: ../components
+#    components: [ clack_water_flow ]
     
 time:
   - platform: homeassistant

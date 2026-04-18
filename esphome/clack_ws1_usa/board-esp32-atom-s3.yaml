@@ -70,7 +70,7 @@ switch:
     turn_on_action:
       - if:
           condition:
-            lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_init_regen}";'
+            lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "${clack_dp_sw_init_regen}";'
           then:
             - switch.turn_on: chlorinator_relay
             - delay: 125s
@@ -79,7 +79,7 @@ switch:
           else:
             - if:
                 condition:
-                  lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_hold_regen}";'
+                  lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "${clack_dp_sw_hold_regen}";'
                 then:
                   - switch.turn_on: chlorinator_relay
     turn_off_action:
