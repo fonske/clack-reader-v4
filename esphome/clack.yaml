@@ -37,23 +37,6 @@ packages:
 #  device_base3:  !include clack_ws1_usa/.tof2.yaml
 #  device_base4:  !include clack_ws1_usa/.clack-optional.yaml
 
-### Option 1 (remote): use git source from GitHub. Comment out Option 2 when using this.
-external_components:
-  - source:
-      type: git
-      url: https://github.com/fonske/clack-reader-v4
-      ref: ws1_usa
-      path: components
-    components: [ clack_water_flow ]
-    refresh: 1d
-
-### Option 2 (local): for developing/testing. Comment out Option 1 when using this.
-#external_components:
-#  - source:
-#      type: local
-#      path: ../components
-#    components: [ clack_water_flow ]
-    
 time:
   - platform: homeassistant
     id: sntp_time

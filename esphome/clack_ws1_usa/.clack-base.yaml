@@ -1311,22 +1311,42 @@ sensor:
 #------
   ##
   #  Flow Rate
-  - platform: clack_water_flow
-    id: clack_flow_rate
-    name: ${clack_flow_rate}
+  - platform: pulse_meter
     pin:
       number: GPIO7
       mode:
         input: true
         pullup: true
-    total_water_usage: totalWaterUsage
-    pulse_per_gallon: pulse_per_gallon
-    water_meter_freeze: water_meter_freeze
-    watermeter_sensor: clack_watermeter
+    id: clack_flow_rate
+    name: ${clack_flow_rate}
     unit_of_measurement: gal/min
     accuracy_decimals: 2
     device_class: volume_flow_rate
     state_class: measurement
+    internal_filter: 10ms
+    internal_filter_mode: PULSE
+    timeout: 30s
+    filters:
+      - lambda: |-
+          float ppg = id(pulse_per_gallon);
+          return ppg > 0 ? x / ppg : 0.0f;
+    total:
+      id: clack_pulse_total_raw
+      internal: true
+      on_value:
+        then:
+          - lambda: |-
+              static uint32_t last_total = 0;
+              uint32_t cur = (uint32_t) x;
+              uint32_t delta = cur - last_total;
+              last_total = cur;
+              float ppg = id(pulse_per_gallon);
+              if (!id(water_meter_freeze) && delta > 0 && ppg > 0) {
+                id(totalWaterUsage) += (float) delta / ppg;
+              }
+          - sensor.template.publish:
+              id: clack_watermeter
+              state: !lambda 'return id(totalWaterUsage);'
 
 
   #  Watermeter
@@ -1339,6 +1359,10 @@ sensor:
     device_class: water
     state_class: total_increasing
     accuracy_decimals: 1
+    lambda: |-
+      return id(totalWaterUsage);
+    filters:
+      - throttle: 300ms
     on_value:
       - sensor.template.publish:
           id: clack_g_left
