@@ -1034,7 +1034,7 @@ binary_sensor:
     name: ${clack_water_flowing}
     id: clack_water_flowing
     lambda: |-
-      return (id(clack_flow_rate).state > 0);
+      return (id(clack_flow_rate).state > 0) && !id(water_meter_freeze);
     on_state:
       - if:
           condition:
