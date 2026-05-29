@@ -3,9 +3,17 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
   on_boot:
-    priority: -100
-    then:
-      - script.execute: on_boot
+    - priority: 600
+      then:
+        # Restore pulse meter total BEFORE API connects to HA (API connects at priority 200)
+        # This prevents HA from seeing a 0 value on reboot
+        - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
+    - priority: -100
+      then:
+        - script.execute: on_boot
 
 # Enable Home Assistant API
 api:
@@ -381,7 +389,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -404,7 +412,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
       - delay: 17s
@@ -528,7 +536,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -551,7 +559,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
       - delay: 17s
@@ -729,7 +737,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -888,7 +896,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -911,7 +919,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_stop
       - delay: 17s
@@ -1052,7 +1060,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -1211,7 +1219,7 @@ script:
           id(start_time) = id(sntp_time).now().timestamp;
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - script.execute: chlorinator_start
       - delay: 17s
@@ -1300,37 +1308,37 @@ script:
           then:
             - if:
                 condition:
-                  lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}";'
+                  lambda: 'return id(clack_select_cycle).current_option() == "${clack_pre_fill_no_2nd_backwash}";'
                 then:
                   - script.execute: cycle_steps_4cycle_pre   # fill/service/backwash/brine/backwash2/rinse
                 else:
                   - if:
                       condition:
-                        lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}";'
+                        lambda: 'return id(clack_select_cycle).current_option() == "${clack_pre_fill_2nd_backwash}";'
                       then:
                         - script.execute: cycle_steps_5cycle_pre  # fill/service/backwash/brine/backwash2/rinse  
                       else:
                         - if:
                             condition:
-                              lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow}";'
+                              lambda: 'return id(clack_select_cycle).current_option() == "${clack_pre_fill_upflow}";'
                             then:
                               - script.execute: cycle_steps_5cycle_pre_upflow # fill/service/brine/backwash/rinse    
                             else:
                               - if:
                                   condition:
-                                    lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}";'
+                                    lambda: 'return id(clack_select_cycle).current_option() == "${clack_pre_fill_upflow_2}";'
                                   then:
                                     - script.execute: cycle_steps_5cycle_pre_upflow_2 # fill/service/brine/rinse/backwash    
                                   else:
                                     - if:
                                         condition:
-                                          lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}";'
+                                          lambda: 'return id(clack_select_cycle).current_option() == "${clack_post_fill_no_2nd_backwash}";'
                                         then:
                                           - script.execute: cycle_steps_4cycle_post # backwash/brine/rinse/fill    
                                         else:
                                           - if:
                                               condition:
-                                                lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}";'
+                                                lambda: 'return id(clack_select_cycle).current_option() == "${clack_post_fill_2nd_backwash}";'
                                               then:
                                                 - script.execute: cycle_steps_5cycle_post  # backwash/brine/backwash2/rinse/fill
 
@@ -1857,17 +1865,17 @@ select:
       - text_sensor.template.publish:
           id: clack_all_cycle_steps
           state: !lambda |-
-            if(id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}")
+            if(id(clack_select_cycle).current_option() == "${clack_post_fill_no_2nd_backwash}")
               return { "${clack_post_fill_no_2nd_backwash_steps}" };
-            else if(id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}")
+            else if(id(clack_select_cycle).current_option() == "${clack_post_fill_2nd_backwash}")
               return { "${clack_post_fill_2nd_backwash_steps}" };
-            else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow}")
+            else if(id(clack_select_cycle).current_option() == "${clack_pre_fill_upflow}")
               return { "${clack_pre_fill_upflow_steps}" };
-            else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}")
+            else if(id(clack_select_cycle).current_option() == "${clack_pre_fill_upflow_2}")
               return { "${clack_pre_fill_upflow_2_steps}" };
-            else if(id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}")
+            else if(id(clack_select_cycle).current_option() == "${clack_pre_fill_no_2nd_backwash}")
               return { "${clack_pre_fill_no_2nd_backwash_steps}" };
-            else if(id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}")
+            else if(id(clack_select_cycle).current_option() == "${clack_pre_fill_2nd_backwash}")
               return { "${clack_pre_fill_2nd_backwash_steps}" };
             else
               return { "" };
