@@ -61,6 +61,7 @@ switch:
       inverted: false
     name: ${clack_chlorinator_sw}
     id: chlorinator_relay
+    object_id: chlorinator_dp_sw
     icon: mdi:bacteria
     entity_category: config
 
