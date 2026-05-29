@@ -1,0 +1,902 @@
+INFO ESPHome 2026.5.1
+INFO Reading configuration /config/esphome/clack-reader-v4.yaml...
+INFO Updating https://github.com/fonske/clack-reader-v4@ws1
+INFO Updating https://github.com/mrtoy-me/esphome-vl53l1x.git@main
+WARNING 'Chlorinator / DP-SW' contains '/' which is reserved as a URL path separator. Automatically replacing with 'Chlorinator ⁄ DP-SW' (Unicode FRACTION SLASH). Please update your configuration. This will become an error in ESPHome 2026.7.0.
+INFO Generating C++ source...
+INFO Setting CONFIG_LWIP_MAX_SOCKETS to 17 (TCP=11 [api=3, captive_portal=3, web_server=5], UDP=3 [captive_portal=1, mdns=2], TCP_LISTEN=3 [api=1, ota=1, web_server_base=1])
+INFO Compiling app... Build path: /data/build/clack
+Processing clack (board: esp32-s3-devkitc-1; framework: espidf; platform: https://github.com/pioarduino/platform-espressif32/releases/download/55.03.38-1/platform-espressif32.zip)
+--------------------------------------------------------------------------------
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+ - contrib-piohome @ 3.4.4 
+ - framework-espidf @ 3.50504.0 (5.5.4) 
+ - tool-cmake @ 4.0.3 
+ - tool-esp-rom-elfs @ 2024.10.11 
+ - tool-esptoolpy @ 5.2.0 
+ - tool-ninja @ 1.13.1 
+ - tool-scons @ 4.40801.0 (4.8.1) 
+ - tool-xtensa-esp-elf-gdb @ 16.3.0+20250913 
+ - toolchain-xtensa-esp-elf @ 14.2.0+20260121
+Using Python 3.12.10 environment at: /root/.platformio/penv/.espidf-5.5.4
+Reading CMake configuration...
+No dependencies
+Compiling .pioenvs/clack/src/esphome/core/build_info_data.cpp.o
+Compiling .pioenvs/clack/src/main.cpp.o
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml:77:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+   77 |             lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_init_regen}";'
+      |                                        ^~~~~
+In file included from src/esphome/core/entity_includes.h:51,
+                 from src/esphome/core/application.h:39,
+                 from src/esphome/components/api/api_frame_helper.h:14,
+                 from src/esphome/components/api/api_connection.h:5,
+                 from src/esphome.h:4,
+                 from src/main.cpp:3:
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml:77:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+   77 |             lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_init_regen}";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml:77:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+   77 |             lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_init_regen}";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml:86:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+   86 |                   lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_hold_regen}";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml:86:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+   86 |                   lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_hold_regen}";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/board-esp32-atom-s3.yaml:86:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+   86 |                   lambda: 'return id(clack_select_chl_or_dpsw).state == "${clack_dp_sw_hold_regen}";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1860:30: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1860 |             if(id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}")
+      |                              ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1860:30: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1860 |             if(id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}")
+      |                              ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1860:30: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1860 |             if(id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}")
+      |                              ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1862:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1862 |             else if(id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1862:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1862 |             else if(id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1862:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1862 |             else if(id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1864:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1864 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1864:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1864 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1864:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1864 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1866:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1866 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1866:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1866 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1866:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1866 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1868:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1868 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1868:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1868 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1868:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1868 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1870:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1870 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1870:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1870 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1870:35: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1870 |             else if(id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}")
+      |                                   ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:384:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  384 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:384:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  384 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:384:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  384 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:407:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  407 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:407:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  407 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:407:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  407 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:531:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  531 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:531:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  531 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:531:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  531 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:554:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  554 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:554:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  554 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:554:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  554 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:732:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  732 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:732:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  732 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:732:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  732 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:891:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  891 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:891:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  891 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:891:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  891 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:914:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  914 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:914:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  914 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:914:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+  914 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1055:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1055 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1055:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1055 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1055:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1055 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1214:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1214 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1214:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1214 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1214:40: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1214 |             - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+      |                                        ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1303:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1303 |                   lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1303:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1303 |                   lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1303:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1303 |                   lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_no_2nd_backwash}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1309:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1309 |                         lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1309:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1309 |                         lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1309:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1309 |                         lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_2nd_backwash}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1315:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1315 |                               lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1315:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1315 |                               lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1315:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1315 |                               lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow}";'
+      |                                  ^~~~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1321:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1321 |                                     lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}";'
+      |                                  ^  ~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1321:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1321 |                                     lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}";'
+      |                                  ^  ~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1321:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1321 |                                     lambda: 'return id(clack_select_cycle).state == "${clack_pre_fill_upflow_2}";'
+      |                                  ^  ~~
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1327:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1327 |                                           lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}";'
+      |                                  ^    
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1327:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1327 |                                           lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}";'
+      |                                  ^    
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1327:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1327 |                                           lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_no_2nd_backwash}";'
+      |                                  ^    
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml: In lambda function:
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1333:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1333 |                                                 lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}";'
+      |                                  ^    
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1333:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1333 |                                                 lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}";'
+      |                                  ^    
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+/data/packages/2498ae65/esphome/clack_ws1/.clack-base.yaml:1333:34: warning: 'esphome::select::Select::state' is deprecated: Use current_option() instead of .state. Will be removed in 2026.7.0 [-Wdeprecated-declarations]
+ 1333 |                                                 lambda: 'return id(clack_select_cycle).state == "${clack_post_fill_2nd_backwash}";'
+      |                                  ^    
+src/esphome/components/select/select.h:37:15: note: declared here
+   37 |   std::string state{};
+      |               ^~~~~
+Linking .pioenvs/clack/firmware.elf
+                            Memory Type Usage Summary                             
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Memory Type/Section ┃ Used [bytes] ┃ Used [%] ┃ Remain [bytes] ┃ Total [bytes] ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Flash Code          │       716360 │          │                │               │
+│    .text            │       716360 │          │                │               │
+│ Flash Data          │       132240 │          │                │               │
+│    .rodata          │       131984 │          │                │               │
+│    .appdesc         │          256 │          │                │               │
+│ DIRAM               │       119619 │     35.0 │         222141 │        341760 │
+│    .text            │        54287 │    15.88 │                │               │
+│    .bss             │        46496 │     13.6 │                │               │
+│    .data            │        18684 │     5.47 │                │               │
+│    .noinit          │          152 │     0.04 │                │               │
+│ IRAM                │        16384 │    100.0 │              0 │         16384 │
+│    .text            │        15356 │    93.73 │                │               │
+│    .vectors         │         1028 │     6.27 │                │               │
+└─────────────────────┴──────────────┴──────────┴────────────────┴───────────────┘
+Total image size: 937955 bytes (.bin may be padded larger)
+Note: The reported total sizes may be smaller than those in the technical reference manual due to reserved memory and application configuration. The total flash size available for the application is not included by default, as it cannot be reliably determined due to the presence of other data like the bootloader, partition table, and application partition size.
+RAM:   [==        ]  19.9% (used 65332 bytes from 327680 bytes)
+Flash: [==        ]  23.8% (used 937699 bytes from 3932160 bytes)
+Building .pioenvs/clack/firmware.bin
+Creating ESP32-S3 image...
+Successfully created ESP32-S3 image.
+Creating binary "firmware.factory.bin" with:
+    Offset   | File
+ -  0x0      | bootloader.bin
+ -  0x8000   | partitions.bin
+ -  0x9000   | ota_data_initial.bin
+ -  0x10000  | firmware.bin
+Successfully created combined binary image.
+sign_firmware([".pioenvs/clack/firmware.bin"], [".pioenvs/clack/firmware.elf"])
+merge_factory_bin([".pioenvs/clack/firmware.bin"], [".pioenvs/clack/firmware.elf"])
+Info: bootloader.bin not found - skipping
+Info: partition-table.bin not found - skipping
+Info: ota_data_initial.bin not found - skipping
+Info: clack.bin not found - skipping
+Using FLASH_EXTRA_IMAGES from PlatformIO environment
+Merging binaries into /data/build/clack/.pioenvs/clack/firmware.factory.bin
+Merging binaries with esptool
+SHA digest in image updated.
+Wrote 0xf5070 bytes to file '/data/build/clack/.pioenvs/clack/firmware.factory.bin', ready to flash to offset 0x0.
+Successfully created /data/build/clack/.pioenvs/clack/firmware.factory.bin
+esp32_copy_ota_bin([".pioenvs/clack/firmware.bin"], [".pioenvs/clack/firmware.elf"])
+Copied firmware to /data/build/clack/.pioenvs/clack/firmware.ota.bin
+========================= [SUCCESS] Took 27.88 seconds =========================
+INFO Build Info: config_hash=0x0d79ff42 build_time_str=2026-05-29 21:57:27 +0300
+INFO Successfully compiled program.
+INFO Connecting to 10.10.20.42 port 3232...
+INFO Connected to 10.10.20.42
+INFO Uploading /data/build/clack/.pioenvs/clack/firmware.bin (938096 bytes)
+Uploading: [============================================================] 100% Done...
+
+INFO Upload took 3.59 seconds, waiting for result...
+INFO OTA successful
+INFO Successfully uploaded program.
+INFO Starting log output from 10.10.20.42 using esphome API
+INFO Successfully resolved clack @ 10.10.20.42 in 0.000s
+INFO Successfully connected to clack @ 10.10.20.42 in 5.148s
+INFO Successful handshake with clack @ 10.10.20.42 in 0.012s
+[21:58:10.228][I][app:151]: ESPHome version 2026.5.1 compiled on 2026-05-29 21:57:27 +0300
+[21:58:10.228][I][app:158]: ESP32 Chip: ESP32-S3 rev0.2, 2 core(s)
+[21:58:10.228][W][app:193]: Bootloader too old for OTA rollback. Flash via USB once to update the bootloader
+[21:58:10.228][C][logger:219]: Logger:
+[21:58:10.228][C][logger:219]:   Max Level: DEBUG
+[21:58:10.228][C][logger:219]:   Initial Level: DEBUG
+[21:58:10.229][C][logger:226]:   Log Baud Rate: 0
+[21:58:10.229][C][logger:226]:   Hardware UART: USB_SERIAL_JTAG
+[21:58:10.229][C][logger:235]:   Task Log Buffer Size: 768 bytes
+[21:58:10.229][C][logger:241]:   Level for 'binary_sensor': DEBUG
+[21:58:10.229][C][logger:241]:   Level for 'button': DEBUG
+[21:58:10.229][C][logger:241]:   Level for 'climate': DEBUG
+[21:58:10.229][C][logger:241]:   Level for 'component': ERROR
+[21:58:10.229][C][logger:241]:   Level for 'esp32.preferences': DEBUG
+[21:58:10.229][C][logger:241]:   Level for 'number': DEBUG
+[21:58:10.240][C][logger:241]:   Level for 'sensor': DEBUG
+[21:58:10.240][C][logger:241]:   Level for 'switch': DEBUG
+[21:58:10.240][C][logger:241]:   Level for 'text_sensor': DEBUG
+[21:58:10.240][D][api:223]: Accept 10.10.10.30
+[21:58:10.247][D][api.connection:2458]: Home Assistant 2026.5.4 (10.10.10.30): connected
+[21:58:10.248][C][i2c.idf:092]: I2C Bus:
+[21:58:10.248][C][i2c.idf:093]:   SDA Pin: GPIO6
+[21:58:10.248][C][i2c.idf:093]:   SCL Pin: GPIO5
+[21:58:10.248][C][i2c.idf:093]:   Frequency: 50000 Hz
+[21:58:10.248][C][i2c.idf:103]:   Recovery: bus successfully recovered
+[21:58:10.252][C][template.binary_sensor:016]: Template Binary Sensor 'Motor running'
+[21:58:10.265][C][template.binary_sensor:016]: Template Binary Sensor 'Water flowing'
+[21:58:10.274][C][template.binary_sensor:016]: Template Binary Sensor 'Leakage detected'
+[21:58:10.284][C][template.binary_sensor:016]: Template Binary Sensor 'clack_use_test_button'
+[21:58:10.299][C][template.binary_sensor:016]: Template Binary Sensor 'Block regen'
+[21:58:10.303][C][template.sensor:017]: Template Sensor 'clack_distance'
+[21:58:10.303][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.303][C][template.sensor:017]:   Unit of Measurement: 'cm'
+[21:58:10.303][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.303][C][template.sensor:232]:   Device Class: 'distance'
+[21:58:10.303][C][template.sensor:223]:   Icon: 'mdi:arrow-expand-vertical'
+[21:58:10.307][C][template.sensor:451]:   Update Interval: 60.0s
+[21:58:10.313][C][template.sensor:017]: Template Sensor 'Salt level distance'
+[21:58:10.313][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.313][C][template.sensor:017]:   Unit of Measurement: 'cm'
+[21:58:10.313][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.313][C][template.sensor:232]:   Device Class: 'distance'
+[21:58:10.313][C][template.sensor:223]:   Icon: 'mdi:arrow-expand-vertical'
+[21:58:10.322][C][template.sensor:447]:   Update Interval: never
+[21:58:10.324][C][template.sensor:017]: Template Sensor 'Voltage'
+[21:58:10.324][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.324][C][template.sensor:017]:   Unit of Measurement: 'V'
+[21:58:10.324][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.325][C][template.sensor:232]:   Device Class: 'voltage'
+[21:58:10.325][C][template.sensor:223]:   Icon: 'mdi:lightning-bolt'
+[21:58:10.325][C][template.sensor:447]:   Update Interval: never
+[21:58:10.343][C][template.sensor:017]: Template Sensor 'Power Clack'
+[21:58:10.343][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.343][C][template.sensor:017]:   Unit of Measurement: 'W'
+[21:58:10.343][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.343][C][template.sensor:232]:   Device Class: 'power'
+[21:58:10.343][C][template.sensor:223]:   Icon: 'mdi:flash'
+[21:58:10.343][C][template.sensor:447]:   Update Interval: never
+[21:58:10.362][C][template.sensor:017]: Template Sensor 'Power ESP'
+[21:58:10.362][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.362][C][template.sensor:017]:   Unit of Measurement: 'W'
+[21:58:10.362][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.362][C][template.sensor:232]:   Device Class: 'power'
+[21:58:10.363][C][template.sensor:223]:   Icon: 'mdi:flash'
+[21:58:10.363][C][template.sensor:447]:   Update Interval: never
+[21:58:10.379][C][template.sensor:017]: Template Sensor 'Power Chlorinator'
+[21:58:10.379][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.379][C][template.sensor:017]:   Unit of Measurement: 'W'
+[21:58:10.379][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.380][C][template.sensor:232]:   Device Class: 'power'
+[21:58:10.380][C][template.sensor:223]:   Icon: 'mdi:flash'
+[21:58:10.380][C][template.sensor:447]:   Update Interval: never
+[21:58:10.397][C][template.sensor:017]: Template Sensor 'Salt level percent'
+[21:58:10.397][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.397][C][template.sensor:017]:   Unit of Measurement: '%'
+[21:58:10.397][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.415][C][template.sensor:223]:   Icon: 'mdi:percent-box-outline'
+[21:58:10.415][C][template.sensor:451]:   Update Interval: 600.0s
+[21:58:10.415][C][template.sensor:017]: Template Sensor 'Salt level height'
+[21:58:10.415][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.415][C][template.sensor:017]:   Unit of Measurement: 'cm'
+[21:58:10.415][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.417][C][template.sensor:232]:   Device Class: 'distance'
+[21:58:10.417][C][template.sensor:223]:   Icon: 'mdi:hydraulic-oil-level'
+[21:58:10.417][C][template.sensor:451]:   Update Interval: 600.0s
+[21:58:10.433][C][template.sensor:017]: Template Sensor 'Water softener m3 left'
+[21:58:10.433][C][template.sensor:017]:   State Class: 'total'
+[21:58:10.433][C][template.sensor:017]:   Unit of Measurement: 'm³'
+[21:58:10.433][C][template.sensor:017]:   Accuracy Decimals: 2
+[21:58:10.435][C][template.sensor:232]:   Device Class: 'water'
+[21:58:10.435][C][template.sensor:451]:   Update Interval: 600.0s
+[21:58:10.452][C][template.sensor:017]: Template Sensor 'Water softener ltr left'
+[21:58:10.452][C][template.sensor:017]:   State Class: 'total'
+[21:58:10.452][C][template.sensor:017]:   Unit of Measurement: 'L'
+[21:58:10.452][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.452][C][template.sensor:232]:   Device Class: 'water'
+[21:58:10.455][C][template.sensor:451]:   Update Interval: 600.0s
+[21:58:10.469][C][template.sensor:017]: Template Sensor 'Water softener percent ltr left'
+[21:58:10.469][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.469][C][template.sensor:017]:   Unit of Measurement: '%'
+[21:58:10.469][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.470][C][template.sensor:232]:   Device Class: 'water'
+[21:58:10.470][C][template.sensor:223]:   Icon: 'mdi:water-percent'
+[21:58:10.477][C][template.sensor:451]:   Update Interval: 600.0s
+[21:58:10.488][C][template.sensor:017]: Template Sensor 'Water softener percent time left'
+[21:58:10.488][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.488][C][template.sensor:017]:   Unit of Measurement: '%'
+[21:58:10.488][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.488][C][template.sensor:232]:   Device Class: 'duration'
+[21:58:10.489][C][template.sensor:223]:   Icon: 'mdi:progress-clock'
+[21:58:10.490][C][template.sensor:451]:   Update Interval: 600.0s
+[21:58:10.492][C][template.sensor:017]: Template Sensor 'Capacity used'
+[21:58:10.492][C][template.sensor:017]:   State Class: 'total'
+[21:58:10.492][C][template.sensor:017]:   Unit of Measurement: 'L'
+[21:58:10.492][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.492][C][template.sensor:232]:   Device Class: 'water'
+[21:58:10.492][C][template.sensor:223]:   Icon: 'mdi:water-check-outline'
+[21:58:10.497][C][template.sensor:447]:   Update Interval: never
+[21:58:10.498][C][template.sensor:017]: Template Sensor 'clack_brine_time'
+[21:58:10.498][C][template.sensor:017]:   State Class: ''
+[21:58:10.498][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.498][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.499][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.499][C][template.sensor:447]:   Update Interval: never
+[21:58:10.504][C][template.sensor:017]: Template Sensor 'clack_backwash_time'
+[21:58:10.504][C][template.sensor:017]:   State Class: ''
+[21:58:10.504][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.504][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.508][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.508][C][template.sensor:447]:   Update Interval: never
+[21:58:10.509][C][template.sensor:017]: Template Sensor 'clack_backwash2_time'
+[21:58:10.509][C][template.sensor:017]:   State Class: ''
+[21:58:10.509][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.509][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.511][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.511][C][template.sensor:447]:   Update Interval: never
+[21:58:10.520][C][template.sensor:017]: Template Sensor 'clack_rinse_time'
+[21:58:10.520][C][template.sensor:017]:   State Class: ''
+[21:58:10.520][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.520][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.520][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.521][C][template.sensor:447]:   Update Interval: never
+[21:58:10.521][C][template.sensor:017]: Template Sensor 'clack_fill_time'
+[21:58:10.521][C][template.sensor:017]:   State Class: ''
+[21:58:10.521][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.521][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.521][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.521][C][template.sensor:447]:   Update Interval: never
+[21:58:10.529][C][template.sensor:017]: Template Sensor 'clack_service_time'
+[21:58:10.529][C][template.sensor:017]:   State Class: ''
+[21:58:10.529][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.529][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.538][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.538][C][template.sensor:447]:   Update Interval: never
+[21:58:10.538][C][template.sensor:017]: Template Sensor 'clack_total_run_time'
+[21:58:10.538][C][template.sensor:017]:   State Class: ''
+[21:58:10.538][C][template.sensor:017]:   Unit of Measurement: ''
+[21:58:10.538][C][template.sensor:017]:   Accuracy Decimals: 0
+[21:58:10.541][C][template.sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.542][C][template.sensor:447]:   Update Interval: never
+[21:58:10.547][C][template.sensor:017]: Template Sensor 'Salt level distance TOF'
+[21:58:10.547][C][template.sensor:017]:   State Class: 'measurement'
+[21:58:10.547][C][template.sensor:017]:   Unit of Measurement: 'cm'
+[21:58:10.547][C][template.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.547][C][template.sensor:232]:   Device Class: 'distance'
+[21:58:10.551][C][template.sensor:223]:   Icon: 'mdi:ruler'
+[21:58:10.551][C][template.sensor:451]:   Update Interval: 60.0s
+[21:58:10.556][C][uptime.sensor:017]: Uptime Sensor 'Uptime'
+[21:58:10.556][C][uptime.sensor:017]:   State Class: 'total_increasing'
+[21:58:10.556][C][uptime.sensor:017]:   Unit of Measurement: 'days'
+[21:58:10.556][C][uptime.sensor:017]:   Accuracy Decimals: 1
+[21:58:10.556][C][uptime.sensor:232]:   Device Class: 'duration'
+[21:58:10.558][C][uptime.sensor:223]:   Icon: 'mdi:timer-outline'
+[21:58:10.558][C][uptime.sensor:019]:   Type: Seconds
+[21:58:10.567][C][template.select:010]: Template Select 'Function mode'
+[21:58:10.567][C][template.select:014]:   Optimistic: YES
+[21:58:10.567][C][template.select:014]:   Initial Option: Off
+[21:58:10.567][C][template.select:014]:   Restore Value: YES
+[21:58:10.585][C][template.select:010]: Template Select 'Regeneration mode'
+[21:58:10.585][C][template.select:014]:   Optimistic: YES
+[21:58:10.585][C][template.select:014]:   Initial Option: Post fill no 2nd Backwash
+[21:58:10.585][C][template.select:014]:   Restore Value: YES
+[21:58:10.599][C][template.text_sensor:016]: Template Sensor 'Cycle steps'
+[21:58:10.599][C][template.text_sensor:223]:   Icon: 'mdi:basket-fill'
+[21:58:10.620][C][template.text_sensor:016]: Template Sensor 'Fill salt'
+[21:58:10.632][C][template.text_sensor:223]:   Icon: 'mdi:basket-fill'
+[21:58:10.632][C][template.text_sensor:016]: Template Sensor 'Cycle step'
+[21:58:10.632][C][template.text_sensor:223]:   Icon: 'mdi:basket-fill'
+[21:58:10.636][C][template.text_sensor:016]: Template Sensor 'Time to regen'
+[21:58:10.636][C][template.text_sensor:223]:   Icon: 'mdi:clock-outline'
+[21:58:10.642][C][template.text_sensor:016]: Template Sensor 'Operation time'
+[21:58:10.642][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.650][C][template.text_sensor:016]: Template Sensor 'Time to resinclean'
+[21:58:10.665][C][template.text_sensor:223]:   Icon: 'mdi:bacteria-outline'
+[21:58:10.666][C][template.text_sensor:016]: Template Sensor 'Cycle runtime'
+[21:58:10.666][C][template.text_sensor:223]:   Icon: 'mdi:clock-start'
+[21:58:10.682][C][template.text_sensor:016]: Template Sensor 'Cycle total runtime'
+[21:58:10.700][C][template.text_sensor:223]:   Icon: 'mdi:clock-start'
+[21:58:10.701][C][template.text_sensor:016]: Template Sensor 'Brine'
+[21:58:10.701][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.709][C][template.text_sensor:016]: Template Sensor 'Backwash'
+[21:58:10.721][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.721][C][template.text_sensor:016]: Template Sensor 'Backwash2'
+[21:58:10.721][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.724][C][template.text_sensor:016]: Template Sensor 'Rinse'
+[21:58:10.726][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.726][C][template.text_sensor:016]: Template Sensor 'Fill'
+[21:58:10.726][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.734][C][template.text_sensor:016]: Template Sensor 'Service'
+[21:58:10.740][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.741][C][template.text_sensor:016]: Template Sensor 'Run time'
+[21:58:10.741][C][template.text_sensor:223]:   Icon: 'mdi:clock-check-outline'
+[21:58:10.750][C][template.text_sensor:016]: Template Sensor 'Regenerated on'
+[21:58:10.759][C][template.text_sensor:223]:   Icon: 'mdi:clock-start'
+[21:58:10.760][C][template.text_sensor:016]: Template Sensor 'Resinclean on'
+[21:58:10.760][C][template.text_sensor:223]:   Icon: 'mdi:clock-start'
+[21:58:10.762][C][template.text_sensor:016]: Template Sensor 'Salt fill on'
+[21:58:10.776][C][template.text_sensor:223]:   Icon: 'mdi:clock-start'
+[21:58:10.776][C][template.text_sensor:016]: Template Sensor 'ESP Current Date'
+[21:58:10.776][C][template.number:016]: Template Number 'Pulses per ltr'
+[21:58:10.776][C][template.number:223]:   Icon: 'mdi:pulse'
+[21:58:10.776][C][template.number:238]:   Unit of Measurement: ' '
+[21:58:10.776][C][template.number:049]:   Optimistic: YES
+[21:58:10.776][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.782][C][template.number:016]: Template Number 'Min salt distance'
+[21:58:10.783][C][template.number:223]:   Icon: 'mdi:toggle-switch-variant'
+[21:58:10.784][C][template.number:238]:   Unit of Measurement: 'cm'
+[21:58:10.784][C][template.number:049]:   Optimistic: YES
+[21:58:10.786][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.795][C][template.number:016]: Template Number 'Max salt distance'
+[21:58:10.796][C][template.number:223]:   Icon: 'mdi:toggle-switch-variant-off'
+[21:58:10.796][C][template.number:238]:   Unit of Measurement: 'cm'
+[21:58:10.798][C][template.number:049]:   Optimistic: YES
+[21:58:10.798][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.803][C][template.number:016]: Template Number 'Fill salt distance'
+[21:58:10.803][C][template.number:223]:   Icon: 'mdi:hydraulic-oil-temperature'
+[21:58:10.806][C][template.number:238]:   Unit of Measurement: 'cm'
+[21:58:10.806][C][template.number:049]:   Optimistic: YES
+[21:58:10.806][C][template.number:451]:   Update Interval: 600.0s
+[21:58:10.820][C][template.number:016]: Template Number 'Capacity in liters'
+[21:58:10.823][C][template.number:223]:   Icon: 'mdi:water-opacity'
+[21:58:10.823][C][template.number:238]:   Unit of Measurement: 'L'
+[21:58:10.823][C][template.number:049]:   Optimistic: YES
+[21:58:10.823][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.843][C][template.number:016]: Template Number 'Capacity in days'
+[21:58:10.844][C][template.number:223]:   Icon: 'mdi:calendar-clock'
+[21:58:10.844][C][template.number:238]:   Unit of Measurement: 'days'
+[21:58:10.844][C][template.number:049]:   Optimistic: YES
+[21:58:10.844][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.844][C][template.number:016]: Template Number 'Resinclean days'
+[21:58:10.844][C][template.number:223]:   Icon: 'mdi:calendar-clock'
+[21:58:10.844][C][template.number:238]:   Unit of Measurement: 'days'
+[21:58:10.857][C][template.number:049]:   Optimistic: YES
+[21:58:10.858][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.858][C][template.number:016]: Template Number 'Chlorinator active time'
+[21:58:10.858][C][template.number:223]:   Icon: 'mdi:toggle-switch-variant'
+[21:58:10.859][C][template.number:238]:   Unit of Measurement: 'min'
+[21:58:10.860][C][template.number:049]:   Optimistic: YES
+[21:58:10.860][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.866][C][template.number:016]: Template Number 'Delay leakage alarm'
+[21:58:10.868][C][template.number:223]:   Icon: 'mdi:home-flood'
+[21:58:10.868][C][template.number:238]:   Unit of Measurement: 'min'
+[21:58:10.868][C][template.number:049]:   Optimistic: YES
+[21:58:10.868][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.884][C][template.number:016]: Template Number 'Water flow timeout'
+[21:58:10.884][C][template.number:223]:   Icon: 'mdi:waves-arrow-right'
+[21:58:10.884][C][template.number:238]:   Unit of Measurement: 's'
+[21:58:10.884][C][template.number:049]:   Optimistic: YES
+[21:58:10.889][C][template.number:451]:   Update Interval: 60.0s
+[21:58:10.895][C][switch.gpio:088]: GPIO Switch 'Chlorinator ⁄ DP-SW'
+[21:58:10.895][C][switch.gpio:088]:   Restore Mode: always OFF
+[21:58:10.895][C][switch.gpio:223]:   Icon: 'mdi:bacteria'
+[21:58:10.895][C][switch.gpio:152]:   Pin: GPIO8
+[21:58:11.360][C][template.switch:088]: Template Switch 'DP-SW Activate'
+[21:58:11.360][C][template.switch:088]:   Restore Mode: always OFF
+[21:58:11.403][C][template.switch:223]:   Icon: 'mdi:timelapse'
+[21:58:11.403][C][template.switch:055]:   Optimistic: YES
+[21:58:11.409][C][restart.button:014]: Restart Button 'ESP Restart'
+[21:58:11.411][C][restart.button:223]:   Icon: 'mdi:restart'
+[21:58:11.428][C][safe_mode.button:014]: Safe Mode Button 'ESP Restart (Safe Mode)'
+[21:58:11.430][C][safe_mode.button:223]:   Icon: 'mdi:restart-alert'
+[21:58:11.444][C][ina3221:058]: INA3221:
+[21:58:11.448][C][ina3221:059]:   Address: 0x41
+[21:58:11.448][C][ina3221:451]:   Update Interval: 1.0s
+[21:58:11.448][C][ina3221:017]:   Bus Voltage #1 'ch1_voltage'
+[21:58:11.448][C][ina3221:017]:     State Class: 'measurement'
+[21:58:11.448][C][ina3221:017]:     Unit of Measurement: 'V'
+[21:58:11.448][C][ina3221:017]:     Accuracy Decimals: 2
+[21:58:11.448][C][ina3221:232]:     Device Class: 'voltage'
+[21:58:11.453][C][ina3221:017]:   Power #1 'ch1_power'
+[21:58:11.453][C][ina3221:017]:     State Class: 'measurement'
+[21:58:11.453][C][ina3221:017]:     Unit of Measurement: 'W'
+[21:58:11.453][C][ina3221:017]:     Accuracy Decimals: 2
+[21:58:11.453][C][ina3221:232]:     Device Class: 'power'
+[21:58:11.453][C][ina3221:017]:   Power #2 'ch2_power'
+[21:58:11.453][C][ina3221:017]:     State Class: 'measurement'
+[21:58:11.453][C][ina3221:017]:     Unit of Measurement: 'W'
+[21:58:11.453][C][ina3221:017]:     Accuracy Decimals: 2
+[21:58:11.453][C][ina3221:232]:     Device Class: 'power'
+[21:58:11.458][C][ina3221:017]:   Power #3 'ch3_power'
+[21:58:11.458][C][ina3221:017]:     State Class: 'measurement'
+[21:58:11.458][C][ina3221:017]:     Unit of Measurement: 'W'
+[21:58:11.458][C][ina3221:017]:     Accuracy Decimals: 2
+[21:58:11.458][C][ina3221:232]:     Device Class: 'power'
+[21:58:11.464][C][copy.sensor:017]: Copy Sensor 'Salt level for dashboard'
+[21:58:11.464][C][copy.sensor:017]:   State Class: 'measurement'
+[21:58:11.464][C][copy.sensor:017]:   Unit of Measurement: '%'
+[21:58:11.464][C][copy.sensor:017]:   Accuracy Decimals: 0
+[21:58:11.465][C][copy.sensor:223]:   Icon: 'mdi:percent-box-outline'
+[21:58:11.483][C][internal_temperature:017]: Internal Temperature Sensor 'Internal Temperature'
+[21:58:11.483][C][internal_temperature:017]:   State Class: 'measurement'
+[21:58:11.483][C][internal_temperature:017]:   Unit of Measurement: '°C'
+[21:58:11.483][C][internal_temperature:017]:   Accuracy Decimals: 1
+[21:58:11.501][C][internal_temperature:232]:   Device Class: 'temperature'
+[21:58:11.501][C][vl53l1x.sensor:272]: VL53L1X:
+[21:58:11.501][E][vl53l1x.sensor:280]:   Soft reset communication failure
+[21:58:11.503][E][component:224]:   vl53l1x.sensor is marked FAILED: unspecified
+[21:58:11.503][C][copy.sensor:017]: Copy Sensor 'WiFi Signal'
+[21:58:11.503][C][copy.sensor:017]:   State Class: 'measurement'
+[21:58:11.503][C][copy.sensor:017]:   Unit of Measurement: '%'
+[21:58:11.503][C][copy.sensor:017]:   Accuracy Decimals: 0
+[21:58:11.503][C][copy.sensor:232]:   Device Class: 'signal_strength'
+[21:58:11.503][C][version.text_sensor:016]: Version Text Sensor 'Version'
+[21:58:11.507][C][version.text_sensor:223]:   Icon: 'mdi:new-box'
+[21:58:11.507][C][wifi_info:016]: IP Address 'Water softener IP'
+[21:58:11.507][C][wifi_info:223]:   Icon: 'mdi:ip-network'
+[21:58:11.516][C][homeassistant.time:009]: Home Assistant Time
+[21:58:11.521][C][time:049]: Timezone: UTC+2:00 (DST UTC+3:00)
+[21:58:11.521][C][time:055]: Current time: 2026-05-29 21:58:11
+[21:58:11.533][C][pulse_meter:017]: Pulse Meter 'Water flow rate'
+[21:58:11.533][C][pulse_meter:017]:   State Class: 'measurement'
+[21:58:11.533][C][pulse_meter:017]:   Unit of Measurement: 'L/min'
+[21:58:11.533][C][pulse_meter:017]:   Accuracy Decimals: 2
+[21:58:11.534][C][pulse_meter:232]:   Device Class: 'volume_flow_rate'
+[21:58:11.536][C][pulse_meter:223]:   Icon: 'mdi:waves-arrow-right'
+[21:58:11.536][C][pulse_meter:152]:   Pin: GPIO7
+[21:58:11.536][C][pulse_meter:136]:   Filtering pulses shorter than 13 µs
+[21:58:11.536][C][pulse_meter:138]:   Assuming 0 pulses/min after not receiving a pulse for 6s
+[21:58:11.618][S][sensor]: 'Power Clack' >> 0.4 W
+[21:58:11.796][C][captive_portal:133]: Captive Portal:
+[21:58:11.804][C][wifi:1526]: WiFi:
+[21:58:11.804][C][wifi:1526]:   Local MAC: 34:B7:DA:57:3B:40
+[21:58:11.804][C][wifi:1526]:   Connected: YES
+[21:58:11.804][C][wifi:1237]:   IP Address: 10.10.20.42
+[21:58:11.804][C][wifi:1248]:   SSID: 'daad.iot'[redacted]
+[21:58:11.804][C][wifi:1248]:   BSSID: 7A:45:58:17:ED:C1[redacted]
+[21:58:11.804][C][wifi:1248]:   Hostname: 'clack'
+[21:58:11.804][C][wifi:1248]:   Signal strength: -60 dB ▂▄▆█
+[21:58:11.804][C][wifi:1248]:   Channel: 6
+[21:58:11.804][C][wifi:1248]:   Subnet: 255.255.255.0
+[21:58:11.804][C][wifi:1248]:   Gateway: 10.10.20.1
+[21:58:11.804][C][wifi:1248]:   DNS1: 10.10.20.1
+[21:58:11.804][C][wifi:1248]:   DNS2: 0.0.0.0
+[21:58:11.828][C][web_server:450]: Web Server:
+[21:58:11.828][C][web_server:450]:   Address: clack.local:80
+[21:58:11.829][C][esphome.ota:097]: Over-The-Air updates:
+[21:58:11.829][C][esphome.ota:097]:   Address: clack.local:3232
+[21:58:11.829][C][esphome.ota:097]:   Version: 2
+[21:58:11.829][C][safe_mode:058]: Safe Mode:
+[21:58:11.829][C][safe_mode:058]:   Successful after: 60s
+[21:58:11.829][C][safe_mode:058]:   Invoke after: 10 attempts
+[21:58:11.829][C][safe_mode:058]:   Duration: 300s
+[21:58:11.829][C][safe_mode:079]:   Bootloader rollback: supported
+[21:58:11.866][C][web_server.ota:256]: Web Server OTA
+[21:58:11.867][C][api:238]: Server:
+[21:58:11.867][C][api:238]:   Address: clack.local:6053
+[21:58:11.867][C][api:238]:   Listen backlog: 4
+[21:58:11.867][C][api:238]:   Max connections: 5
+[21:58:11.867][C][api:250]:   Noise encryption: NO
+[21:58:11.867][C][wifi_signal.sensor:017]: WiFi Signal 'WiFi Signal dB'
+[21:58:11.867][C][wifi_signal.sensor:017]:   State Class: 'measurement'
+[21:58:11.867][C][wifi_signal.sensor:017]:   Unit of Measurement: 'dBm'
+[21:58:11.867][C][wifi_signal.sensor:017]:   Accuracy Decimals: 0
+[21:58:11.876][C][wifi_signal.sensor:232]:   Device Class: 'signal_strength'
+[21:58:11.876][C][mdns:230]: mDNS:
+[21:58:11.876][C][mdns:230]:   Hostname: clack
+[21:58:11.929][D][pulse_meter:119]: No pulse detected for 6s, assuming 0 pulses/min
