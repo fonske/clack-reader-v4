@@ -3,9 +3,17 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
   on_boot:
-    priority: -100
-    then:
-      - script.execute: on_boot
+    - priority: 600
+      then:
+        # Restore pulse meter total BEFORE API connects to HA (API connects at priority 200)
+        # This prevents HA from seeing a 0 value on reboot
+        - pulse_meter.set_total_pulses:
+            id: clack_flow_rate
+            value: !lambda |-
+              return id(totalWaterUsage) * id(pulse_per_liter);
+    - priority: -100
+      then:
+        - script.execute: on_boot
 
 # Enable Home Assistant API
 api:
