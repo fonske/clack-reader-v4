@@ -17,7 +17,7 @@ esphome:
 
 # Enable Home Assistant API
 api:
-  reboot_timeout: 0s
+  reboot_timeout: 15min
   actions:
     - action: water_meter_value
       variables:
