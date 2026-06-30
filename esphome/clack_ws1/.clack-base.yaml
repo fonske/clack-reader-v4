@@ -462,6 +462,7 @@ script:
       - component.update: timer1
       - component.update: timer2
       - delay: 30s
+      - script.execute: reset_water_meter
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
@@ -628,6 +629,7 @@ script:
       - component.update: timer1
       - component.update: timer2
       - delay: 30s
+      - script.execute: reset_water_meter
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
@@ -787,6 +789,7 @@ script:
       - component.update: timer1
       - component.update: timer2
       - delay: 30s
+      - script.execute: reset_water_meter
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
@@ -969,6 +972,7 @@ script:
       - component.update: timer1
       - component.update: timer2
       - delay: 30s
+      - script.execute: reset_water_meter
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
       
@@ -1128,6 +1132,7 @@ script:
       - component.update: timer1
       - component.update: timer2
       - delay: 30s
+      - script.execute: reset_water_meter
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
       
@@ -1287,6 +1292,7 @@ script:
       - component.update: timer1
       - component.update: timer2
       - delay: 30s
+      - script.execute: reset_water_meter
       - lambda: 'id(wait_on_delay) = false;'
       - lambda: 'id(water_meter_freeze) = false;'
 
