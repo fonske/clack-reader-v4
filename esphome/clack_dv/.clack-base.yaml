@@ -319,7 +319,7 @@ script:
             lambda: 'return id(wait_on_delay) == false;'
           then:
             - lambda: |-
-                std::string clack_cycle = id(clack_select_cycle).state;
+                std::string clack_cycle = id(clack_select_cycle).current_option();
                 
                 if (clack_cycle == "${clack_upflow_post_fill}") {
                   id(cycle_steps_post_upflow).execute();
