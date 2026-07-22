@@ -276,7 +276,7 @@ script:
     then:
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - switch.turn_on: chlorinator_relay
             # Use a lambda expression to return the delay in milliseconds
@@ -289,7 +289,7 @@ script:
     then:
       - if:
           condition:
-            - lambda: 'return id(clack_select_chl_or_dpsw).state == "Chlorinator";'
+            - lambda: 'return id(clack_select_chl_or_dpsw).current_option() == "Chlorinator";'
           then:
             - switch.turn_off: chlorinator_relay
 
