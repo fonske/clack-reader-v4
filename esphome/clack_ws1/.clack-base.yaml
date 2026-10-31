@@ -1349,6 +1349,54 @@ script:
                                                 - script.execute: cycle_steps_5cycle_post  # backwash/brine/backwash2/rinse/fill
 
 interval:
+  # Watchdog for "Block regen" (wait_on_delay), see issue #50.
+  # wait_on_delay is set when a regeneration script starts and cleared when it ends,
+  # and it is restored after a reboot. If the ESP reboots or hangs during a regeneration,
+  # no cycle script is running anymore but the flag stays on: no further regeneration is
+  # detected and the water meter is never reset again.
+  # A cycle takes at most ~1.75 h (sum of the wait_until timeouts). So if the flag is on,
+  # no cycle script is running and the cycle started more than 3 h ago (or is unknown),
+  # the flag is released. The water meter was already reset when the cycle started.
+  # Runs at boot and every 5 minutes.
+  - interval: 5min
+    then:
+      - if:
+          condition:
+            and:
+              - lambda: 'return id(wait_on_delay) && id(sntp_time).now().is_valid();'
+              - not:
+                  script.is_running: cycle_steps_4cycle_pre
+              - not:
+                  script.is_running: cycle_steps_5cycle_pre
+              - not:
+                  script.is_running: cycle_steps_4cycle_post
+              - not:
+                  script.is_running: cycle_steps_5cycle_post
+              - not:
+                  script.is_running: cycle_steps_5cycle_pre_upflow
+              - not:
+                  script.is_running: cycle_steps_5cycle_pre_upflow_2
+              - lambda: |-
+                  int64_t now = id(sntp_time).now().timestamp;
+                  int64_t start = id(start_time_total);
+                  return start == 0 || (now - start) > 3 * 3600;
+          then:
+            - logger.log:
+                level: WARN
+                format: "Block regen stuck without a running cycle - releasing it"
+            - lambda: |-
+                id(wait_on_delay) = false;
+                id(water_meter_freeze) = false;
+                id(start_time) = 0;
+                id(start_time_total) = 0;
+                id(run_time) = 0;
+                id(run_time_total) = 0;
+            - text_sensor.template.publish:
+                id: clack_cycle_step
+                state: !lambda 'return id(cycle_step) = "Idle";'
+            - component.update: timer1
+            - component.update: timer2
+
   - interval: 1s
     then:
       - if:
